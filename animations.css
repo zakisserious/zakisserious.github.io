@@ -1,0 +1,252 @@
+/* ========================================
+   ANIMATIONS — Retro Terminal Effects
+   ======================================== */
+
+/* --- Reveal System --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Glow Pulse --- */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.03); }
+}
+
+/* --- Terminal Typing --- */
+@keyframes terminalTyping {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* --- Flicker --- */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  3% { opacity: 0.4; }
+  6% { opacity: 1; }
+  7% { opacity: 0.4; }
+  8% { opacity: 1; }
+  50% { opacity: 1; }
+  52% { opacity: 0.8; }
+  53% { opacity: 1; }
+}
+
+/* --- Float --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* --- Slide In Left --- */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Slide In Right --- */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Scale Bounce --- */
+@keyframes scaleBounce {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* --- Rotate In --- */
+@keyframes rotateIn {
+  from { opacity: 0; transform: rotate(-10deg) scale(0.9); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+/* --- Pulse Green --- */
+@keyframes pulseGreen {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+}
+
+/* --- Scan Line Move --- */
+@keyframes scanMove {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* --- Glitch Text Enhanced --- */
+@keyframes glitchText {
+  0%, 100% {
+    text-shadow: 2px 0 #ff0040, -2px 0 #00ff88;
+    transform: translate(0);
+  }
+  20% {
+    text-shadow: -3px 0 #ff0040, 3px 0 #00ff88;
+    transform: translate(2px, -1px);
+  }
+  40% {
+    text-shadow: 3px 0 #ff0040, -3px 0 #00ff88;
+    transform: translate(-2px, 1px);
+  }
+  60% {
+    text-shadow: -2px 0 #ff0040, 2px 0 #00ff88;
+    transform: translate(1px, 2px);
+  }
+  80% {
+    text-shadow: 2px 0 #ff0040, -2px 0 #00ff88;
+    transform: translate(-1px, -2px);
+  }
+}
+
+/* --- Scan Sweep (horizontal green line) --- */
+@keyframes scanSweep {
+  0% { top: -2px; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: calc(100% + 2px); opacity: 0; }
+}
+
+/* --- Pulse Ring (expanding ring on hero photo) --- */
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* --- Code Float (floating code snippets) --- */
+@keyframes codeFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); opacity: 0.06; }
+  25% { transform: translateY(-15px) rotate(0deg); opacity: 0.1; }
+  50% { transform: translateY(-8px) rotate(2deg); opacity: 0.06; }
+  75% { transform: translateY(-20px) rotate(-1deg); opacity: 0.09; }
+}
+
+/* --- Boot Flicker --- */
+@keyframes bootFlicker {
+  0% { opacity: 1; }
+  5% { opacity: 0; }
+  10% { opacity: 1; }
+  15% { opacity: 0.3; }
+  20% { opacity: 1; }
+  50% { opacity: 1; }
+  55% { opacity: 0; }
+  56% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* --- Neon Pulse --- */
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(0, 255, 136, 0.5), 0 0 10px rgba(0, 255, 136, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 255, 136, 0.2);
+  }
+}
+
+/* --- Typing Cursor (for section labels) --- */
+@keyframes typingCursor {
+  0%, 49% { border-right-color: var(--green); }
+  50%, 100% { border-right-color: transparent; }
+}
+
+/* --- Data Stream --- */
+@keyframes dataStream {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+/* --- Scan Line Sweep (horizontal on sections) --- */
+@keyframes sectionScanSweep {
+  0% { left: -100%; opacity: 0; }
+  5% { opacity: 0.5; }
+  95% { opacity: 0.5; }
+  100% { left: 200%; opacity: 0; }
+}
+
+/* --- Glitch Flicker (for random hero glitch) --- */
+@keyframes glitchFlicker {
+  0% { opacity: 1; transform: translate(0); filter: none; }
+  5% { opacity: 0.8; transform: translate(-2px, 1px); filter: hue-rotate(90deg); }
+  10% { opacity: 1; transform: translate(2px, -1px); filter: none; }
+  15% { opacity: 0.6; transform: translate(0); filter: hue-rotate(-90deg) saturate(2); }
+  20% { opacity: 1; transform: translate(-1px, 0); filter: none; }
+  100% { opacity: 1; transform: translate(0); filter: none; }
+}
+
+/* --- Terminal Corruption --- */
+@keyframes terminalCorrupt {
+  0%, 100% { text-shadow: none; }
+  25% { text-shadow: -2px 0 #ff0040, 2px 0 #00ff88; }
+  50% { text-shadow: 2px 0 #ff0040, -2px 0 #00ff88, 0 2px #0040ff; }
+  75% { text-shadow: -1px 0 #ff0040, 1px 0 #00ff88; }
+}
+
+/* --- Horizontal Glitch Bar --- */
+@keyframes glitchBar {
+  0%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  10% { clip-path: inset(40% 0 50% 0); opacity: 0.8; }
+  20% { clip-path: inset(70% 0 20% 0); opacity: 0.6; }
+  30% { clip-path: inset(10% 0 80% 0); opacity: 0.9; }
+  40% { clip-path: inset(0 0 100% 0); opacity: 0; }
+}
+
+/* --- Binary Float Drift --- */
+@keyframes binaryDrift {
+  0% { transform: translateY(20px) translateX(0); opacity: 0; }
+  10% { opacity: 0.06; }
+  90% { opacity: 0.06; }
+  100% { transform: translateY(-40px) translateX(10px); opacity: 0; }
+}
+
+/* --- Section Flash --- */
+@keyframes sectionFlash {
+  0% { opacity: 0; transform: scaleX(0); transform-origin: left; }
+  20% { opacity: 0.8; transform: scaleX(1); transform-origin: left; }
+  40% { opacity: 0; transform: scaleX(1); transform-origin: right; }
+  100% { opacity: 0; }
+}
+
+/* --- Nav Logo Flicker --- */
+@keyframes navFlicker {
+  0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
+  10% { opacity: 0.2; text-shadow: none; }
+  20% { opacity: 1; text-shadow: 0 0 20px rgba(0, 255, 136, 0.8); }
+  30% { opacity: 0.6; text-shadow: 0 0 5px rgba(0, 255, 136, 0.2); }
+  40% { opacity: 1; text-shadow: 0 0 15px rgba(0, 255, 136, 0.5); }
+}
+
+/* --- Photo Scan Line --- */
+@keyframes photoScanLine {
+  0% { top: -2px; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: calc(100% + 2px); opacity: 0; }
+}
+
+/* --- Card Tilt Glow --- */
+@keyframes cardTiltGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.1), inset 0 0 30px rgba(0, 255, 136, 0.02); }
+}
+
+/* --- Stagger Utility --- */
+.stagger-1 { transition-delay: 0ms; }
+.stagger-2 { transition-delay: 60ms; }
+.stagger-3 { transition-delay: 120ms; }
+.stagger-4 { transition-delay: 180ms; }
+.stagger-5 { transition-delay: 240ms; }
+.stagger-6 { transition-delay: 300ms; }
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

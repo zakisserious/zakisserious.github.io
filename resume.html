@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Zakaria Omar — Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
+  <style>
+    body { padding: 0; }
+    .resume-page { max-width: 920px; margin: 0 auto; padding: var(--space-xl) var(--space-lg); }
+
+    /* --- Terminal Header --- */
+    .resume-header { text-align: center; margin-bottom: var(--space-xl); padding-bottom: var(--space-lg); border-bottom: 1px solid var(--border); position: relative; }
+    .resume-header::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--green), transparent); animation: glowPulse 4s ease-in-out infinite; }
+    .resume-name { font-family: var(--font-mono); font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 500; color: var(--green); margin: 0 0 var(--space-sm) 0; text-shadow: 0 0 15px rgba(0,255,136,0.3); }
+    .resume-name .cursor-blink { display: inline-block; width: 3px; height: 1em; background: var(--green); margin-left: 4px; vertical-align: text-bottom; animation: terminalBlink 0.7s steps(1) infinite; }
+    .resume-title { font-family: var(--font-terminal); font-size: 1.2rem; color: var(--text-secondary); letter-spacing: 0.15em; margin: 0 0 var(--space-sm) 0; }
+    .resume-contact { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-sm); font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); }
+    .resume-contact a { color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+    .resume-contact a:hover { color: var(--green); }
+    .resume-contact .sep { color: var(--border); }
+    .resume-contact .prompt { color: var(--green); margin-right: 0.3rem; }
+    .resume-actions { margin-top: var(--space-md); display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap; }
+
+    /* --- Sections --- */
+    .resume-section { margin-bottom: var(--space-xl); }
+    .resume-section-title { font-family: var(--font-terminal); font-size: 1.1rem; color: var(--green); letter-spacing: 0.15em; margin-bottom: var(--space-md); padding-bottom: var(--space-xs); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; }
+    .resume-section-title::before { content: '>'; color: var(--green); font-weight: 400; }
+
+    /* --- Timeline Items --- */
+    .resume-item { margin-bottom: var(--space-lg); padding: var(--space-sm) 0 var(--space-sm) var(--space-xl); position: relative; border-left: 2px solid var(--border); transition: border-color 0.3s ease; }
+    .resume-item::before { content: ''; position: absolute; left: -5px; top: 12px; width: 8px; height: 8px; border-radius: 50%; background: var(--bg); border: 2px solid var(--green); transition: box-shadow 0.3s ease, background 0.3s ease; }
+    .resume-item:hover { border-left-color: var(--green); }
+    .resume-item:hover::before { background: var(--green); box-shadow: 0 0 10px rgba(0,255,136,0.5); }
+    .resume-item-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-xs); margin-bottom: 0.5rem; }
+    .resume-item-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--text); margin: 0; }
+    .resume-item-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); background: var(--bg-elevated); padding: 2px 8px; border-radius: 3px; border: 1px solid var(--border); }
+    .resume-item-subtitle { font-family: var(--font-mono); font-size: 0.9rem; color: var(--green); margin: 0 0 0.5rem 0; }
+    .resume-item-location { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin: 0 0 0.6rem 0; }
+    .resume-list { list-style: none; padding: 0; margin: 0.5rem 0 0 0; }
+    .resume-list li { font-family: var(--font-body); font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem; }
+    .resume-list li::before { content: '▸'; position: absolute; left: 0; color: var(--green); font-family: var(--font-mono); }
+
+    /* --- Skills Grid --- */
+    .resume-skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-md); }
+    .resume-skill-group h4 { font-family: var(--font-terminal); font-size: 0.9rem; color: var(--green); margin: 0 0 0.5rem 0; letter-spacing: 0.1em; }
+    .resume-skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .resume-skill-tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 3px; background: var(--bg-elevated); transition: all 0.3s ease; }
+    .resume-skill-tag:hover { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.05); box-shadow: 0 0 8px rgba(0,255,136,0.1); }
+
+    /* --- Languages --- */
+    .resume-langs { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+    .resume-lang-tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); padding: 0.3rem 0.8rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-elevated); transition: all 0.3s ease; }
+    .resume-lang-tag:hover { border-color: var(--green); color: var(--green); }
+
+    /* --- Footer --- */
+    .resume-footer { text-align: center; padding-top: var(--space-lg); border-top: 1px solid var(--border); margin-top: var(--space-xl); }
+    .resume-footer p { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); }
+
+    /* --- Back Button --- */
+    .resume-back { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: var(--space-lg); font-family: var(--font-mono); font-size: 0.9rem; color: var(--green); text-decoration: none; transition: all 0.3s ease; }
+    .resume-back:hover { color: #fff; transform: translateX(-3px); text-shadow: 0 0 10px rgba(0,255,136,0.5); }
+
+    /* --- Scroll Progress --- */
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: linear-gradient(90deg, var(--green), rgba(0,255,136,0.6)); z-index: 10003; transition: width 0.1s linear; box-shadow: 0 0 8px rgba(0,255,136,0.4); pointer-events: none; }
+
+    /* --- Cursor Spotlight --- */
+    .cursor-spotlight { position: fixed; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, rgba(0,255,136,0.05) 0%, transparent 70%); pointer-events: none; z-index: 1; transform: translate(-50%, -50%); transition: left 0.15s ease-out, top 0.15s ease-out; will-change: left, top; }
+
+    /* --- Impact Metrics --- */
+    .resume-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); margin-bottom: var(--space-md); }
+    .metric { text-align: center; padding: var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-elevated); transition: border-color 0.3s ease; }
+    .metric:hover { border-color: var(--green); }
+    .metric-value { display: block; font-family: var(--font-terminal); font-size: 1.8rem; font-weight: 700; color: var(--green); line-height: 1; margin-bottom: 0.3rem; }
+    .metric-label { display: block; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em; }
+
+    /* --- Resume Project Cards --- */
+    .resume-project-card { margin-bottom: var(--space-lg); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; transition: border-color 0.3s ease; }
+    .resume-project-card:hover { border-color: var(--green); }
+    .resume-project-card .project-card-chrome { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.75rem; background: rgba(0,255,136,0.04); border-bottom: 1px solid var(--border); }
+    .resume-project-card .terminal-dots { display: flex; gap: 0.35rem; }
+    .resume-project-card .dot { width: 7px; height: 7px; border-radius: 50%; }
+    .resume-project-card .dot-close { background: #ff5f56; }
+    .resume-project-card .dot-minimize { background: #ffbd2e; }
+    .resume-project-card .dot-maximize { background: #27c93f; }
+    .resume-project-card .terminal-title { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.05em; }
+    .resume-project-card .project-card-body { padding: var(--space-sm) 0; }
+    .resume-project-card .resume-item { margin-bottom: 0; padding: var(--space-xs) var(--space-md); border-left: none; }
+    .resume-project-card .resume-item::before { display: none; }
+    .resume-project-card .resume-item:hover { border-left-color: transparent; }
+    .resume-project-card .resume-list { margin-top: var(--space-xs); }
+
+    /* --- Resume Item Links (live ↗) --- */
+    .resume-item-link { font-family: var(--font-mono); font-size: 0.75rem; color: var(--green); text-decoration: none; margin-left: 0.5rem; opacity: 0.7; transition: opacity 0.3s ease, text-shadow 0.3s ease; }
+    .resume-item-link:hover { opacity: 1; text-shadow: 0 0 8px rgba(0,255,136,0.4); }
+
+    /* --- Interests --- */
+    .resume-interests { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .interest-tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); padding: 0.35rem 0.8rem; border: 1px dashed var(--border); border-radius: var(--radius-sm); transition: all 0.3s ease; }
+    .interest-tag:hover { border-color: var(--green); color: var(--green); border-style: solid; }
+
+    /* --- Cursor Blink (for typing animation) --- */
+    .cursor-blink { display: inline-block; width: 0.6em; height: 1.1em; background: var(--green); margin-left: 2px; vertical-align: text-bottom; animation: terminalBlink 1s step-end infinite; }
+
+    @keyframes terminalBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* --- Print Styles --- */
+    @media print {
+      .scanlines, .grain, .crt-glow, .cursor-dot, .cursor-trail, .cursor-spotlight, .scroll-progress { display: none !important; }
+      body { background: #fff !important; color: #000 !important; }
+      .resume-page { max-width: 100%; padding: 0; }
+      .resume-name { color: #000 !important; text-shadow: none !important; }
+      .resume-section-title, .resume-item-subtitle, .resume-title { color: #333 !important; }
+      .resume-item { break-inside: avoid; }
+      .resume-item::before { border-color: #333 !important; }
+      .resume-skill-tag { border-color: #ccc !important; color: #333 !important; background: transparent !important; }
+      .resume-contact a { color: #333 !important; }
+      .resume-back, .resume-actions { display: none !important; }
+      .resume-footer { color: #999 !important; }
+      .resume-footer p { color: #999 !important; }
+      .resume-item-date { border-color: #ccc !important; background: transparent !important; }
+      .resume-list li::before { color: #666 !important; }
+      .resume-project-card { border-color: #ccc !important; }
+      .resume-project-card .project-card-chrome { background: transparent !important; border-color: #ccc !important; }
+      .resume-project-card .terminal-title { color: #666 !important; }
+      .interest-tag { border-color: #ccc !important; color: #333 !important; }
+      .metric { border-color: #ccc !important; }
+      .metric-value { color: #333 !important; }
+      .metric-label { color: #666 !important; }
+      .resume-item-link { color: #333 !important; }
+    }
+
+    @media (max-width: 768px) {
+      .resume-page { padding: var(--space-lg) var(--space-md); }
+      .resume-contact { flex-direction: column; align-items: center; gap: 0.3rem; }
+      .resume-contact .sep { display: none; }
+      .resume-item-header { flex-direction: column; }
+      .resume-skills-grid { grid-template-columns: 1fr; }
+      .resume-metrics { grid-template-columns: repeat(2, 1fr); }
+      .resume-project-card .resume-item { padding: var(--space-xs) var(--space-sm); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="crt-glow" aria-hidden="true"></div>
+
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursor-trail" aria-hidden="true"></div>
+
+  <main class="resume-page">
+    <a href="index.html" class="resume-back">← back_to_portfolio</a>
+
+    <header class="resume-header">
+      <h1 class="resume-name" id="resume-name">zakaria@portfolio:~$ <span class="cursor-blink"></span></h1>
+      <p class="resume-title">FULL-STACK DEVELOPER &amp; AI ENTHUSIAST</p>
+      <div class="resume-contact">
+        <span class="prompt">[email]</span><a href="mailto:zakaria.m.omar@gmail.com">zakaria.m.omar@gmail.com</a>
+        <span class="sep">|</span>
+        <span class="prompt">[tel]</span><span>+254722855761</span>
+        <span class="sep">|</span>
+        <span class="prompt">[linkedin]</span><a href="https://linkedin.com/in/zakaria-omar-21b0b729b" target="_blank" rel="noopener">zakaria-omar</a>
+        <span class="sep">|</span>
+        <span class="prompt">[github]</span><a href="https://github.com/zakisserious" target="_blank" rel="noopener">zakisserious</a>
+      </div>
+      <div class="resume-actions">
+        <button class="btn btn-primary magnetic" onclick="window.print()">print --output=resume.pdf</button>
+      </div>
+    </header>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Summary</h2>
+      <p style="color: var(--text-secondary); font-family: var(--font-body); font-size: 0.95rem; line-height: 1.7;">
+        Full-stack developer and AI enthusiast with 3+ years of experience building scalable web applications, blockchain systems, and machine learning solutions. Proficient in JavaScript, React, Node.js, Python, and AWS. Led development of 7+ shipped projects including a blockchain certificate verification system (GoQuorum + Solidity), an interactive pathfinding algorithm visualizer, and data visualization platforms deployed on Vercel. Mentored 200+ students in programming fundamentals, increasing course completion rates by 30%. Strong background in SaaS analysis, backend architecture, and system design.
+      </p>
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Impact</h2>
+      <div class="resume-metrics">
+        <div class="metric">
+          <span class="metric-value">7+</span>
+          <span class="metric-label">Projects Shipped</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">200+</span>
+          <span class="metric-label">Students Mentored</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">3+</span>
+          <span class="metric-label">Years Experience</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">20+</span>
+          <span class="metric-label">Technologies</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Experience</h2>
+
+      <div class="resume-item">
+        <div class="resume-item-header">
+          <h3 class="resume-item-title">Web Developer and Trainer Assistant</h3>
+          <span class="resume-item-date">Jul 2024 – Jul 2025</span>
+        </div>
+        <p class="resume-item-subtitle">Kidocode Sdn Bhd</p>
+        <p class="resume-item-location">Kuala Lumpur, Malaysia</p>
+        <ul class="resume-list">
+          <li>Built full-stack web applications with React, Node.js, and Flask, delivering REST APIs and responsive interfaces.</li>
+          <li>Mentored 200+ students in web development and programming fundamentals, increasing course completion rates by 30%.</li>
+          <li>Designed and launched 5+ new programming course modules, reducing student drop-off by 25%.</li>
+          <li>Led SaaS business analysis across multiple product lines, identifying pricing optimizations projected to drive 50% revenue growth over 3 years.</li>
+          <li>Coordinated with instructors and developers to test and deploy educational tools and coding projects.</li>
+        </ul>
+      </div>
+
+      <div class="resume-item">
+        <div class="resume-item-header">
+          <h3 class="resume-item-title">Travel Agent and IT Support</h3>
+          <span class="resume-item-date">2018 – 2023</span>
+        </div>
+        <p class="resume-item-subtitle">Aragshan Travels</p>
+        <p class="resume-item-location">Nairobi, Kenya</p>
+        <ul class="resume-list">
+          <li>Led IT operations, maintaining two internal servers and company-wide systems.</li>
+          <li>Implemented digital tools that improved operational efficiency by 40%.</li>
+          <li>Provided technical support and resolved 80% of customer complaints within 24 hours.</li>
+          <li>Performed data analysis and reporting to inform business decisions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Education</h2>
+
+      <div class="resume-item">
+        <div class="resume-item-header">
+          <h3 class="resume-item-title">Bachelor's in Computer Science (Honors)</h3>
+          <span class="resume-item-date">2022 – 2025</span>
+        </div>
+        <p class="resume-item-subtitle">Asia Pacific University</p>
+        <p class="resume-item-location">Kuala Lumpur, Malaysia</p>
+      </div>
+
+      <div class="resume-item">
+        <div class="resume-item-header">
+          <h3 class="resume-item-title">Diploma in Business Information Technology</h3>
+          <span class="resume-item-date">2020 – 2022</span>
+        </div>
+        <p class="resume-item-subtitle">Strathmore University</p>
+        <p class="resume-item-location">Nairobi, Kenya</p>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Technical Skills</h2>
+      <div class="resume-skills-grid">
+        <div class="resume-skill-group">
+          <h4>Programming Languages</h4>
+          <div class="resume-skill-tags">
+            <span class="resume-skill-tag">JavaScript</span>
+            <span class="resume-skill-tag">Python</span>
+            <span class="resume-skill-tag">TypeScript</span>
+            <span class="resume-skill-tag">Java</span>
+            <span class="resume-skill-tag">C++</span>
+            <span class="resume-skill-tag">C#</span>
+            <span class="resume-skill-tag">SQL</span>
+            <span class="resume-skill-tag">Rust</span>
+          </div>
+        </div>
+        <div class="resume-skill-group">
+          <h4>Databases</h4>
+          <div class="resume-skill-tags">
+            <span class="resume-skill-tag">MongoDB</span>
+            <span class="resume-skill-tag">PostgreSQL</span>
+            <span class="resume-skill-tag">MySQL</span>
+            <span class="resume-skill-tag">SQLite</span>
+          </div>
+        </div>
+        <div class="resume-skill-group">
+          <h4>Blockchain</h4>
+          <div class="resume-skill-tags">
+            <span class="resume-skill-tag">Solidity</span>
+            <span class="resume-skill-tag">Hardhat</span>
+            <span class="resume-skill-tag">Web3.js</span>
+            <span class="resume-skill-tag">Truffle</span>
+            <span class="resume-skill-tag">Smart Contracts</span>
+          </div>
+        </div>
+        <div class="resume-skill-group">
+          <h4>AI & Machine Learning</h4>
+          <div class="resume-skill-tags">
+            <span class="resume-skill-tag">TensorFlow</span>
+            <span class="resume-skill-tag">OpenCV</span>
+            <span class="resume-skill-tag">Pandas</span>
+            <span class="resume-skill-tag">NumPy</span>
+            <span class="resume-skill-tag">Computer Vision</span>
+            <span class="resume-skill-tag">LLM Utilization</span>
+            <span class="resume-skill-tag">Advanced Prompt Engineering</span>
+          </div>
+        </div>
+        <div class="resume-skill-group">
+          <h4>Tools & Platforms</h4>
+          <div class="resume-skill-tags">
+            <span class="resume-skill-tag">Git</span>
+            <span class="resume-skill-tag">GitHub</span>
+            <span class="resume-skill-tag">Firebase</span>
+            <span class="resume-skill-tag">Figma</span>
+            <span class="resume-skill-tag">AWS</span>
+            <span class="resume-skill-tag">Docker</span>
+            <span class="resume-skill-tag">Linux</span>
+            <span class="resume-skill-tag">REST APIs</span>
+          </div>
+        </div>
+        <div class="resume-skill-group">
+          <h4>Business Analysis</h4>
+          <div class="resume-skill-tags">
+            <span class="resume-skill-tag">Financial Forecasting</span>
+            <span class="resume-skill-tag">Budgeting</span>
+            <span class="resume-skill-tag">Market Trend Assessment</span>
+            <span class="resume-skill-tag">SaaS Evaluation</span>
+          </div>
+        </div>
+        <div class="resume-skill-group">
+          <h4>Teaching & Content</h4>
+          <div class="resume-skill-tags">
+            <span class="resume-skill-tag">Curriculum Design</span>
+            <span class="resume-skill-tag">Interactive Learning</span>
+            <span class="resume-skill-tag">Technical Instruction</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Languages</h2>
+      <div class="resume-langs">
+        <span class="resume-lang-tag">English</span>
+        <span class="resume-lang-tag">Swahili</span>
+        <span class="resume-lang-tag">Somali</span>
+        <span class="resume-lang-tag">Arabic</span>
+      </div>
+    </section>
+
+    <section class="resume-section resume-projects">
+      <h2 class="resume-section-title">Projects</h2>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
+          <span class="terminal-title">pathfinder</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">Pathfinder — Algorithm Visualizer <a href="https://pathfinding-ecru.vercel.app/" target="_blank" class="resume-item-link">live ↗</a></h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">React, Vite, Tailwind CSS</p>
+            <ul class="resume-list">
+              <li>Built an interactive pathfinding algorithm visualizer supporting 9 algorithms (A*, Dijkstra, BFS, DFS, Greedy Best-First, Jump Point, etc.).</li>
+              <li>Features include side-by-side compare mode, real-time cost/distance visualization, maze generation, and adjustable speed controls.</li>
+              <li>Deployed on Vercel with responsive design and touch-friendly controls.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
+          <span class="terminal-title">artists-evolution</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">Artists Evolution Analyzer <a href="https://artists-evolution-data.vercel.app/" target="_blank" class="resume-item-link">live ↗</a></h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">React, Spotify API, Data Visualization</p>
+            <ul class="resume-list">
+              <li>Developed a data visualization tool that analyzes an artist's discography evolution, popularity trends, and breakout eras using Spotify's API.</li>
+              <li>Interactive timeline charts, popularity graphs, and era-based segmentation for exploring musical progression.</li>
+              <li>Deployed on Vercel with responsive design.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
+          <span class="terminal-title">blockchain-cert</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">Machine Learning and Blockchain Based Certification System</h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">React, Node.js, Python, Solidity, Hardhat, MongoDB</p>
+            <ul class="resume-list">
+              <li>Designed and developed a blockchain-based academic certificate verification system using GoQuorum.</li>
+              <li>Solidity smart contracts for secure and immutable record storage, AI/ML-powered document classification, anomaly detection for fraud prevention, and real-time verification via Web3.js integration.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
+          <span class="terminal-title">portfolio</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">Portfolio — Terminal-Themed Website <a href="https://zakisserious.github.io" target="_blank" class="resume-item-link">live ↗</a></h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">HTML, CSS, JavaScript, GSAP</p>
+            <ul class="resume-list">
+              <li>Designed and built a retro terminal-themed portfolio with custom cursor effects, GSAP scroll animations, and a live terminal output background.</li>
+              <li>Features include smooth scroll, 3D card tilts, text scramble effects, and full mobile responsiveness.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
+          <span class="terminal-title">diabetes-mgmt</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">Cloud Based Diabetes Management System</h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">C#, Razor Pages, AWS Elastic Beanstalk, AWS Lambda</p>
+            <ul class="resume-list">
+              <li>Developed a cloud-based application for tracking and managing diabetes data, integrating Razor Pages for dynamic web interfaces.</li>
+              <li>Deployed via AWS Elastic Beanstalk and AWS Lambda for scalable, serverless architecture with secure data handling.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
+          <span class="terminal-title">face-hand-detect</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">Face and Hand Detection System</h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">Python, TensorFlow, OpenCV</p>
+            <ul class="resume-list">
+              <li>Designed and developed a machine learning-based face and hand detection system for real-time interaction and security.</li>
+              <li>Deep learning-based face detection, real-time hand tracking, and integration for authentication, gesture control, and human-computer interaction.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
+          <span class="terminal-title">club-mgmt</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">Club Management System</h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">HTML, PHP, CSS, MySQL</p>
+            <ul class="resume-list">
+              <li>Developed a web-based club management system using PHP and MySQL for secure member registration, profile editing, and a searchable directory.</li>
+              <li>Event management and integrated communication tools, with HTML and CSS ensuring a user-friendly interface.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
+          <span class="terminal-title">image-editor</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">Image Editor</h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">JavaScript</p>
+            <ul class="resume-list">
+              <li>Developed a JavaScript-based image editing application for real-time photo manipulation.</li>
+              <li>Filters, cropping, resizing, and drawing tools, with an intuitive UI for seamless user experience.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2 class="resume-section-title">Interests</h2>
+      <div class="resume-interests">
+        <span class="interest-tag">Blockchain & Web3</span>
+        <span class="interest-tag">AI / Machine Learning</span>
+        <span class="interest-tag">System Design</span>
+        <span class="interest-tag">Open Source</span>
+        <span class="interest-tag">Rust</span>
+        <span class="interest-tag">Cloud Infrastructure</span>
+        <span class="interest-tag">Cybersecurity</span>
+      </div>
+    </section>
+
+    <footer class="resume-footer">
+      <p>last updated: jul 2026 | generated from zakisserious.github.io</p>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Cursor
+      const dot = document.getElementById('cursor-dot');
+      const trail = document.getElementById('cursor-trail');
+      if (dot && trail && !('ontouchstart' in window)) {
+        let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+        let trailX = mouseX, trailY = mouseY;
+        dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
+        trail.style.left = mouseX + 'px'; trail.style.top = mouseY + 'px';
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px'; });
+        (function animTrail() { trailX += (mouseX - trailX) * 0.15; trailY += (mouseY - trailY) * 0.15; trail.style.left = trailX + 'px'; trail.style.top = trailY + 'px'; requestAnimationFrame(animTrail); })();
+        document.querySelectorAll('a, button, .magnetic').forEach((el) => { el.addEventListener('mouseenter', () => dot.classList.add('hover')); el.addEventListener('mouseleave', () => dot.classList.remove('hover')); });
+      } else if (dot && trail) {
+        dot.style.display = 'none'; trail.style.display = 'none';
+      }
+
+      // Cursor spotlight
+      if (!('ontouchstart' in window)) {
+        const spotlight = document.createElement('div');
+        spotlight.className = 'cursor-spotlight';
+        spotlight.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(spotlight);
+        let sx = window.innerWidth / 2, sy = window.innerHeight / 2;
+        document.addEventListener('mousemove', (e) => { sx = e.clientX; sy = e.clientY; });
+        (function animSpot() { spotlight.style.left = sx + 'px'; spotlight.style.top = sy + 'px'; requestAnimationFrame(animSpot); })();
+      }
+
+      // Scroll progress
+      const bar = document.createElement('div');
+      bar.className = 'scroll-progress';
+      bar.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(bar);
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+      }, { passive: true });
+
+      // Typing animation for name
+      const nameEl = document.getElementById('resume-name');
+      if (nameEl) {
+        const fullText = 'zakaria@portfolio:~$ ';
+        nameEl.textContent = '';
+        let i = 0;
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor-blink';
+        function typeChar() {
+          if (i < fullText.length) {
+            nameEl.textContent = fullText.slice(0, i + 1);
+            nameEl.appendChild(cursor);
+            i++;
+            setTimeout(typeChar, 45 + Math.random() * 30);
+          } else {
+            nameEl.appendChild(cursor);
+          }
+        }
+        setTimeout(typeChar, 300);
+      }
+
+      // GSAP animations
+      if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.fromTo('.resume-header', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.2 });
+        gsap.fromTo('.resume-section-title', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out', scrollTrigger: { trigger: '.resume-page', start: 'top 80%', once: true } });
+        gsap.fromTo('.resume-item', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: '.resume-page', start: 'top 70%', once: true } });
+        gsap.fromTo('.resume-skill-tag', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.3, stagger: 0.02, ease: 'power2.out', scrollTrigger: { trigger: '.resume-skills-grid', start: 'top 85%', once: true } });
+        gsap.fromTo('.resume-lang-tag', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: 'power2.out', scrollTrigger: { trigger: '.resume-langs', start: 'top 90%', once: true } });
+        gsap.fromTo('.metric', { opacity: 0, y: 15, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out', scrollTrigger: { trigger: '.resume-metrics', start: 'top 85%', once: true } });
+        gsap.fromTo('.resume-project-card', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: '.resume-projects', start: 'top 75%', once: true } });
+        gsap.fromTo('.interest-tag', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.3, stagger: 0.04, ease: 'power2.out', scrollTrigger: { trigger: '.resume-interests', start: 'top 90%', once: true } });
+      }
+    });
+  </script>
+</body>
+
+</html>
