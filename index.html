@@ -3,299 +3,562 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zaks Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Zakaria Omar — Full-Stack Developer</title>
+  <meta name="description" content="Portfolio of Zakaria Omar — Full-Stack Developer, AI Enthusiast, and Blockchain Builder." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="smallscreens.css" />
-  <!-- <link rel="icon" href="http://example.com/favicon.png"> when i choose a favicon its gon be here-->
+  <link rel="stylesheet" href="animations.css" />
+  <link rel="stylesheet" href="responsive.css" />
 </head>
 
-<body>
-  <nav id="desktop-nav">
-    <div class="logo" id="logo">Zakaria Omar</div>
-    <div>
+<body class="loading">
+  <!-- Retro Overlays -->
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="crt-glow" aria-hidden="true"></div>
+  <div class="terminal-output" id="terminal-output" aria-hidden="true">
+    <div class="terminal-chrome">
+      <div class="terminal-dots">
+        <span class="dot dot-close"></span>
+        <span class="dot dot-minimize"></span>
+        <span class="dot dot-maximize"></span>
+      </div>
+      <span class="terminal-title">zakaria — terminal</span>
+    </div>
+    <div class="terminal-body" id="terminal-body"></div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div class="loader" id="loader" aria-hidden="true">
+  <pre class="loader-ascii" id="loader-ascii" aria-hidden="true">
+┌───────────────────────────────────────┐
+│ ███████╗ █████╗ ██╗  ██╗              │
+│ ╚══███╔╝██╔══██╗██║ ██╔╝              │
+│   ███╔╝ ███████║█████╔╝               │
+│  ███╔╝  ██╔══██║██╔═██╗               │
+│ ███████╗██║  ██║██║  ██╗              │
+│ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝              │
+│       ◆ PORTFOLIO SYSTEM v2.0.26 ◆    │
+└───────────────────────────────────────┘
+</pre>
+    <div class="loader-terminal" id="loader-terminal">
+      <div class="loader-line" id="loader-line-1">
+        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">sudo init portfolio --theme=retro</span>
+      </div>
+      <div class="loader-line" id="loader-line-2">
+        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">loading modules...</span>
+      </div>
+      <div class="loader-line" id="loader-line-3">
+        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">compiling animations...</span>
+      </div>
+      <div class="loader-line" id="loader-line-4">
+        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">initializing terminal...</span>
+      </div>
+      <div class="loader-line" id="loader-line-5">
+        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">ready_</span><span class="cursor-blink"></span>
+      </div>
+      <div class="loader-progress" id="loader-progress">
+        <div class="loader-progress-bar" id="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursor-trail" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-1" id="trail-1" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-2" id="trail-2" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-3" id="trail-3" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-4" id="trail-4" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-5" id="trail-5" aria-hidden="true"></div>
+  <div class="cursor-image" id="cursor-image" aria-hidden="true">
+    <img src="" alt="" id="cursor-img-el" />
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">~/zakaria</a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">about</a></li>
+        <li><a href="#toolbox">skills</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#contact">contact</a></li>
+        <li><a href="resume.html">resume</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
-  <nav id="hamburger-nav" style="background-color: ghostwhite;">
-    <div class="logo">Zakaria Omar</div>
-    <div class="hamburger-menu">
-      <div class="hamburger-icon" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="menu-links">
-        <li><a href="#about" onclick="toggleMenu()">About</a></li>
-        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-        <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-      </div>
-    </div>
-  </nav>
-  <section id="profile">
-    <div class="section__pic-container">
-      <img src="./assets/profile-pic.png" class="about-pic" style="border-radius: 50%;" />
-    </div>
-    <div class="section__text">
-      <p class="section__text__p1"> &#x1F44B; Hello, I'm</p>
-      <h1 class="title">Zakaria Omar,</h1>
-      <span class="auto_type"></span>
-      <div class="btn-container">
-        <button class="btn btn-color-2" onclick="window.open('./assets/Resume.pdf')">
-          CV
-        </button>
-        <button class="btn btn-color-1" onclick="location.href='./#contact'">
-          Contact Info
-        </button>
-      </div>
-      <div id="socials-container">
-        <img src="./assets/linkedin.png" alt="My LinkedIn profile" class="icon"
-          onclick="location.href='https://www.linkedin.com/in/zakaria-omar-21b0b729b/'" />
-        <img src="./assets/github.png" class="icon" onclick="location.href='https://github.com/zakisserious'" />
-      </div>
-    </div>
-  </section>
-  <section id="about">
-    <p class="section__text__p1">Get To Know More</p>
-    <h1 class="title">About Me</h1>
-    <div class="section-container">
-      <div class="section__pic-container">
-        <img src="./assets/about-pic.jpg" class="about-pic" />
-      </div>
-      <div class="about-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <img src="./assets/experience.png" alt="Experience icon" class="icon" />
-            <h3>Experience</h3>
-            <p>2 years <br />Web Development <br /> Technical Support </p>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#about" class="mobile-link">~/about</a>
+    <a href="#toolbox" class="mobile-link">~/skills</a>
+    <a href="#projects" class="mobile-link">~/projects</a>
+    <a href="#contact" class="mobile-link">~/contact</a>
+    <a href="resume.html" class="mobile-link">~/resume</a>
+  </div>
+
+  <main>
+    <!-- ======================== HERO ======================== -->
+    <section class="hero" id="hero">
+      <!-- Floating Code Snippets -->
+      <div class="hero-floating-code" aria-hidden="true">const zakaria = new Developer({ stack: 'full' });</div>
+      <div class="hero-floating-code" aria-hidden="true">while(alive) { code(); learn(); build(); }</div>
+      <div class="hero-floating-code" aria-hidden="true">import { skills } from './toolbox';</div>
+      <div class="hero-floating-code" aria-hidden="true">// TODO: change the world</div>
+      <div class="hero-floating-code" aria-hidden="true">npm run deploy --production</div>
+
+      <!-- Binary Floats -->
+      <div class="binary-float" aria-hidden="true" data-speed="0.3">01101001 10110100 11010011</div>
+      <div class="binary-float" aria-hidden="true" data-speed="0.5">0xDEADBEEF 0xCAFEBABE</div>
+      <div class="binary-float" aria-hidden="true" data-speed="0.2">SELECT * FROM skills WHERE level='elite'</div>
+      <div class="binary-float" aria-hidden="true" data-speed="0.4">git commit -m "initializing soul"</div>
+
+      <div class="hero-inner">
+        <div class="hero-photo-wrap">
+          <div class="hero-pulse-ring" aria-hidden="true"></div>
+          <div class="hero-pulse-ring" aria-hidden="true"></div>
+          <div class="hero-pulse-ring" aria-hidden="true"></div>
+          <img src="./assets/profile-pic.png" alt="Zakaria Omar" class="hero-photo" />
+          <div class="hero-photo-glow" aria-hidden="true"></div>
+        </div>
+        <div class="hero-text">
+          <p class="hero-greeting">> Hello, I'm</p>
+          <h2 class="section-heading reveal glitch">zakaria</h2>
+          <div class="hero-role">
+            <span class="auto_type"></span>
           </div>
-          <div class="details-container">
-            <img src="./assets/education.png" alt="Education icon" class="icon" />
-            <h3>Education</h3>
-            <p>Bachelors in Computer Science @ APU Malaysia <br />Business Information Technology @ Strathmore
+          <div class="hero-actions">
+            <a href="resume.html" class="btn btn-primary magnetic">Resume</a>
+            <a href="#contact" class="btn btn-outline magnetic">Contact Me</a>
+          </div>
+          <div class="hero-social">
+            <a href="https://www.linkedin.com/in/zakaria-omar-21b0b729b/" target="_blank" rel="noopener" aria-label="LinkedIn" class="magnetic">
+              <img src="./assets/linkedin.png" alt="" />
+            </a>
+            <a href="https://github.com/zakisserious" target="_blank" rel="noopener" aria-label="GitHub" class="magnetic">
+              <img src="./assets/github.png" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <span>scroll</span>
+        <div class="scroll-hint-line"></div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider" aria-hidden="true">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-text">sys.nav</span>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <!-- ======================== ABOUT ======================== -->
+    <section class="section" id="about">
+      <div class="section-scan-line" aria-hidden="true"></div>
+      <div class="section-flash" aria-hidden="true"></div>
+      <div class="binary-float" aria-hidden="true" data-speed="0.25">0xFF 0xAA 0xBB 0xCC</div>
+      <div class="binary-float" aria-hidden="true" data-speed="0.35">mkdir -p ~/achievements && cd ~/goals</div>
+      <p class="section-label">// about_me</p>
+      <h2 class="section-heading reveal glitch">About Me</h2>
+      <div class="about-grid">
+        <div class="about-photo-wrap reveal">
+          <div class="about-photo-scan" aria-hidden="true"></div>
+          <img src="./assets/about-pic.jpg" alt="Zakaria Omar" class="about-photo" />
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <p class="reveal">
+              I'm a <strong>Full-Stack Developer</strong> who enjoys building things that work efficiently — from interactive web apps to AI-powered platforms. My experience spans React.js, Node.js, Python, and AWS, with hands-on work in SaaS, blockchain, and AI/ML projects.
+            </p>
+            <p class="reveal">
+              I love solving problems, optimizing systems, and turning ideas into real, functional products. My recent work includes developing a blockchain-based certificate verification system and cloud applications focused on scalability and performance. I've also <strong>mentored 200+ students</strong> in programming fundamentals.
             </p>
           </div>
+          <div class="about-stats">
+            <div class="stat reveal">
+              <span class="stat-number" data-target="3">0</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat reveal">
+              <span class="stat-number" data-target="2">0</span>
+              <span class="stat-label">Degrees</span>
+            </div>
+            <div class="stat reveal">
+              <span class="stat-number" data-target="5">0</span>
+              <span class="stat-label">Projects Shipped</span>
+            </div>
+          </div>
         </div>
-        <div class="text-container">
-          <p>
-            I’m a passionate Full Stack Developer who enjoys building things that work efficiently from interactive web
-            apps to AI-powered platforms. My experience spans React.js, Node.js, and AWS, with hands-on work in SaaS,
-            blockchain, and AI/ML projects.
+      </div>
+    </section>
 
-            I love solving problems, optimizing systems, and turning ideas into real, functional products. My recent
-            work includes developing a blockchain-based certificate verification system and cloud applications focused
-            on scalability and performance.
-          </p>
-        </div>
-      </div>
+    <!-- Divider -->
+    <div class="section-divider" aria-hidden="true">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-text">load modules</span>
+      <div class="section-divider-line"></div>
     </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#experience'" />
-  </section>
-  <section id="experience">
-    <p class="section__text__p1">Explore My</p>
-    <h1 class="title">Skills 👨‍🏭</h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="zoom-container" style="transition: 0.7s;">
-          <div class="article-container">
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>HTML</h3>
-                <p>Experienced</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>CSS</h3>
-                <p>Experienced</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>ASM</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>JavaScript</h3>
-                <p>Basic</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Python</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>R</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <div class="zoom-container" style="transition: 0.7s;">
-          <div class="article-container">
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>MySQL</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>PHP</h3>
-                <p>Experienced</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>C#</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Java</h3>
-                <p>Intermediate</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Bootstrap</h3>
-                <p>Basic</p>
-              </div>
-            </article>
-            <article>
-              <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-              <div>
-                <h3>Arduino IDE</h3>
-                <p>Basic</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#projects'" />
-  </section>
-  <section id="projects">
-    <p class="section__text__p1">Browse My Recent</p>
-    <h1 class="title">Projects &#128104;&#8205;&#128187;</h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="zoom-container color-container">
-          <div class="article-container">
-            <img src="./assets/project1.png" alt="Project 1" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Construction Management System with ASM</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://github.com/zakisserious/ASM-Project', '_blank')">
-              Github
-            </button>
-          </div>
-        </div>
-        <div class="zoom-container color-container">
-          <div class="article-container">
-            <img src="./assets/project2.png" alt="Project 2" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Artists Evolution Analyzer (Live)</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://artists-evolution-data.vercel.app/', '_blank')">
-              Live Website
-            </button>
-          </div>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://github.com/zakisserious/Artists-Evolution-Data/', '_blank')">
-              Github
-            </button>
-          </div>
-        </div>
-        <div class="zoom-container color-container">
-          <div class="article-container">
-            <img src="./assets/project3.png" alt="Project 3" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Final Year Project: Blockchain-based certificate verification
-            system </h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://github.com/zakisserious/fyp', '_blank')">
-              Github
-            </button>
 
+    <!-- ======================== TOOLBOX ======================== -->
+    <section class="section" id="toolbox">
+      <div class="section-scan-line" aria-hidden="true"></div>
+      <div class="section-flash" aria-hidden="true"></div>
+      <div class="binary-float" aria-hidden="true" data-speed="0.3">pip install --upgrade skills brain</div>
+      <div class="binary-float" aria-hidden="true" data-speed="0.4">cargo build --release --target=legend</div>
+      <p class="section-label">// tech_stack</p>
+      <h2 class="section-heading reveal glitch">Toolbox</h2>
+      <div class="toolbox-grid">
+        <div class="toolbox-row reveal">
+          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
+          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
+          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
+          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
+          <div class="toolbox-header">
+            <div class="toolbox-icon"></div>
+            <span class="toolbox-label">Languages</span>
+          </div>
+          <div class="toolbox-tags">
+            <span class="toolbox-tag"><i class="devicon-javascript-plain"></i> JavaScript</span>
+            <span class="toolbox-tag"><i class="devicon-typescript-plain"></i> TypeScript</span>
+            <span class="toolbox-tag"><i class="devicon-python-plain"></i> Python</span>
+            <span class="toolbox-tag"><i class="devicon-java-plain"></i> Java</span>
+            <span class="toolbox-tag"><i class="devicon-cplusplus-plain"></i> C++</span>
+            <span class="toolbox-tag"><i class="devicon-csharp-plain"></i> C#</span>
+            <span class="toolbox-tag"><i class="devicon-solidity-plain"></i> Solidity</span>
+            <span class="toolbox-tag"><i class="devicon-rust-plain"></i> Rust</span>
+            <span class="toolbox-tag">SQL</span>
+          </div>
+        </div>
+        <div class="toolbox-row reveal">
+          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
+          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
+          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
+          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
+          <div class="toolbox-header">
+            <div class="toolbox-icon"></div>
+            <span class="toolbox-label">Frontend</span>
+          </div>
+          <div class="toolbox-tags">
+            <span class="toolbox-tag"><i class="devicon-react-original"></i> React.js</span>
+            <span class="toolbox-tag"><i class="devicon-html5-plain"></i> HTML5</span>
+            <span class="toolbox-tag"><i class="devicon-css3-plain"></i> CSS3</span>
+            <span class="toolbox-tag"><i class="devicon-bootstrap-plain"></i> Bootstrap</span>
+            <span class="toolbox-tag"><i class="devicon-tailwindcss-plain"></i> Tailwind CSS</span>
+            <span class="toolbox-tag"><i class="devicon-razor-plain"></i> Razor Pages</span>
+          </div>
+        </div>
+        <div class="toolbox-row reveal">
+          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
+          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
+          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
+          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
+          <div class="toolbox-header">
+            <div class="toolbox-icon"></div>
+            <span class="toolbox-label">Backend & Database</span>
+          </div>
+          <div class="toolbox-tags">
+            <span class="toolbox-tag"><i class="devicon-nodejs-plain"></i> Node.js</span>
+            <span class="toolbox-tag"><i class="devicon-flask-original"></i> Flask</span>
+            <span class="toolbox-tag"><i class="devicon-express-original"></i> Express</span>
+            <span class="toolbox-tag"><i class="devicon-mongodb-plain"></i> MongoDB</span>
+            <span class="toolbox-tag"><i class="devicon-postgresql-plain"></i> PostgreSQL</span>
+            <span class="toolbox-tag"><i class="devicon-mysql-plain"></i> MySQL</span>
+            <span class="toolbox-tag"><i class="devicon-sqlite-plain"></i> SQLite</span>
+            <span class="toolbox-tag"><i class="devicon-firebase-plain"></i> Firebase</span>
+          </div>
+        </div>
+        <div class="toolbox-row reveal">
+          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
+          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
+          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
+          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
+          <div class="toolbox-header">
+            <div class="toolbox-icon"></div>
+            <span class="toolbox-label">AI & Machine Learning</span>
+          </div>
+          <div class="toolbox-tags">
+            <span class="toolbox-tag"><i class="devicon-tensorflow-original"></i> TensorFlow</span>
+            <span class="toolbox-tag"><i class="devicon-opencv-plain"></i> OpenCV</span>
+            <span class="toolbox-tag"><i class="devicon-python-plain"></i> Pandas</span>
+            <span class="toolbox-tag"><i class="devicon-python-plain"></i> NumPy</span>
+            <span class="toolbox-tag">Computer Vision</span>
+            <span class="toolbox-tag">LLMs</span>
+            <span class="toolbox-tag">Prompt Engineering</span>
+          </div>
+        </div>
+        <div class="toolbox-row reveal">
+          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
+          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
+          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
+          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
+          <div class="toolbox-header">
+            <div class="toolbox-icon"></div>
+            <span class="toolbox-label">Blockchain & Web3</span>
+          </div>
+          <div class="toolbox-tags">
+            <span class="toolbox-tag"><i class="devicon-solidity-plain"></i> Solidity</span>
+            <span class="toolbox-tag"><i class="devicon-hardhat-plain"></i> Hardhat</span>
+            <span class="toolbox-tag"><i class="devicon-ethereum-plain"></i> Web3.js</span>
+            <span class="toolbox-tag">Truffle</span>
+            <span class="toolbox-tag">Smart Contracts</span>
+            <span class="toolbox-tag">GoQuorum</span>
+          </div>
+        </div>
+        <div class="toolbox-row reveal">
+          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
+          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
+          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
+          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
+          <div class="toolbox-header">
+            <div class="toolbox-icon"></div>
+            <span class="toolbox-label">DevOps & Tools</span>
+          </div>
+          <div class="toolbox-tags">
+            <span class="toolbox-tag"><i class="devicon-git-plain"></i> Git</span>
+            <span class="toolbox-tag"><i class="devicon-github-original"></i> GitHub</span>
+            <span class="toolbox-tag"><i class="devicon-amazonwebservices-plain-wordmark"></i> AWS</span>
+            <span class="toolbox-tag"><i class="devicon-docker-plain"></i> Docker</span>
+            <span class="toolbox-tag"><i class="devicon-linux-plain"></i> Linux</span>
+            <span class="toolbox-tag">REST APIs</span>
+            <span class="toolbox-tag"><i class="devicon-figma-plain"></i> Figma</span>
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider" aria-hidden="true">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-text">deploy</span>
+      <div class="section-divider-line"></div>
     </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
-  </section>
-  <section id="contact">
-    <p class="section__text__p1">Get in Touch</p>
-    <h1 class="title">Contact Me</h1>
-    <div class="contact-info-upper-container">
-      <div class="contact-info-container">
-        <img src="./assets/email.png" alt="Email icon" class="icon contact-icon email-icon" />
-        <p><a href="mailto:zakaria.m.omar@gmail.com">Send an Email</a></p>
+
+    <!-- ======================== PROJECTS ======================== -->
+    <section class="section" id="projects">
+      <p class="section-label">// featured_work</p>
+      <h2 class="section-heading reveal glitch">Projects</h2>
+
+      <div class="projects-wrapper" id="projects-wrapper">
+        <div class="projects-track" id="projects-track">
+
+        <div class="project-slide" data-cursor="expand" data-image="./assets/project2.png">
+          <div class="project-card-chrome">
+            <div class="terminal-dots">
+              <span class="dot dot-close"></span>
+              <span class="dot dot-minimize"></span>
+              <span class="dot dot-maximize"></span>
+            </div>
+            <span class="terminal-title">artists-evolution</span>
+          </div>
+          <div class="project-image">
+            <img src="./assets/project2.png" alt="Artists Evolution Analyzer" loading="lazy" />
+            <div class="project-image-overlay">
+              <span class="project-image-badge">LIVE</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Artists Evolution Analyzer</h3>
+            <p class="project-desc">Discover an artist's breakout era, trace their popularity over time, and explore their discography timeline through interactive data visualization.</p>
+            <div class="project-tech">
+              <span>React</span>
+            </div>
+            <div class="project-links">
+              <a href="https://artists-evolution-data.vercel.app/" target="_blank" rel="noopener" class="btn btn-sm btn-primary magnetic">$ open live_demo</a>
+              <a href="https://github.com/zakisserious/Artists-Evolution-Data" target="_blank" rel="noopener" class="btn btn-sm btn-outline magnetic">$ cat source</a>
+            </div>
+          </div>
+          <div class="card-scan-line" aria-hidden="true"></div>
+        </div>
+
+        <div class="project-slide" data-cursor="expand" data-image="./assets/project1.png">
+          <div class="project-card-chrome">
+            <div class="terminal-dots">
+              <span class="dot dot-close"></span>
+              <span class="dot dot-minimize"></span>
+              <span class="dot dot-maximize"></span>
+            </div>
+            <span class="terminal-title">pathfinder</span>
+          </div>
+          <div class="project-image">
+            <img src="./assets/project1.png" alt="Pathfinder Algorithm Visualizer" loading="lazy" />
+            <div class="project-image-overlay">
+              <span class="project-image-badge">LIVE</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Pathfinder</h3>
+            <p class="project-desc">Interactive pathfinding algorithm visualizer with 9 algorithms (A*, Dijkstra, BFS, DFS), compare mode, cost visualization, and maze generation.</p>
+            <div class="project-tech">
+              <span>React</span>
+              <span>Vite</span>
+              <span>Tailwind CSS</span>
+            </div>
+            <div class="project-links">
+              <a href="https://pathfinding-ecru.vercel.app/" target="_blank" rel="noopener" class="btn btn-sm btn-primary magnetic">$ open live_demo</a>
+              <a href="https://github.com/zakisserious/pathfinder" target="_blank" rel="noopener" class="btn btn-sm btn-outline magnetic">$ cat source</a>
+            </div>
+          </div>
+          <div class="card-scan-line" aria-hidden="true"></div>
+        </div>
+
+        <div class="project-slide" data-cursor="expand" data-image="./assets/project3.png">
+          <div class="project-card-chrome">
+            <div class="terminal-dots">
+              <span class="dot dot-close"></span>
+              <span class="dot dot-minimize"></span>
+              <span class="dot dot-maximize"></span>
+            </div>
+            <span class="terminal-title">blockchain-cert</span>
+          </div>
+          <div class="project-image">
+            <img src="./assets/project3.png" alt="Blockchain Certificate Verification" loading="lazy" />
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Blockchain Certificate Verification</h3>
+            <p class="project-desc">Academic certificate verification system using GoQuorum blockchain with Solidity smart contracts, AI/ML document classification, and anomaly detection.</p>
+            <div class="project-tech">
+              <span>React</span>
+              <span>Node.js</span>
+              <span>Python</span>
+              <span>Solidity</span>
+              <span>Hardhat</span>
+              <span>MongoDB</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/zakisserious/fyp" target="_blank" rel="noopener" class="btn btn-sm btn-outline magnetic">$ cat source</a>
+            </div>
+          </div>
+          <div class="card-scan-line" aria-hidden="true"></div>
+        </div>
+
+        <div class="project-text-card" data-cursor="expand">
+          <div class="project-card-chrome">
+            <div class="terminal-dots">
+              <span class="dot dot-close"></span>
+              <span class="dot dot-minimize"></span>
+              <span class="dot dot-maximize"></span>
+            </div>
+            <span class="terminal-title">diabetes-mgmt</span>
+          </div>
+          <span class="project-number">04</span>
+          <div class="project-info">
+            <h3 class="project-title">Cloud Diabetes Management System</h3>
+            <p class="project-desc">Cloud-based application for tracking and managing diabetes data with serverless architecture, secure data handling, and efficient backend logic for patient record management.</p>
+            <div class="project-tech">
+              <span>C#</span>
+              <span>Razor Pages</span>
+              <span>AWS Elastic Beanstalk</span>
+              <span>AWS Lambda</span>
+            </div>
+          </div>
+          <div class="card-scan-line" aria-hidden="true"></div>
+        </div>
+
+        <div class="project-text-card" data-cursor="expand">
+          <div class="project-card-chrome">
+            <div class="terminal-dots">
+              <span class="dot dot-close"></span>
+              <span class="dot dot-minimize"></span>
+              <span class="dot dot-maximize"></span>
+            </div>
+            <span class="terminal-title">face-hand-detect</span>
+          </div>
+          <span class="project-number">05</span>
+          <div class="project-info">
+            <h3 class="project-title">Face & Hand Detection System</h3>
+            <p class="project-desc">Real-time ML-based face and hand detection system for authentication, gesture control, and human-computer interaction using deep learning.</p>
+            <div class="project-tech">
+              <span>Python</span>
+              <span>TensorFlow</span>
+              <span>OpenCV</span>
+            </div>
+          </div>
+          <div class="card-scan-line" aria-hidden="true"></div>
+        </div>
+
       </div>
-      <div class="contact-info-container">
-        <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon contact-icon" />
-        <p><a href="https://www.linkedin.com/in/zakaria-omar-21b0b729b/">LinkedIn</a></p>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider" aria-hidden="true">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-text">establish connection</span>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <!-- ======================== CONTACT ======================== -->
+    <section class="section contact-section" id="contact">
+      <div class="section-scan-line" aria-hidden="true"></div>
+      <div class="section-flash" aria-hidden="true"></div>
+      <p class="section-label">// get_in_touch</p>
+      <h2 class="contact-heading reveal glitch">Let's work<br>together.</h2>
+      <p class="contact-subtext reveal">
+        > I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+      </p>
+      <a href="mailto:zakaria.m.omar@gmail.com" class="contact-email reveal magnetic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        zakaria.m.omar@gmail.com
+      </a>
+      <div class="contact-social">
+        <a href="https://www.linkedin.com/in/zakaria-omar-21b0b729b/" target="_blank" rel="noopener" aria-label="LinkedIn" class="magnetic">
+          <img src="./assets/linkedin.png" alt="" />
+        </a>
+        <a href="https://github.com/zakisserious" target="_blank" rel="noopener" aria-label="GitHub" class="magnetic">
+          <img src="./assets/github.png" alt="" />
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- System Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-left">
+      <div class="status-item">
+        <span class="status-dot"></span>
+        <span>SYSTEM: ONLINE</span>
+      </div>
+      <div class="status-item">
+        <span class="status-dot amber"></span>
+        <span>LOAD: 42%</span>
       </div>
     </div>
-    <div class="article-container">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127482.66733698611!2d101.60458730550671!3d3.138674074326262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc362abd08e7d3%3A0x232e1ff540d86c99!2sKuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur!5e0!3m2!1sen!2smy!4v1728363196695!5m2!1sen!2smy"
-        width="600" height="450" style="border:0; justify-content: center;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-  </section>
-  <footer>
-    <nav style="background-color: white;">
-      <div style="background-color: white;">
-        <ul class="nav-links" style="font-size: 1.7rem;">
-          <li style="font-size: 1.7rem;"><a href="#about">About</a></li>
-          <li style="font-size: 1.7rem;"><a href="#experience">Experience</a></li>
-          <li style="font-size: 1.7rem;"><a href="#projects">Projects</a></li>
-          <li style="font-size: 1.7rem;"><a href="#contact">Contact</a></li>
-        </ul>
+    <div class="status-bar-right">
+      <div class="status-item">
+        <span id="uptime">UPTIME: 00:00:00</span>
       </div>
-    </nav>
-    <p>Copyright &#169; 2026 Zakaria Omar. </p>
+      <div class="status-item">
+        <span>v2.0.26</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Built with <span class="green">&#9829;</span> by Zakaria Omar &copy; 2026</p>
   </footer>
-  <script src="script.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-  <script>
-    var typed = new Typed('.auto_type', {
-      strings: ['A Programmer', 'A Problem Solver', 'A Frontend Dev', 'A Backend Dev'],
-      typeSpeed: 100,
-      backSpeed: 50,
-      loop: true,
-      showCursor: false
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
