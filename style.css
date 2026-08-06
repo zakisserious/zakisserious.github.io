@@ -3,7 +3,7 @@
    ======================================== */
 
 /* --- Reset & Base --- */
-*, *::before, *after {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -158,6 +158,7 @@ button { font-family: inherit; border: none; background: none; }
   gap: var(--space-lg);
   opacity: 1;
   visibility: visible;
+  overflow: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
