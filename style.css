@@ -27,7 +27,7 @@
   --border-hover: rgba(255, 255, 255, 0.16);
 
   --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --font-terminal: 'VT323', 'Courier New', monospace;
 
@@ -232,15 +232,10 @@ button { font-family: inherit; border: none; background: none; }
   opacity: 1;
 }
 
-.loader-progress.visible {
-  opacity: 1;
-}
-
 .loader-progress-bar {
   height: 100%;
   background: var(--green);
   width: 0%;
-  transition: width 0.3s;
 }
 
 /* --- Hero CSS Animation (works without JS) --- */
@@ -274,19 +269,11 @@ button { font-family: inherit; border: none; background: none; }
   animation: heroFadeIn 0.5s ease-out 5s both;
 }
 
-.hero-social {
-  animation: heroFadeIn 0.5s ease-out 5.1s both;
-}
-
-.scroll-hint {
-  animation: heroFadeIn 0.5s ease-out 5.3s both;
-}
-
 /* --- Custom Cursor --- */
 .cursor-dot {
   position: fixed;
-  top: 50vh;
-  left: 50vw;
+  top: 0;
+  left: 0;
   width: 14px;
   height: 14px;
   background: transparent;
@@ -294,10 +281,10 @@ button { font-family: inherit; border: none; background: none; }
   border-radius: 50%;
   pointer-events: none;
   z-index: 10002;
-  transform: translate(-50%, -50%);
+  transform: translate(var(--cx, 50vw), var(--cy, 50vh)) translate(-50%, -50%);
   transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), background 0.3s, opacity 0.3s, border-color 0.3s;
   box-shadow: 0 0 6px rgba(0, 255, 136, 0.3), 0 0 12px rgba(0, 255, 136, 0.1);
-  will-change: left, top;
+  will-change: transform;
 }
 
 .cursor-dot.expanded {
@@ -324,22 +311,23 @@ button { font-family: inherit; border: none; background: none; }
 
 .cursor-dot.hide {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate(var(--cx, 50vw), var(--cy, 50vh)) translate(-50%, -50%) scale(0);
 }
 
 /* Cursor trail */
 .cursor-trail {
   position: fixed;
-  top: 50vh;
-  left: 50vw;
+  top: 0;
+  left: 0;
   width: 6px;
   height: 6px;
   background: var(--green);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10001;
-  transform: translate(-50%, -50%);
+  transform: translate(var(--cx, 50vw), var(--cy, 50vh)) translate(-50%, -50%);
   transition: width 0.4s, height 0.4s, opacity 0.4s;
+  will-change: transform;
 }
 
 .cursor-image {
@@ -373,13 +361,13 @@ button { font-family: inherit; border: none; background: none; }
 /* --- Multi-dot Cursor Trail --- */
 .cursor-trail-dot {
   position: fixed;
-  top: 50vh;
-  left: 50vw;
+  top: 0;
+  left: 0;
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(-50%, -50%);
-  will-change: left, top;
+  transform: translate(var(--cx, 50vw), var(--cy, 50vh)) translate(-50%, -50%);
+  will-change: transform;
 }
 
 .cursor-trail-dot-1 { width: 12px; height: 12px; background: rgba(0, 255, 136, 0.5); }
@@ -396,7 +384,7 @@ button { font-family: inherit; border: none; background: none; }
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.10;
+  opacity: 0.14;
   overflow: hidden;
 }
 
@@ -458,7 +446,7 @@ button { font-family: inherit; border: none; background: none; }
 }
 
 .terminal-line .t-output {
-  color: #00cc66;
+  color: #66ffaa;
   opacity: 0.7;
 }
 
@@ -547,11 +535,6 @@ button { font-family: inherit; border: none; background: none; }
   width: auto;
   animation: none;
   border-right: none;
-}
-
-/* --- Enhanced Glitch on Headings --- */
-.section-heading.glitch-active {
-  animation: glitchText 0.3s ease-in-out;
 }
 
 /* --- Hero Neon Glow on Name --- */
@@ -653,7 +636,6 @@ button { font-family: inherit; border: none; background: none; }
   border-radius: 1px;
   transition: transform 0.3s var(--ease-out), opacity 0.2s;
   transform-origin: center;
-  box-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
 }
 
 .hamburger.open span:first-child {
@@ -712,7 +694,7 @@ button { font-family: inherit; border: none; background: none; }
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-5xl) clamp(var(--space-lg), 4vw, var(--space-2xl));
+  padding: clamp(4rem, 8vw, 8rem) clamp(var(--space-lg), 4vw, var(--space-2xl));
   position: relative;
   overflow: hidden;
 }
@@ -846,71 +828,6 @@ button { font-family: inherit; border: none; background: none; }
   margin-top: var(--space-sm);
 }
 
-.hero-social {
-  display: flex;
-  gap: var(--space-md);
-  margin-top: var(--space-xs);
-}
-
-.hero-social a {
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  transition: border-color 0.3s, transform 0.3s var(--ease-out), box-shadow 0.3s;
-}
-
-.hero-social a:hover {
-  border-color: var(--green);
-  transform: translateY(-2px);
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
-}
-
-.hero-social img {
-  width: 18px;
-  height: 18px;
-  filter: invert(0.7);
-  transition: filter 0.3s;
-}
-
-.hero-social a:hover img {
-  filter: invert(1) sepia(1) saturate(5) hue-rotate(85deg);
-}
-
-.scroll-hint {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-sm);
-  color: var(--text-muted);
-}
-
-.scroll-hint span {
-  font-family: var(--font-terminal);
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.scroll-hint-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--green), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
-  50% { opacity: 1; transform: scaleY(1); }
-}
-
 /* --- Buttons --- */
 .btn {
   display: inline-flex;
@@ -938,7 +855,6 @@ button { font-family: inherit; border: none; background: none; }
   background: #fff;
   border-color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0, 255, 136, 0.25);
 }
 
 .btn-outline {
@@ -951,7 +867,6 @@ button { font-family: inherit; border: none; background: none; }
   border-color: var(--green);
   color: var(--green);
   transform: translateY(-2px);
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
 }
 
 .btn-sm {
@@ -986,11 +901,11 @@ button { font-family: inherit; border: none; background: none; }
   object-fit: cover;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
-  transition: box-shadow 0.5s;
+  transition: border-color 0.5s;
 }
 
 .about-photo:hover {
-  box-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.35);
 }
 
 .about-content {
@@ -1058,7 +973,7 @@ button { font-family: inherit; border: none; background: none; }
   border-radius: var(--radius-md);
   position: relative;
   overflow: hidden;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: border-color 0.3s;
 }
 
 .toolbox-row::before {
@@ -1075,7 +990,6 @@ button { font-family: inherit; border: none; background: none; }
 
 .toolbox-row:hover {
   border-color: rgba(0, 255, 136, 0.2);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.05), inset 0 0 30px rgba(0, 255, 136, 0.02);
 }
 
 .toolbox-row:hover::before {
@@ -1170,6 +1084,21 @@ button { font-family: inherit; border: none; background: none; }
   transform: translateY(-6px);
 }
 
+.project-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(240px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(0, 255, 136, 0.08), transparent 70%);
+}
+
+.project-slide:hover::after {
+  opacity: 1;
+}
+
 .project-image {
   position: relative;
   width: 100%;
@@ -1189,31 +1118,17 @@ button { font-family: inherit; border: none; background: none; }
   transform: scale(1.05);
 }
 
-.project-image-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  display: flex;
-  align-items: flex-end;
-  padding: var(--space-lg);
-}
-
-.project-slide:hover .project-image-overlay {
-  opacity: 1;
-}
-
 .project-image-badge {
-  font-family: var(--font-terminal);
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 4px 12px;
-  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
   background: var(--green);
   color: var(--bg);
-  font-weight: 400;
+  font-weight: 500;
+  flex-shrink: 0;
 }
 
 /* Text-only project cards */
@@ -1356,8 +1271,8 @@ button { font-family: inherit; border: none; background: none; }
 /* --- Contact --- */
 .contact-section {
   text-align: center;
-  padding-top: var(--space-6xl);
-  padding-bottom: var(--space-6xl);
+  padding-top: clamp(4rem, 8vw, 8rem);
+  padding-bottom: clamp(4rem, 8vw, 8rem);
 }
 
 .contact-heading {
@@ -1392,7 +1307,7 @@ button { font-family: inherit; border: none; background: none; }
   padding: var(--space-md) var(--space-2xl);
   border: 1px solid rgba(0, 255, 136, 0.3);
   border-radius: var(--radius-full);
-  transition: border-color 0.3s, color 0.3s, transform 0.3s var(--ease-out), box-shadow 0.3s;
+  transition: border-color 0.3s, color 0.3s, transform 0.3s var(--ease-out);
   position: relative;
 }
 
@@ -1400,7 +1315,6 @@ button { font-family: inherit; border: none; background: none; }
   border-color: var(--green);
   color: var(--green);
   transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(0, 255, 136, 0.2);
 }
 
 .contact-email svg {
@@ -1417,31 +1331,28 @@ button { font-family: inherit; border: none; background: none; }
 }
 
 .contact-social a {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
-  transition: border-color 0.3s, transform 0.3s var(--ease-out), box-shadow 0.3s;
+  transition: border-color 0.3s, transform 0.3s var(--ease-out);
 }
 
 .contact-social a:hover {
   border-color: var(--green);
   transform: translateY(-3px);
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
 }
 
-.contact-social img {
-  width: 20px;
-  height: 20px;
-  filter: invert(0.7);
-  transition: filter 0.3s;
+.contact-social svg {
+  width: 34px;
+  height: 34px;
 }
 
-.contact-social a:hover img {
-  filter: invert(1) sepia(1) saturate(5) hue-rotate(85deg);
+.contact-social a:hover svg {
+  filter: brightness(1.25) drop-shadow(0 0 6px rgba(0, 255, 136, 0.35));
 }
 
 /* --- Footer --- */
@@ -1656,7 +1567,6 @@ button { font-family: inherit; border: none; background: none; }
   color: var(--green);
   background: var(--green-ghost);
   transform: translateY(-2px);
-  box-shadow: 0 0 12px rgba(0, 255, 136, 0.15), inset 0 0 12px rgba(0, 255, 136, 0.05);
 }
 
 /* --- Project Card Terminal Number --- */
@@ -1716,7 +1626,6 @@ button { font-family: inherit; border: none; background: none; }
   }
   .hero-name { opacity: 1; }
   .hero-name-glitch::before, .hero-name-glitch::after { display: none; }
-  .scroll-hint-line { animation: none; }
   .scanlines { display: none; }
   .crt-glow { display: none; }
   .status-bar { display: none; }
@@ -1952,15 +1861,16 @@ button { font-family: inherit; border: none; background: none; }
 /* --- Cursor Spotlight --- */
 .cursor-spotlight {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 280px;
   height: 280px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(0, 255, 136, 0.035) 0%, transparent 70%);
   pointer-events: none;
   z-index: 1;
-  transform: translate(-50%, -50%);
-  transition: left 0.15s ease-out, top 0.15s ease-out;
-  will-change: left, top;
+  transform: translate(var(--cx, 50vw), var(--cy, 50vh)) translate(-50%, -50%);
+  will-change: transform;
 }
 
 /* --- Scroll Progress Bar --- */
@@ -1969,10 +1879,21 @@ button { font-family: inherit; border: none; background: none; }
   top: 0;
   left: 0;
   height: 2px;
-  width: 0%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
   background: linear-gradient(90deg, var(--green), rgba(0, 255, 136, 0.6));
   z-index: 10003;
-  transition: width 0.1s linear;
   box-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
   pointer-events: none;
+  will-change: transform;
+}
+
+/* --- Repeat Visit (loader skipped) --- */
+body.repeat-visit .hero-photo-wrap,
+body.repeat-visit .hero-greeting,
+body.repeat-visit .hero-role,
+body.repeat-visit .hero-actions {
+  animation: none;
+  opacity: 1;
 }

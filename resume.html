@@ -5,10 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0a0a0a" />
-  <title>Zakaria Omar — Resume</title>
+  <title>Zakaria Omar - Resume</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="responsive.css" />
@@ -70,9 +70,6 @@
 
     /* --- Scroll Progress --- */
     .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: linear-gradient(90deg, var(--green), rgba(0,255,136,0.6)); z-index: 10003; transition: width 0.1s linear; box-shadow: 0 0 8px rgba(0,255,136,0.4); pointer-events: none; }
-
-    /* --- Cursor Spotlight --- */
-    .cursor-spotlight { position: fixed; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, rgba(0,255,136,0.05) 0%, transparent 70%); pointer-events: none; z-index: 1; transform: translate(-50%, -50%); transition: left 0.15s ease-out, top 0.15s ease-out; will-change: left, top; }
 
     /* --- Impact Metrics --- */
     .resume-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); margin-bottom: var(--space-md); }
@@ -159,12 +156,17 @@
 
   <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-trail" id="cursor-trail" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-1" id="trail-1" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-2" id="trail-2" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-3" id="trail-3" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-4" id="trail-4" aria-hidden="true"></div>
+  <div class="cursor-trail-dot cursor-trail-dot-5" id="trail-5" aria-hidden="true"></div>
 
   <main class="resume-page">
     <a href="index.html" class="resume-back">← back_to_portfolio</a>
 
     <header class="resume-header">
-      <h1 class="resume-name" id="resume-name">zakaria@portfolio:~$ <span class="cursor-blink"></span></h1>
+      <h1 class="resume-name" id="resume-name">zakaria-m-omar@portfolio:~$ <span class="cursor-blink"></span></h1>
       <p class="resume-title">FULL-STACK DEVELOPER &amp; AI ENTHUSIAST</p>
       <div class="resume-contact">
         <span class="prompt">[email]</span><a href="mailto:zakaria.m.omar@gmail.com">zakaria.m.omar@gmail.com</a>
@@ -177,6 +179,7 @@
       </div>
       <div class="resume-actions">
         <button class="btn btn-primary magnetic" onclick="window.print()">print --output=resume.pdf</button>
+        <a href="assets/Zakaria-M-Omar-CV-2026.pdf" download class="btn btn-outline magnetic">$ curl -O Zakaria-M-Omar-CV-2026.pdf</a>
       </div>
     </header>
 
@@ -215,7 +218,7 @@
       <div class="resume-item">
         <div class="resume-item-header">
           <h3 class="resume-item-title">Web Developer and Trainer Assistant</h3>
-          <span class="resume-item-date">Jul 2024 – Jul 2025</span>
+          <span class="resume-item-date">Jul 2024 - Jul 2025</span>
         </div>
         <p class="resume-item-subtitle">Kidocode Sdn Bhd</p>
         <p class="resume-item-location">Kuala Lumpur, Malaysia</p>
@@ -231,7 +234,7 @@
       <div class="resume-item">
         <div class="resume-item-header">
           <h3 class="resume-item-title">Travel Agent and IT Support</h3>
-          <span class="resume-item-date">2018 – 2023</span>
+          <span class="resume-item-date">2018 - 2023</span>
         </div>
         <p class="resume-item-subtitle">Aragshan Travels</p>
         <p class="resume-item-location">Nairobi, Kenya</p>
@@ -250,7 +253,7 @@
       <div class="resume-item">
         <div class="resume-item-header">
           <h3 class="resume-item-title">Bachelor's in Computer Science (Honors)</h3>
-          <span class="resume-item-date">2022 – 2025</span>
+          <span class="resume-item-date">2022 - 2025</span>
         </div>
         <p class="resume-item-subtitle">Asia Pacific University</p>
         <p class="resume-item-location">Kuala Lumpur, Malaysia</p>
@@ -259,7 +262,7 @@
       <div class="resume-item">
         <div class="resume-item-header">
           <h3 class="resume-item-title">Diploma in Business Information Technology</h3>
-          <span class="resume-item-date">2020 – 2022</span>
+          <span class="resume-item-date">2020 - 2022</span>
         </div>
         <p class="resume-item-subtitle">Strathmore University</p>
         <p class="resume-item-location">Nairobi, Kenya</p>
@@ -366,12 +369,60 @@
             <span class="dot dot-minimize"></span>
             <span class="dot dot-maximize"></span>
           </div>
+          <span class="terminal-title">codebase-qa</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">CodeBase QA - Self-Hosted RAG for Codebases <a href="https://github.com/zakisserious/codebase-qa" target="_blank" class="resume-item-link">source ↗</a></h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">Python, FastAPI, LangChain, ChromaDB, Ollama</p>
+            <ul class="resume-list">
+              <li>Built a self-hosted RAG platform that answers plain-English questions about any GitHub or local repo, with every answer citing clickable file:line references.</li>
+              <li>AST-aware code splitting (ast + tree-sitter for 15+ languages), streaming SSE chat, a ReAct agent for deep cross-file analysis, and an interactive D3 dependency graph.</li>
+              <li>Runs fully local on Ollama (private by default); 167 tests with CI, Dockerized.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
+          <span class="terminal-title">zava</span>
+        </div>
+        <div class="project-card-body">
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <h3 class="resume-item-title">Zava - Console Audio Visualizer in Pure Rust <a href="https://github.com/zakisserious/zava" target="_blank" class="resume-item-link">source ↗</a></h3>
+            </div>
+            <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">Rust, SIMD FFT, PipeWire, PulseAudio</p>
+            <ul class="resume-list">
+              <li>Remade CAVA in pure Rust: dual-buffer SIMD FFT DSP, Hann windowing, Monstercat smoothing, and CAVA-compatible block glyphs with truecolor gradient rendering.</li>
+              <li>Ship 16 toggleable visual upgrades (waveform, reflections, spectrum, beat pulse) with a live in-terminal menu; zero-config startup with PipeWire/PulseAudio/FIFO capture.</li>
+              <li>CAVA's ported DSP test suite validates peak-bin accuracy and smoothing within 0.5% error; 68 tests, PKGBUILD, man page.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-project-card">
+        <div class="project-card-chrome">
+          <div class="terminal-dots">
+            <span class="dot dot-close"></span>
+            <span class="dot dot-minimize"></span>
+            <span class="dot dot-maximize"></span>
+          </div>
           <span class="terminal-title">pathfinder</span>
         </div>
         <div class="project-card-body">
           <div class="resume-item">
             <div class="resume-item-header">
-              <h3 class="resume-item-title">Pathfinder — Algorithm Visualizer <a href="https://pathfinding-ecru.vercel.app/" target="_blank" class="resume-item-link">live ↗</a></h3>
+              <h3 class="resume-item-title">Pathfinder - Algorithm Visualizer <a href="https://pathfinding-ecru.vercel.app/" target="_blank" class="resume-item-link">live ↗</a></h3>
             </div>
             <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">React, Vite, Tailwind CSS</p>
             <ul class="resume-list">
@@ -442,7 +493,7 @@
         <div class="project-card-body">
           <div class="resume-item">
             <div class="resume-item-header">
-              <h3 class="resume-item-title">Portfolio — Terminal-Themed Website <a href="https://zakisserious.github.io" target="_blank" class="resume-item-link">live ↗</a></h3>
+              <h3 class="resume-item-title">Portfolio - Terminal-Themed Website <a href="https://zakisserious.github.io" target="_blank" class="resume-item-link">live ↗</a></h3>
             </div>
             <p class="resume-item-subtitle" style="font-size: 0.75rem; opacity: 0.6;">HTML, CSS, JavaScript, GSAP</p>
             <ul class="resume-list">
@@ -571,16 +622,34 @@
       // Cursor
       const dot = document.getElementById('cursor-dot');
       const trail = document.getElementById('cursor-trail');
-      if (dot && trail && !('ontouchstart' in window)) {
+      if (dot && trail && !('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+        const trailDots = [];
+        for (let i = 1; i <= 5; i++) {
+          const el = document.getElementById('trail-' + i);
+          if (el) trailDots.push({ el, x: window.innerWidth / 2, y: window.innerHeight / 2 });
+        }
         let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
         let trailX = mouseX, trailY = mouseY;
-        dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
-        trail.style.left = mouseX + 'px'; trail.style.top = mouseY + 'px';
-        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px'; });
-        (function animTrail() { trailX += (mouseX - trailX) * 0.15; trailY += (mouseY - trailY) * 0.15; trail.style.left = trailX + 'px'; trail.style.top = trailY + 'px'; requestAnimationFrame(animTrail); })();
-        document.querySelectorAll('a, button, .magnetic').forEach((el) => { el.addEventListener('mouseenter', () => dot.classList.add('hover')); el.addEventListener('mouseleave', () => dot.classList.remove('hover')); });
-      } else if (dot && trail) {
-        dot.style.display = 'none'; trail.style.display = 'none';
+        const setPos = (el, x, y) => { el.style.setProperty('--cx', x + 'px'); el.style.setProperty('--cy', y + 'px'); };
+        setPos(dot, mouseX, mouseY);
+        setPos(trail, mouseX, mouseY);
+        trailDots.forEach(td => setPos(td.el, td.x, td.y));
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; setPos(dot, mouseX, mouseY); });
+        const lerpFactors = [0.18, 0.12, 0.08, 0.05, 0.03];
+        (function animTrail() {
+          trailX += (mouseX - trailX) * 0.15; trailY += (mouseY - trailY) * 0.15;
+          setPos(trail, trailX, trailY);
+          trailDots.forEach((td, i) => { td.x += (mouseX - td.x) * lerpFactors[i]; td.y += (mouseY - td.y) * lerpFactors[i]; setPos(td.el, td.x, td.y); });
+          requestAnimationFrame(animTrail);
+        })();
+        document.querySelectorAll('a, button, .magnetic, .btn').forEach((el) => { el.addEventListener('mouseenter', () => dot.classList.add('hover')); el.addEventListener('mouseleave', () => dot.classList.remove('hover')); });
+      } else if (dot) {
+        dot.style.display = 'none';
+        for (let i = 1; i <= 5; i++) {
+          const el = document.getElementById('trail-' + i);
+          if (el) el.style.display = 'none';
+        }
+        if (trail) trail.style.display = 'none';
       }
 
       // Cursor spotlight
@@ -591,7 +660,7 @@
         document.body.appendChild(spotlight);
         let sx = window.innerWidth / 2, sy = window.innerHeight / 2;
         document.addEventListener('mousemove', (e) => { sx = e.clientX; sy = e.clientY; });
-        (function animSpot() { spotlight.style.left = sx + 'px'; spotlight.style.top = sy + 'px'; requestAnimationFrame(animSpot); })();
+        (function animSpot() { spotlight.style.setProperty('--cx', sx + 'px'); spotlight.style.setProperty('--cy', sy + 'px'); requestAnimationFrame(animSpot); })();
       }
 
       // Scroll progress
@@ -608,7 +677,7 @@
       // Typing animation for name
       const nameEl = document.getElementById('resume-name');
       if (nameEl) {
-        const fullText = 'zakaria@portfolio:~$ ';
+        const fullText = 'zakaria-m-omar@portfolio:~$ ';
         nameEl.textContent = '';
         let i = 0;
         const cursor = document.createElement('span');

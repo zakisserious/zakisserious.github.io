@@ -5,25 +5,34 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.remove('loading');
 
-  // Pre-fill hero name with scrambled text immediately
+  // Pre-fill hero name with scrambled text so the decode reads as a reveal
   const glitchEl = document.querySelector('.hero-name-glitch');
   if (glitchEl) {
     const chars = '!@#$%^&*0123456789ABCDEF';
     const text = glitchEl.textContent;
+    window.__heroNameTarget = glitchEl.getAttribute('data-text') || text;
     const scrambled = text.split('').map((c) => c === ' ' ? ' ' : chars[Math.floor(Math.random() * chars.length)]).join('');
     glitchEl.textContent = scrambled;
-    glitchEl.setAttribute('data-text', scrambled);
   }
 
-  animateLoader();
-  initUptime();
-
-  setTimeout(() => {
+  if (sessionStorage.getItem('booted')) {
+    document.body.classList.add('repeat-visit');
     const loader = document.getElementById('loader');
     if (loader) loader.classList.add('dismissed');
-  }, 4000);
+    initUptime();
+    initPage();
+  } else {
+    sessionStorage.setItem('booted', '1');
+    animateLoader();
+    initUptime();
 
-  setTimeout(initPage, 4500);
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) loader.classList.add('dismissed');
+    }, 4000);
+
+    setTimeout(initPage, 4500);
+  }
 
   function animateLoader() {
     const lines = document.querySelectorAll('.loader-line');
@@ -40,7 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => progress.classList.add('visible'), 500);
     }
     if (progressBar) {
-      setTimeout(() => { progressBar.style.width = '100%'; }, 600);
+      if (typeof gsap !== 'undefined') {
+        gsap.to(progressBar, { width: '100%', duration: 3.1, ease: 'power1.inOut', delay: 0.6 });
+      } else {
+        setTimeout(() => { progressBar.style.width = '100%'; }, 600);
+      }
     }
   }
 
@@ -51,6 +64,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof gsap !== 'undefined') {
         if (typeof ScrollTrigger !== 'undefined') {
           gsap.registerPlugin(ScrollTrigger);
+        }
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          initNavScroll();
+          initHamburger();
+          initTyped();
+          initMagnetic();
+          initToolboxTags();
+          initProjectHovers();
+          initSectionScanLines();
+          initTypingLabels();
+          initStatusSimulation();
+          initScrollProgress();
+          document.querySelectorAll('.reveal, .section-heading').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          });
+          return;
         }
         initSmoothScroll();
         initNavScroll();
@@ -65,8 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
         initSectionScanLines();
         initTypingLabels();
         initHeroParallax();
-        initGlitchFlicker();
-        initHeadingGlitch();
         initTextScramble();
         initSectionFlash();
         initNavFlicker();
@@ -105,14 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
       const s = String(diff % 60).padStart(2, '0');
       el.textContent = 'UPTIME: ' + h + ':' + m + ':' + s;
-      requestAnimationFrame(update);
     }
     update();
+    setInterval(update, 1000);
   }
 
   // --- Smooth Scroll (Lenis) ---
   function initSmoothScroll() {
     if (typeof Lenis === 'undefined') return;
+    if (typeof gsap === 'undefined') return;
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -120,11 +149,11 @@ document.addEventListener('DOMContentLoaded', () => {
       smoothWheel: true,
     });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
 
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener('click', (e) => {
@@ -202,12 +231,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!glitchEl || !nameEl) return;
 
     const chars = '!@#$%^&*0123456789ABCDEF';
-    const originalText = glitchEl.getAttribute('data-text');
+    const originalText = glitchEl.getAttribute('data-text') || glitchEl.textContent;
+    const targetText = nameEl.getAttribute('data-text') || '';
 
     nameEl.style.opacity = '1';
-    let iteration = 0;
+    const h2 = nameEl.closest('.section-heading');
+    if (h2) {
+      h2.style.opacity = '1';
+      h2.style.transform = 'none';
+    }
+
+    // Front-load: unmask the first ~40% instantly so it reads as a pop, not a drift
+    const frontCount = Math.ceil(originalText.length * 0.4);
+    let iteration = frontCount;
+    let tick = 0;
 
     const interval = setInterval(() => {
+      tick += 1;
+      // 1-char reveal per tick after the front-load, with an occasional double jump
+      iteration = Math.min(originalText.length, iteration + (tick % 3 === 0 ? 2 : 1));
       const newText = originalText
         .split('')
         .map((char, index) => {
@@ -220,19 +262,63 @@ document.addEventListener('DOMContentLoaded', () => {
       glitchEl.textContent = newText;
       glitchEl.setAttribute('data-text', newText);
 
-      iteration += 1;
       if (iteration >= originalText.length) {
         clearInterval(interval);
         glitchEl.textContent = originalText;
         glitchEl.setAttribute('data-text', originalText);
       }
-    }, 25);
+    }, 65);
+
+    // The statically-scrambled pre-fill already ran at load; if the target
+    // text is available, finish on the real name. #ponytail: pre-fill + scatter
+    // converge in ~0.5s; no reveal-choreography state to keep in sync.
+    if (targetText) {
+      setTimeout(() => {
+        clearInterval(interval);
+        glitchEl.textContent = targetText;
+        glitchEl.setAttribute('data-text', targetText);
+      }, 650);
+    }
   }
 
   // --- Scroll Reveal Animations ---
   function initScrollAnimations() {
     if (typeof gsap === 'undefined') return;
+
+    const handled = new Set();
+
+    // Staggered sibling groups (about text/stats, toolbox rows)
+    const staggerGroups = [
+      { selector: '.about-text', children: '.reveal' },
+      { selector: '.about-stats', children: ':scope > .reveal' },
+      { selector: '.toolbox-grid', children: ':scope > .reveal' },
+    ];
+    staggerGroups.forEach((group) => {
+      const parent = document.querySelector(group.selector);
+      if (!parent) return;
+      const items = parent.querySelectorAll(group.children);
+      if (items.length < 2) return;
+      items.forEach((el) => handled.add(el));
+      gsap.fromTo(items,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.09,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: parent,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
+    });
+
     document.querySelectorAll('.reveal').forEach((el) => {
+      if (handled.has(el)) return;
+      if (el.classList.contains('section-heading')) return;
       gsap.fromTo(el,
         { opacity: 0, y: 25 },
         {
@@ -249,17 +335,19 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     });
 
+    // Section headings: fade in place; the character scramble is the entrance
     document.querySelectorAll('.section-heading').forEach((heading) => {
+      if (heading.querySelector('.hero-name-glitch')) return;
       gsap.fromTo(heading,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 25 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
+          duration: 0.6,
+          ease: 'power1.out',
           scrollTrigger: {
             trigger: heading,
-            start: 'top 85%',
+            start: 'top 90%',
             once: true,
           },
         }
@@ -313,16 +401,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (el) trailDots.push({ el, x: window.innerWidth / 2, y: window.innerHeight / 2 });
     }
 
+    function setPos(el, x, y) {
+      el.style.setProperty('--cx', x + 'px');
+      el.style.setProperty('--cy', y + 'px');
+    }
+
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
     let trailX = mouseX;
     let trailY = mouseY;
 
-    dot.style.left = mouseX + 'px';
-    dot.style.top = mouseY + 'px';
-    trail.style.left = mouseX + 'px';
-    trail.style.top = mouseY + 'px';
-    trailDots.forEach(td => { td.x = mouseX; td.y = mouseY; td.el.style.left = mouseX + 'px'; td.el.style.top = mouseY + 'px'; });
+    setPos(dot, mouseX, mouseY);
+    setPos(trail, mouseX, mouseY);
+    trailDots.forEach(td => { td.x = mouseX; td.y = mouseY; setPos(td.el, mouseX, mouseY); });
 
     if (cursorImage) {
       cursorImage.style.left = mouseX + 'px';
@@ -332,8 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      dot.style.left = mouseX + 'px';
-      dot.style.top = mouseY + 'px';
+      setPos(dot, mouseX, mouseY);
       if (cursorImage) {
         cursorImage.style.left = mouseX + 'px';
         cursorImage.style.top = mouseY + 'px';
@@ -345,14 +435,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateTrail() {
       trailX += (mouseX - trailX) * 0.15;
       trailY += (mouseY - trailY) * 0.15;
-      trail.style.left = trailX + 'px';
-      trail.style.top = trailY + 'px';
+      setPos(trail, trailX, trailY);
 
       trailDots.forEach((td, i) => {
         td.x += (mouseX - td.x) * lerpFactors[i];
         td.y += (mouseY - td.y) * lerpFactors[i];
-        td.el.style.left = td.x + 'px';
-        td.el.style.top = td.y + 'px';
+        setPos(td.el, td.x, td.y);
       });
 
       requestAnimationFrame(animateTrail);
@@ -560,9 +648,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('ontouchstart' in window) return;
     const hero = document.getElementById('hero');
     const photoWrap = hero ? hero.querySelector('.hero-photo-wrap') : null;
+    const textBlock = hero ? hero.querySelector('.hero-text') : null;
     const floatingCodes = hero ? hero.querySelectorAll('.hero-floating-code') : [];
     const binaryFloats = hero ? hero.querySelectorAll('.binary-float') : [];
     if (!hero) return;
+
+    // Scroll parallax: layers drift at different speeds as the hero exits
+    if (photoWrap && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.to(photoWrap, {
+        y: 140,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: hero,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+      if (textBlock) {
+        gsap.to(textBlock, {
+          y: 60,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: hero,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
+    }
 
     hero.addEventListener('mousemove', (e) => {
       const rect = hero.getBoundingClientRect();
@@ -572,7 +687,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (photoWrap && typeof gsap !== 'undefined') {
         gsap.to(photoWrap, {
           x: x * 15,
-          y: y * 15,
           duration: 0.6,
           ease: 'power2.out',
         });
@@ -602,45 +716,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Random Glitch Flicker on Hero Name ---
-  function initGlitchFlicker() {
-    const glitchEl = document.querySelector('.hero-name-glitch');
-    if (!glitchEl) return;
-
-    function doGlitch() {
-      glitchEl.style.animation = 'glitchFlicker 0.15s ease-in-out';
-      setTimeout(() => {
-        glitchEl.style.animation = '';
-      }, 150);
-      setTimeout(doGlitch, 3000 + Math.random() * 5000);
-    }
-    setTimeout(doGlitch, 5000);
-  }
-
-  // --- Section Heading Glitch on Scroll Enter ---
-  function initHeadingGlitch() {
-    if (typeof gsap === 'undefined') return;
-    document.querySelectorAll('.section-heading').forEach((heading) => {
-      ScrollTrigger.create({
-        trigger: heading,
-        start: 'top 85%',
-        once: true,
-        onEnter: () => {
-          heading.style.animation = 'glitchText 0.3s ease-in-out';
-          setTimeout(() => {
-            heading.style.animation = '';
-          }, 300);
-        },
-      });
-    });
-  }
-
   // --- Text Scramble Effect on Section Headings ---
   function initTextScramble() {
     if (typeof gsap === 'undefined') return;
     const chars = '!@#$%^&*0123456789ABCDEF';
 
     document.querySelectorAll('.section-heading').forEach((heading) => {
+      if (heading.querySelector('.hero-name-glitch')) return;
       const originalText = heading.textContent;
       let scrambled = false;
 
@@ -727,6 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to(card, {
           rotateX: rotateX,
           rotateY: rotateY,
+          y: -6,
           duration: 0.4,
           ease: 'power2.out',
           transformPerspective: 800,
@@ -737,6 +820,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to(card, {
           rotateX: 0,
           rotateY: 0,
+          y: 0,
           duration: 0.6,
           ease: 'elastic.out(1, 0.5)',
           transformPerspective: 800,
@@ -906,13 +990,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(spotlight);
 
     let sx = window.innerWidth / 2, sy = window.innerHeight / 2;
+    const slides = document.querySelectorAll('.project-slide');
     document.addEventListener('mousemove', (e) => {
       sx = e.clientX;
       sy = e.clientY;
+      slides.forEach((slide) => {
+        const r = slide.getBoundingClientRect();
+        if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
+          slide.style.setProperty('--spot-x', (e.clientX - r.left) + 'px');
+          slide.style.setProperty('--spot-y', (e.clientY - r.top) + 'px');
+        }
+      });
     });
     function animSpot() {
-      spotlight.style.left = sx + 'px';
-      spotlight.style.top = sy + 'px';
+      spotlight.style.setProperty('--cx', sx + 'px');
+      spotlight.style.setProperty('--cy', sy + 'px');
       requestAnimationFrame(animSpot);
     }
     animSpot();
@@ -925,12 +1017,20 @@ document.addEventListener('DOMContentLoaded', () => {
     bar.setAttribute('aria-hidden', 'true');
     document.body.appendChild(bar);
 
+    let target = 0;
+    let current = 0;
     window.addEventListener('scroll', () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      bar.style.width = pct + '%';
+      target = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     }, { passive: true });
+
+    function animate() {
+      current += (target - current) * 0.15;
+      bar.style.transform = 'scaleX(' + current / 100 + ')';
+      requestAnimationFrame(animate);
+    }
+    animate();
   }
 
   // --- Hover Text Scramble ---
