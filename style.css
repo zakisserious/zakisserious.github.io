@@ -623,3 +623,63 @@ strong {
 .stamp {
   filter: grayscale(1) contrast(1.4);
 }
+/* ---------------------------------------------------------------- motion */
+@media (prefers-reduced-motion: no-preference) {
+  .receipt {
+    animation: feed-in 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) both;
+  }
+
+  .proj[open] .proj-body {
+    animation: unroll 0.24s ease-out both;
+  }
+
+  @keyframes feed-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes unroll {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ----------------------------------------------------------------- touch */
+/* Hover styling exists only where a real pointer can hover, so taps never
+   leave links stuck in a hover state. */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn--solid:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .proj-sum:hover .proj-name,
+  .proj-links a:hover,
+  .mail:hover,
+  .social a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
