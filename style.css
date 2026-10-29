@@ -683,3 +683,41 @@ strong {
     text-underline-offset: 3px;
   }
 }
+/* ---------------------------------------------------------------- cursor */
+/* Created by script.js only, and only after it has successfully mounted.
+   `html.has-cursor` is what hides the native pointer, so a failing script
+   can never leave the page without a visible cursor. */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(var(--cx, 50vw), var(--cy, 50vh), 0) translate(-50%, -50%);
+  transition: width 0.15s ease, height 0.15s ease, border-radius 0.15s ease, opacity 0.15s ease;
+}
+
+.cursor.is-live {
+  opacity: 1;
+}
+
+.cursor.is-hot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.cursor.is-down {
+  width: 10px;
+  height: 10px;
+}
+
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
