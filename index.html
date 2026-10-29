@@ -4,11 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#f4f1e6" />
+  <meta name="theme-color" content="#f7f3e7" />
   <title>Zakaria Omar - Full-Stack Developer</title>
   <meta name="description"
     content="Portfolio of Zakaria Omar - Full-Stack Developer, AI Enthusiast, and Blockchain Builder." />
-  <link rel="stylesheet" href="style.css?v=1" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f7f3e7'/%3E%3Cpath d='M9 4h14v24l-3.5-2.5L16 28l-3.5-2.5L9 28z' fill='%23191510'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css?v=2" />
 </head>
 
 <body>
@@ -21,36 +23,40 @@
   <main class="receipt" id="main" tabindex="-1">
     <!-- ======================== HEAD ======================== -->
     <header class="head" id="hero">
-      <p class="head-top">
-        <span>ZAKARIA OMAR</span>
-        <span class="head-top-r">PORTFOLIO</span>
-      </p>
+      <p class="cut" aria-hidden="true">CUT HERE</p>
 
-      <div class="head-id">
-        <img class="stamp" src="./assets/profile-pic.png" alt="Zakaria Omar" width="400" height="400" decoding="async" />
-        <div class="head-id-text">
+      <div class="brand">
+        <img class="stamp" src="./assets/profile-pic.png" alt="Zakaria Omar" width="400" height="400"
+          decoding="async" />
+        <div class="brand-text">
           <p class="kicker">Hello, I'm</p>
           <h1 class="head-name">zakaria</h1>
         </div>
       </div>
 
-      <p class="head-role">Full-Stack Developer. AI Enthusiast. Blockchain Builder. Problem Solver.</p>
-      <p class="head-meta">Portfolio receipt &middot; No. 0001</p>
+      <p class="head-role">Full-Stack Developer &middot; AI Enthusiast &middot; Blockchain Builder &middot; Problem Solver</p>
+
+      <div class="meta">
+        <p class="meta-row"><span>Receipt</span><span class="leader" aria-hidden="true"></span><span>No. 0001</span></p>
+        <p class="meta-row"><span>Year</span><span class="leader" aria-hidden="true"></span><span>2026</span></p>
+        <p class="meta-row"><span>Status</span><span class="leader" aria-hidden="true"></span><span>Online</span></p>
+      </div>
 
       <div class="head-actions">
-        <a class="btn" href="resume.html">Resume</a>
-        <a class="btn btn--solid" href="#contact">Contact Me</a>
+        <a class="btn btn--solid" href="resume.html">Resume</a>
+        <a class="btn" href="#contact">Contact Me</a>
       </div>
     </header>
 
-    <hr class="rule rule--double" />
-
     <!-- ======================== ABOUT ======================== -->
     <section class="block" id="about" aria-labelledby="about-title">
-      <h2 class="block-title" id="about-title"><span class="block-num">01</span> About Me</h2>
+      <h2 class="sec" id="about-title"><span class="sec-num">01</span>About Me</h2>
 
       <figure class="portrait">
-        <img src="./assets/about-pic.jpg" alt="Zakaria Omar" width="595" height="751" decoding="async" />
+        <div class="portrait-frame">
+          <img src="./assets/about-pic.jpg" alt="Zakaria Omar" width="595" height="751" decoding="async" />
+        </div>
+        <figcaption class="shot-cap"><span>Fig. 00</span><span>Portrait</span></figcaption>
       </figure>
 
       <p class="block-text">
@@ -64,80 +70,73 @@
         scalability and performance. I've also <strong>mentored 200+ students</strong> in programming fundamentals.
       </p>
 
-      <ul class="ledger">
+      <ul class="stats">
         <li>
-          <span class="ledger-label">Years Experience</span>
-          <span class="ledger-dots" aria-hidden="true"></span>
-          <span class="ledger-value">3</span>
+          <span class="stat-num">3</span>
+          <span class="stat-label">Years Experience</span>
         </li>
         <li>
-          <span class="ledger-label">Degrees</span>
-          <span class="ledger-dots" aria-hidden="true"></span>
-          <span class="ledger-value">2</span>
+          <span class="stat-num">2</span>
+          <span class="stat-label">Degrees</span>
         </li>
         <li>
-          <span class="ledger-label">Projects Shipped</span>
-          <span class="ledger-dots" aria-hidden="true"></span>
-          <span class="ledger-value">5</span>
+          <span class="stat-num">5</span>
+          <span class="stat-label">Projects Shipped</span>
         </li>
       </ul>
     </section>
 
-    <hr class="rule" />
-
     <!-- ======================== TOOLBOX ======================== -->
     <section class="block" id="toolbox" aria-labelledby="toolbox-title">
-      <h2 class="block-title" id="toolbox-title"><span class="block-num">02</span> Toolbox</h2>
-      <p class="block-note">load modules</p>
+      <h2 class="sec" id="toolbox-title"><span class="sec-num">02</span>Toolbox</h2>
+      <p class="block-note">// load modules</p>
 
       <div class="group">
-        <h3 class="group-title">Languages</h3>
+        <h3 class="group-title"><span>Languages</span><span class="leader" aria-hidden="true"></span><span class="group-count">09</span></h3>
         <p class="tags">
           <span>JavaScript</span><span>TypeScript</span><span>Python</span><span>Java</span><span>C++</span><span>C#</span><span>Solidity</span><span>Rust</span><span>SQL</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">Frontend</h3>
+        <h3 class="group-title"><span>Frontend</span><span class="leader" aria-hidden="true"></span><span class="group-count">06</span></h3>
         <p class="tags">
           <span>React.js</span><span>HTML5</span><span>CSS3</span><span>Bootstrap</span><span>Tailwind CSS</span><span>Razor Pages</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">Backend &amp; Database</h3>
+        <h3 class="group-title"><span>Backend &amp; Database</span><span class="leader" aria-hidden="true"></span><span class="group-count">08</span></h3>
         <p class="tags">
           <span>Node.js</span><span>Flask</span><span>Express</span><span>MongoDB</span><span>PostgreSQL</span><span>MySQL</span><span>SQLite</span><span>Firebase</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">AI &amp; Machine Learning</h3>
+        <h3 class="group-title"><span>AI &amp; Machine Learning</span><span class="leader" aria-hidden="true"></span><span class="group-count">07</span></h3>
         <p class="tags">
           <span>TensorFlow</span><span>OpenCV</span><span>Pandas</span><span>NumPy</span><span>Computer Vision</span><span>LLMs</span><span>Prompt Engineering</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">Blockchain &amp; Web3</h3>
+        <h3 class="group-title"><span>Blockchain &amp; Web3</span><span class="leader" aria-hidden="true"></span><span class="group-count">06</span></h3>
         <p class="tags">
           <span>Solidity</span><span>Hardhat</span><span>Web3.js</span><span>Truffle</span><span>Smart Contracts</span><span>GoQuorum</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">DevOps &amp; Tools</h3>
+        <h3 class="group-title"><span>DevOps &amp; Tools</span><span class="leader" aria-hidden="true"></span><span class="group-count">07</span></h3>
         <p class="tags">
           <span>Git</span><span>GitHub</span><span>AWS</span><span>Docker</span><span>Linux</span><span>REST APIs</span><span>Figma</span>
         </p>
       </div>
     </section>
 
-    <hr class="rule" />
-
     <!-- ======================== PROJECTS ======================== -->
     <section class="block" id="projects" aria-labelledby="projects-title">
-      <h2 class="block-title" id="projects-title"><span class="block-num">03</span> Projects</h2>
+      <h2 class="sec" id="projects-title"><span class="sec-num">03</span>Projects</h2>
       <p class="block-note">// featured_work</p>
 
       <details class="proj" open>
@@ -149,7 +148,11 @@
         </summary>
         <div class="proj-body">
           <figure class="shot">
-            <img src="./assets/project4.png" alt="CodeBase QA" width="1734" height="963" loading="lazy" decoding="async" />
+            <div class="shot-frame">
+              <img src="./assets/project4.png" alt="CodeBase QA" width="1734" height="963" loading="lazy"
+                decoding="async" />
+            </div>
+            <figcaption class="shot-cap"><span>Fig. 01</span><span>CodeBase QA</span></figcaption>
           </figure>
           <p class="proj-desc">Self-hosted RAG for codebases. Ask questions about any GitHub/local repo in plain
             English and get answers with clickable file:line citations. AST-aware splitting, agentic deep analysis, D3
@@ -170,7 +173,11 @@
         </summary>
         <div class="proj-body">
           <figure class="shot">
-            <img src="./assets/project5.png" alt="Zava Audio Visualizer" width="1280" height="720" loading="lazy" decoding="async" />
+            <div class="shot-frame">
+              <img src="./assets/project5.png" alt="Zava Audio Visualizer" width="1280" height="720" loading="lazy"
+                decoding="async" />
+            </div>
+            <figcaption class="shot-cap"><span>Fig. 02</span><span>Zava</span></figcaption>
           </figure>
           <p class="proj-desc">Console-based audio visualizer written in pure Rust. A CAVA remake with SIMD FFT DSP,
             waveform &amp; spectrum modes, and 16 live-toggle visual upgrades. Zero-config, PipeWire/PulseAudio capture.
@@ -191,7 +198,11 @@
         </summary>
         <div class="proj-body">
           <figure class="shot">
-            <img src="./assets/project2.png" alt="Artists Evolution Analyzer" width="836" height="449" loading="lazy" decoding="async" />
+            <div class="shot-frame">
+              <img src="./assets/project2.png" alt="Artists Evolution Analyzer" width="836" height="449"
+                loading="lazy" decoding="async" />
+            </div>
+            <figcaption class="shot-cap"><span>Fig. 03</span><span>Artists Evolution</span></figcaption>
           </figure>
           <p class="proj-desc">Discover an artist's breakout era, trace their popularity over time, and explore their
             discography timeline through interactive data visualization.</p>
@@ -212,8 +223,11 @@
         </summary>
         <div class="proj-body">
           <figure class="shot">
-            <img src="./assets/project1.png" alt="Pathfinder Algorithm Visualizer" width="1362" height="870"
-              loading="lazy" decoding="async" />
+            <div class="shot-frame">
+              <img src="./assets/project1.png" alt="Pathfinder Algorithm Visualizer" width="1362" height="870"
+                loading="lazy" decoding="async" />
+            </div>
+            <figcaption class="shot-cap"><span>Fig. 04</span><span>Pathfinder</span></figcaption>
           </figure>
           <p class="proj-desc">Interactive pathfinding algorithm visualizer with 9 algorithms (A*, Dijkstra, BFS, DFS),
             compare mode, cost visualization, and maze generation.</p>
@@ -234,8 +248,11 @@
         </summary>
         <div class="proj-body">
           <figure class="shot">
-            <img src="./assets/project3.png" alt="Blockchain Certificate Verification" width="1146" height="706"
-              loading="lazy" decoding="async" />
+            <div class="shot-frame">
+              <img src="./assets/project3.png" alt="Blockchain Certificate Verification" width="1146" height="706"
+                loading="lazy" decoding="async" />
+            </div>
+            <figcaption class="shot-cap"><span>Fig. 05</span><span>Blockchain Cert</span></figcaption>
           </figure>
           <p class="proj-desc">Academic certificate verification system using GoQuorum blockchain with Solidity smart
             contracts, AI/ML document classification, and anomaly detection.</p>
@@ -277,11 +294,10 @@
       </details>
     </section>
 
-    <hr class="rule" />
-
     <!-- ======================== CONTACT ======================== -->
     <section class="block contact" id="contact" aria-labelledby="contact-title">
-      <h2 class="contact-title" id="contact-title">Let's work<br />together.</h2>
+      <h2 class="sec" id="contact-title"><span class="sec-num">04</span>Contact</h2>
+      <p class="contact-title">Let's work<br />together.</p>
       <p class="block-note">// get_in_touch</p>
       <p class="block-text">
         I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
@@ -293,30 +309,31 @@
         <li>
           <a href="https://www.linkedin.com/in/zakaria-omar-21b0b729b/" target="_blank" rel="noopener">
             <span class="social-key">linkedin</span>
+            <span class="leader" aria-hidden="true"></span>
             <span class="social-val">/ zakaria-omar</span>
           </a>
         </li>
         <li>
           <a href="https://github.com/zakisserious" target="_blank" rel="noopener">
             <span class="social-key">github</span>
+            <span class="leader" aria-hidden="true"></span>
             <span class="social-val">/ zakisserious</span>
           </a>
         </li>
       </ul>
     </section>
 
-    <hr class="rule rule--double" />
-
     <!-- ======================== FOOT ======================== -->
     <footer class="foot">
       <div class="barcode" aria-hidden="true"></div>
-      <p class="foot-note">THANK YOU FOR VISITING</p>
+      <p class="barcode-num" aria-hidden="true">0 001 2026 0001 7</p>
+      <p class="foot-note">Thank you for visiting</p>
       <p class="foot-line">Built with <span class="heart">&#9829;</span> by Zakaria Omar &copy; 2026</p>
       <p class="foot-small">v2.0.26 &middot; rendered on thermal paper</p>
     </footer>
   </main>
 
-  <script src="script.js?v=1" defer></script>
+  <script src="script.js?v=2" defer></script>
 </body>
 
 </html>

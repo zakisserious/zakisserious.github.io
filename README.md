@@ -17,7 +17,7 @@ JavaScript. No build step, no package manager, no dependencies, no web fonts.
 
 - **Content is the product.** Copy, stats, skills, projects, links and resume
   data live in the HTML. Decorative chrome is the only thing that may go.
-- **Single column at every width.** The paper is `max-width: 460px` on desktop
+- **Single column at every width.** The paper is `max-width: 470px` on desktop
   and the viewport minus 8px on phones. Nothing is ever laid out in columns.
 - **Works with JavaScript off.** Projects are native `<details>`, every link is
   a real anchor, and no text is revealed by script.
@@ -30,8 +30,8 @@ JavaScript. No build step, no package manager, no dependencies, no web fonts.
 
 ## Budgets
 
-CSS < 30 KB and JS < 30 KB, unminified. Current sizes are roughly 17 KB and
-3 KB. Every stylesheet and script link carries `?v=1` for cache busting.
+CSS < 30 KB and JS < 30 KB, unminified. Current sizes are roughly 20 KB and
+3 KB. Every stylesheet and script link carries a `?v=` cache-busting query.
 
 ## Preview
 

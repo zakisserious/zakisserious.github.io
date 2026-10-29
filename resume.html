@@ -4,9 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#f4f1e6" />
+  <meta name="theme-color" content="#f7f3e7" />
   <title>Zakaria Omar - Resume</title>
-  <link rel="stylesheet" href="style.css?v=1" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f7f3e7'/%3E%3Cpath d='M9 4h14v24l-3.5-2.5L16 28l-3.5-2.5L9 28z' fill='%23191510'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css?v=2" />
 </head>
 
 <body>
@@ -18,11 +20,9 @@
 
   <main class="receipt" id="main" tabindex="-1">
     <header class="head">
-      <p class="head-top">
-        <span>ZAKARIA OMAR</span>
-        <span class="head-top-r">RESUME</span>
-      </p>
+      <p class="cut" aria-hidden="true">CUT HERE</p>
 
+      <p class="kicker">Resume</p>
       <h1 class="head-name head-name--sm">Zakaria Omar</h1>
       <p class="res-prompt" aria-hidden="true">zakaria-m-omar@portfolio:~$ <span class="caret"></span></p>
       <p class="res-role">FULL-STACK DEVELOPER &amp; AI ENTHUSIAST</p>
@@ -39,10 +39,8 @@
       </div>
     </header>
 
-    <hr class="rule rule--double" />
-
     <section class="block" aria-labelledby="summary-title">
-      <h2 class="block-title" id="summary-title"><span class="block-num">01</span> Summary</h2>
+      <h2 class="sec" id="summary-title"><span class="sec-num">01</span>Summary</h2>
       <p class="block-text">
         Full-stack developer and AI enthusiast with 3+ years of experience building scalable web applications,
         blockchain systems, and machine learning solutions. Proficient in JavaScript, React, Node.js, Python, and AWS.
@@ -53,38 +51,30 @@
       </p>
     </section>
 
-    <hr class="rule" />
-
     <section class="block" aria-labelledby="impact-title">
-      <h2 class="block-title" id="impact-title"><span class="block-num">02</span> Impact</h2>
-      <ul class="ledger">
+      <h2 class="sec" id="impact-title"><span class="sec-num">02</span>Impact</h2>
+      <ul class="stats">
         <li>
-          <span class="ledger-label">Projects Shipped</span>
-          <span class="ledger-dots" aria-hidden="true"></span>
-          <span class="ledger-value">7+</span>
+          <span class="stat-num">7+</span>
+          <span class="stat-label">Projects Shipped</span>
         </li>
         <li>
-          <span class="ledger-label">Students Mentored</span>
-          <span class="ledger-dots" aria-hidden="true"></span>
-          <span class="ledger-value">200+</span>
+          <span class="stat-num">200+</span>
+          <span class="stat-label">Students Mentored</span>
         </li>
         <li>
-          <span class="ledger-label">Years Experience</span>
-          <span class="ledger-dots" aria-hidden="true"></span>
-          <span class="ledger-value">3+</span>
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Years Experience</span>
         </li>
         <li>
-          <span class="ledger-label">Technologies</span>
-          <span class="ledger-dots" aria-hidden="true"></span>
-          <span class="ledger-value">20+</span>
+          <span class="stat-num">20+</span>
+          <span class="stat-label">Technologies</span>
         </li>
       </ul>
     </section>
 
-    <hr class="rule" />
-
     <section class="block" aria-labelledby="experience-title">
-      <h2 class="block-title" id="experience-title"><span class="block-num">03</span> Experience</h2>
+      <h2 class="sec" id="experience-title"><span class="sec-num">03</span>Experience</h2>
 
       <article class="item">
         <h3 class="item-title">Web Developer and Trainer Assistant</h3>
@@ -114,10 +104,8 @@
       </article>
     </section>
 
-    <hr class="rule" />
-
     <section class="block" aria-labelledby="education-title">
-      <h2 class="block-title" id="education-title"><span class="block-num">04</span> Education</h2>
+      <h2 class="sec" id="education-title"><span class="sec-num">04</span>Education</h2>
 
       <article class="item">
         <h3 class="item-title">Bachelor's in Computer Science (Honors)</h3>
@@ -134,68 +122,62 @@
       </article>
     </section>
 
-    <hr class="rule" />
-
     <section class="block" aria-labelledby="skills-title">
-      <h2 class="block-title" id="skills-title"><span class="block-num">05</span> Technical Skills</h2>
+      <h2 class="sec" id="skills-title"><span class="sec-num">05</span>Technical Skills</h2>
 
       <div class="group">
-        <h3 class="group-title">Programming Languages</h3>
+        <h3 class="group-title"><span>Programming Languages</span><span class="leader" aria-hidden="true"></span><span class="group-count">08</span></h3>
         <p class="tags">
           <span>JavaScript</span><span>Python</span><span>TypeScript</span><span>Java</span><span>C++</span><span>C#</span><span>SQL</span><span>Rust</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">Databases</h3>
+        <h3 class="group-title"><span>Databases</span><span class="leader" aria-hidden="true"></span><span class="group-count">04</span></h3>
         <p class="tags"><span>MongoDB</span><span>PostgreSQL</span><span>MySQL</span><span>SQLite</span></p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">Blockchain</h3>
+        <h3 class="group-title"><span>Blockchain</span><span class="leader" aria-hidden="true"></span><span class="group-count">05</span></h3>
         <p class="tags">
           <span>Solidity</span><span>Hardhat</span><span>Web3.js</span><span>Truffle</span><span>Smart Contracts</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">AI &amp; Machine Learning</h3>
+        <h3 class="group-title"><span>AI &amp; Machine Learning</span><span class="leader" aria-hidden="true"></span><span class="group-count">07</span></h3>
         <p class="tags">
           <span>TensorFlow</span><span>OpenCV</span><span>Pandas</span><span>NumPy</span><span>Computer Vision</span><span>LLM Utilization</span><span>Advanced Prompt Engineering</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">Tools &amp; Platforms</h3>
+        <h3 class="group-title"><span>Tools &amp; Platforms</span><span class="leader" aria-hidden="true"></span><span class="group-count">08</span></h3>
         <p class="tags">
           <span>Git</span><span>GitHub</span><span>Firebase</span><span>Figma</span><span>AWS</span><span>Docker</span><span>Linux</span><span>REST APIs</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">Business Analysis</h3>
+        <h3 class="group-title"><span>Business Analysis</span><span class="leader" aria-hidden="true"></span><span class="group-count">04</span></h3>
         <p class="tags">
           <span>Financial Forecasting</span><span>Budgeting</span><span>Market Trend Assessment</span><span>SaaS Evaluation</span>
         </p>
       </div>
 
       <div class="group">
-        <h3 class="group-title">Teaching &amp; Content</h3>
+        <h3 class="group-title"><span>Teaching &amp; Content</span><span class="leader" aria-hidden="true"></span><span class="group-count">03</span></h3>
         <p class="tags"><span>Curriculum Design</span><span>Interactive Learning</span><span>Technical Instruction</span></p>
       </div>
     </section>
 
-    <hr class="rule" />
-
     <section class="block" aria-labelledby="languages-title">
-      <h2 class="block-title" id="languages-title"><span class="block-num">06</span> Languages</h2>
+      <h2 class="sec" id="languages-title"><span class="sec-num">06</span>Languages</h2>
       <p class="tags"><span>English</span><span>Swahili</span><span>Somali</span><span>Arabic</span></p>
     </section>
 
-    <hr class="rule" />
-
     <section class="block" aria-labelledby="projects-title">
-      <h2 class="block-title" id="projects-title"><span class="block-num">07</span> Projects</h2>
+      <h2 class="sec" id="projects-title"><span class="sec-num">07</span>Projects</h2>
 
       <article class="item item--proj">
         <h3 class="item-title">CodeBase QA - Self-Hosted RAG for Codebases
@@ -302,28 +284,23 @@
       </article>
     </section>
 
-    <hr class="rule" />
-
     <section class="block" aria-labelledby="interests-title">
-      <h2 class="block-title" id="interests-title"><span class="block-num">08</span> Interests</h2>
+      <h2 class="sec" id="interests-title"><span class="sec-num">08</span>Interests</h2>
       <p class="tags">
         <span>Blockchain &amp; Web3</span><span>AI / Machine Learning</span><span>System Design</span><span>Open Source</span><span>Rust</span><span>Cloud Infrastructure</span><span>Cybersecurity</span>
       </p>
     </section>
 
-    <hr class="rule rule--double" />
-
     <footer class="foot">
       <div class="barcode" aria-hidden="true"></div>
-      <p class="foot-note">LAST UPDATED: JUL 2026</p>
+      <p class="barcode-num" aria-hidden="true">0 001 2026 0002 3</p>
+      <p class="foot-note">Last updated: jul 2026</p>
       <p class="foot-line">generated from zakisserious.github.io</p>
-      <p class="foot-small">
-        <a href="index.html">&#8592; back_to_portfolio</a>
-      </p>
+      <p class="foot-small"><a href="index.html">&#8592; back_to_portfolio</a></p>
     </footer>
   </main>
 
-  <script src="script.js?v=1" defer></script>
+  <script src="script.js?v=2" defer></script>
 </body>
 
 </html>
