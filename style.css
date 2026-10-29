@@ -721,3 +721,175 @@ html.has-cursor,
 html.has-cursor * {
   cursor: none !important;
 }
+/* ----------------------------------------------------------- resume page */
+.head-name--sm {
+  font-size: clamp(1.5rem, 6vw, 1.85rem);
+  letter-spacing: 0.06em;
+}
+
+.res-prompt {
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
+
+.caret {
+  display: inline-block;
+  width: 0.62em;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: var(--ink);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.res-role {
+  margin-top: 4px;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+}
+
+.res-contact {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--rule);
+}
+
+.res-contact li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1ch;
+  padding: 3px 0;
+  font-size: 11.5px;
+}
+
+.res-key {
+  min-width: 9ch;
+  color: var(--ink-faint);
+}
+
+.res-contact a {
+  border-bottom: 1px solid var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.item {
+  padding: 12px 0;
+  border-bottom: 1px dotted var(--rule);
+}
+
+.item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.item-title {
+  margin-bottom: 3px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.item-meta {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
+
+.item-date {
+  margin-top: 2px;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+
+.item-tech {
+  margin: 4px 0 6px;
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+
+.bullets {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 2.2ch;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.bullets li::before {
+  content: "\2013";
+  position: absolute;
+  left: 0;
+  color: var(--ink-faint);
+}
+
+.item-link {
+  display: inline-block;
+  margin-left: 0.4ch;
+  border-bottom: 1px solid var(--ink);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------------- print */
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  .desk,
+  .skip,
+  .no-print,
+  .barcode,
+  .caret {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 10.5pt;
+  }
+
+  .receipt {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  .receipt::before,
+  .receipt::after {
+    display: none;
+  }
+
+  .head-name {
+    font-size: 20pt;
+  }
+
+  .block {
+    padding: 8pt 0 2pt;
+  }
+
+  .item {
+    break-inside: avoid;
+  }
+
+  a {
+    color: #000;
+  }
+}

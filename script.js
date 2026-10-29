@@ -72,8 +72,19 @@
     });
   }
 
+  function initPrint() {
+    var btn = document.querySelector('[data-print]');
+    if (!btn) return;
+    // Revealed only once the handler exists; without JS the PDF link stands in.
+    btn.hidden = false;
+    btn.addEventListener('click', function () {
+      window.print();
+    });
+  }
+
   function init() {
     run('cursor', initCursor);
+    run('print', initPrint);
   }
 
   if (document.readyState === 'loading') {
