@@ -332,12 +332,40 @@ strong {
 }
 
 .shot {
-  margin: 0 0 14px;
+  position: relative;
+  margin: 0 calc(var(--pad) * -1) 16px;
+}
+
+/* UI screenshots keep their own colour — a duotone plate turns a dark
+   interface into mud. The riso ink moves to the frame's top rule. */
+.shot-frame {
+  padding: 0;
+  border: 0;
+  border-top: 6px solid var(--red);
+  box-shadow: none;
+  background: none;
+}
+
+.shot-frame--blue {
+  border-top-color: var(--blue);
 }
 
 .shot img {
   width: 100%;
-  filter: grayscale(1) sepia(0.12) contrast(1.12) brightness(1.08);
+  filter: saturate(0.92) contrast(1.03);
+}
+
+.shot .shot-cap {
+  position: absolute;
+  left: var(--pad);
+  bottom: 14px;
+  display: inline-flex;
+  width: max-content;
+  max-width: calc(100% - var(--pad) * 2);
+  gap: 8px;
+  padding: 4px 8px;
+  background: var(--pop);
+  color: var(--ink);
 }
 
 /* two-ink duotone: greyscale plate multiplied into one ink, screened with the
@@ -500,25 +528,40 @@ strong {
 
 /* --------------------------------------------------------------- projects */
 .proj {
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--ink);
 }
 
 .proj:last-of-type {
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--ink);
 }
 
 .proj-sum {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: 2.6ch 1fr 22px;
+  grid-template-columns: auto 1fr 28px;
   grid-template-areas:
     "num name mark"
     "num slug mark";
   align-items: center;
-  column-gap: 12px;
-  min-height: 52px;
-  padding: 12px 0;
+  column-gap: 14px;
+  min-height: 68px;
+  padding: 14px 0;
   cursor: pointer;
   list-style: none;
+}
+
+/* lime wipe on hover — the row's only motion, transform only */
+.proj-sum::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--pop);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.24s ease;
+  pointer-events: none;
 }
 
 .proj-sum::-webkit-details-marker {
@@ -532,17 +575,20 @@ strong {
 .proj-num {
   grid-area: num;
   align-self: center;
-  font-size: 9px;
-  letter-spacing: 0.06em;
+  font-size: clamp(24px, 7vw, 30px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
   color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
 }
 
 .proj-name {
   grid-area: name;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0.02em;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .proj-slug {
@@ -551,17 +597,18 @@ strong {
   font-size: 8.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--blue);
 }
 
 .proj-mark {
   grid-area: mark;
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border: 1px solid var(--ink);
-  font-size: 13px;
+  border-radius: 50%;
+  font-size: 15px;
   line-height: 1;
 }
 
@@ -583,110 +630,109 @@ strong {
 }
 
 .proj-body {
-  padding: 0 0 20px;
+  padding: 0 0 24px;
 }
 
 .proj-desc {
-  margin-bottom: 10px;
-  font-size: 12.5px;
-  line-height: 1.72;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
 .proj-tech {
-  font-size: 9.5px;
-  line-height: 1.9;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 8.5px;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+}
+
+.proj-tech span {
+  padding: 3px 7px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
   color: var(--ink-soft);
+}
+
+.proj-tech span::after {
+  content: none;
 }
 
 .proj-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px dotted var(--rule);
+  gap: 4px 20px;
+  margin-top: 12px;
 }
 
 .proj-links a {
   display: inline-flex;
   align-items: center;
   min-height: 40px;
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-/* ----------------------------------------------------------------- total */
-.total {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-top: 16px;
-  padding-top: 9px;
-  border-top: 3px double var(--ink);
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--red);
   font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
-.total-num {
-  font-size: 24px;
-  letter-spacing: 0;
-  font-variant-numeric: tabular-nums;
+.proj-links a::after {
+  content: "\2197";
+  margin-left: 6px;
+  color: var(--red);
 }
 
 /* ---------------------------------------------------------------- contact */
 .contact {
-  text-align: center;
-}
-
-.contact .block-text {
-  max-width: 40ch;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.contact .social {
+  margin: 40px calc(var(--pad) * -1) 0;
+  padding: 26px var(--pad) 22px;
+  background: var(--pop);
   text-align: left;
 }
 
-.contact-title {
-  margin: 2px 0 12px;
-  font-size: clamp(1.7rem, 7.5vw, 2.15rem);
-  line-height: 1.1;
-  letter-spacing: 0.01em;
+.block.contact .sec-num {
+  color: var(--ink);
 }
 
-.contact .block-note {
-  margin: 0 0 8px;
+.contact .sec-label {
+  border-top-color: var(--ink);
+}
+
+.contact .block-text {
+  margin: 0 0 18px;
+}
+
+.contact-title {
+  margin: 0 0 14px;
+  font-size: clamp(2.1rem, 9.5vw, 2.9rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
 }
 
 .mail {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--tap);
-  margin: 0 0 16px;
-  font-size: 14px;
+  display: inline-block;
+  min-height: 0;
+  margin: 0 0 20px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--ink);
+  font-size: clamp(13px, 4.6vw, 15px);
   font-weight: 700;
   letter-spacing: 0.01em;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 5px;
+  text-decoration: none;
   overflow-wrap: anywhere;
 }
 
 .mail::after {
-  content: "\2192";
+  content: "\2197";
   margin-left: 8px;
-  color: var(--red);
+  color: var(--ink);
 }
 
 .social li {
-  border-top: 1px dotted var(--rule);
+  border-top: 1px solid rgba(23, 19, 16, 0.35);
 }
 
 .social a {
@@ -712,57 +758,20 @@ strong {
 
 /* ------------------------------------------------------------------- foot */
 .foot {
-  margin-top: 26px;
-  padding-top: 18px;
-  border-top: 3px double var(--ink);
-  text-align: center;
-}
-
-.barcode {
-  width: 84%;
-  height: 52px;
-  margin: 0 auto 6px;
-  opacity: 0.9;
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--ink) 0 1px,
-    transparent 1px 3px,
-    var(--ink) 3px 6px,
-    transparent 6px 7px,
-    var(--ink) 7px 8px,
-    transparent 8px 11px,
-    var(--ink) 11px 14px,
-    transparent 14px 15px,
-    var(--ink) 15px 16px,
-    transparent 16px 19px
-  );
-}
-
-.barcode-num {
-  margin-bottom: 16px;
-  font-size: 8px;
-  letter-spacing: 0.34em;
-  color: var(--ink-soft);
+  margin-top: 36px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink);
 }
 
 .foot-note {
-  font-size: 9px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.02em;
 }
 
 .foot-line {
-  margin-top: 7px;
+  margin-top: 5px;
   font-size: 10px;
   color: var(--ink-soft);
-}
-
-.foot-small {
-  margin-top: 7px;
-  font-size: 8px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
 }
 
 .heart {
@@ -880,6 +889,10 @@ html.has-cursor * {
     color: var(--ink);
   }
 
+  .proj-sum:hover::before {
+    transform: scaleX(1);
+  }
+
   .proj-sum:hover .proj-name {
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -893,9 +906,8 @@ html.has-cursor * {
 
   .proj-links a:hover,
   .mail:hover,
-  .social a:hover,
-  .foot-small a:hover {
-    text-decoration-thickness: 2px;
+  .social a:hover {
+    opacity: 0.62;
   }
 }
 
@@ -1083,9 +1095,6 @@ summary {
   .desk,
   .skip,
   .no-print,
-  .barcode,
-  .barcode-num,
-  .cut,
   .caret {
     display: none !important;
   }
@@ -1105,11 +1114,6 @@ summary {
     box-shadow: none;
   }
 
-  .receipt::before,
-  .receipt::after {
-    display: none;
-  }
-
   .head-name {
     font-size: 20pt;
   }
@@ -1120,6 +1124,16 @@ summary {
 
   .item {
     break-inside: avoid;
+  }
+
+  .duo img {
+    filter: grayscale(1) !important;
+  }
+
+  .stats,
+  .contact,
+  .proj-sum::before {
+    background: #fff !important;
   }
 
   a {
