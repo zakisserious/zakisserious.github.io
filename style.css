@@ -585,3 +585,41 @@ strong {
 }
 
 
+/* ------------------------------------------------------- crt on the desk */
+/* Confined to the desk layer behind the paper: it can never blur, tint or
+   intercept the receipt text itself. */
+.desk-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.85) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+/* ------------------------------------------------ 1-bit print treatment */
+/* A hard dot screen over photographs only — halftone, not a blur. */
+.shot,
+.portrait,
+.stamp {
+  position: relative;
+}
+
+.portrait::after,
+.shot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.3;
+  background-image: radial-gradient(circle, rgba(25, 21, 16, 0.9) 0.8px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+}
+
+.stamp {
+  filter: grayscale(1) contrast(1.4);
+}
