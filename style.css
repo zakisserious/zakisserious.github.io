@@ -140,3 +140,448 @@ strong {
   border-top: 3px double var(--ink);
   margin: 14px 0;
 }
+
+/* ------------------------------------------------------------- the paper */
+.receipt {
+  position: relative;
+  width: min(100% - 8px, var(--paper-w));
+  margin: 20px auto 56px;
+  padding: var(--pad) var(--pad) calc(var(--pad) + 8px);
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.014) 0 2px,
+    transparent 2px 4px
+  );
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.45);
+  overflow-wrap: break-word;
+}
+
+/* zigzag cut edges (decorative, never intercepts pointer events) */
+.receipt::before,
+.receipt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--tooth);
+  background: var(--teeth) 0 0 / 12px 10px repeat-x;
+  pointer-events: none;
+}
+
+.receipt::before {
+  bottom: 100%;
+}
+
+.receipt::after {
+  top: 100%;
+  transform: scaleY(-1);
+}
+
+/* ------------------------------------------------------------------ head */
+.head-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1ch;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--rule);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.head-top-r {
+  color: var(--ink-faint);
+}
+
+.head-id {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 16px 0 10px;
+}
+
+.stamp {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border: 1px solid var(--ink);
+  padding: 2px;
+  background: var(--paper-tint);
+  filter: grayscale(1) contrast(1.15);
+}
+
+.kicker {
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.head-name {
+  font-size: clamp(1.9rem, 7vw, 2.35rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.head-role {
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  margin: 10px 0 6px;
+}
+
+.head-meta {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn--solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------------------------------------------------------------- blocks */
+.block {
+  padding: 18px 0 8px;
+}
+
+.block-title {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2ch;
+  margin-bottom: 14px;
+  font-size: 12.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.block-num {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+.block-text {
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  line-height: 1.62;
+}
+
+.block-note {
+  margin: -8px 0 12px;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+/* --------------------------------------------------------------- portrait */
+.portrait {
+  margin: 0 0 14px;
+  padding: 4px;
+  border: 1px solid var(--ink);
+  background: var(--paper-tint);
+}
+
+.portrait img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: 50% 28%;
+  filter: grayscale(1) contrast(1.12);
+}
+
+/* ------------------------------------------------------------ stat ledger */
+.ledger {
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--rule);
+}
+
+.ledger li {
+  display: flex;
+  align-items: baseline;
+  padding: 5px 0;
+  font-size: 12px;
+}
+
+.ledger-label {
+  letter-spacing: 0.03em;
+}
+
+.ledger-dots {
+  flex: 1;
+  margin: 0 8px;
+  border-bottom: 1px dotted var(--ink-faint);
+  transform: translateY(-4px);
+}
+
+.ledger-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------ skill groups */
+.group {
+  padding: 10px 0;
+  border-bottom: 1px dotted var(--rule);
+}
+
+.group:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.group-title {
+  margin-bottom: 6px;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tags,
+.proj-tech {
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.tags span,
+.proj-tech span {
+  white-space: nowrap;
+}
+
+.tags span + span::before,
+.proj-tech span + span::before {
+  content: " \00b7 ";
+  color: var(--ink-faint);
+  white-space: pre;
+}
+
+/* --------------------------------------------------------------- projects */
+.proj {
+  border-top: 1px dashed var(--rule);
+}
+
+.proj:last-of-type {
+  border-bottom: 1px dashed var(--rule);
+}
+
+.proj-sum {
+  display: grid;
+  grid-template-columns: 3.2ch 1fr auto;
+  grid-template-areas:
+    "num name mark"
+    "num slug mark";
+  align-items: center;
+  column-gap: 1.4ch;
+  min-height: var(--tap);
+  padding: 10px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.proj-sum::-webkit-details-marker {
+  display: none;
+}
+
+.proj-num {
+  grid-area: num;
+  align-self: center;
+  font-size: 10px;
+  color: var(--ink-faint);
+}
+
+.proj-name {
+  grid-area: name;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+}
+
+.proj-slug {
+  grid-area: slug;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+.proj-mark {
+  grid-area: mark;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--ink);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.proj-mark::before {
+  content: "+";
+}
+
+.proj[open] .proj-mark::before {
+  content: "\2212";
+}
+
+.proj-body {
+  padding: 2px 0 16px;
+}
+
+.shot {
+  margin: 0 0 10px;
+  border: 1px solid var(--rule);
+  background: var(--paper-tint);
+}
+
+.shot img {
+  width: 100%;
+  height: auto;
+}
+
+.proj-desc {
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.proj-tech {
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.proj-links {
+  margin-top: 4px;
+}
+
+.proj-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  margin-right: 16px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+
+/* ---------------------------------------------------------------- contact */
+.contact-title {
+  margin-bottom: 10px;
+  font-size: clamp(1.35rem, 5.4vw, 1.6rem);
+  line-height: 1.2;
+}
+
+.mail {
+  display: inline-block;
+  margin: 4px 0 14px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.social li {
+  border-top: 1px dotted var(--rule);
+}
+
+.social a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1ch;
+  min-height: var(--tap);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.social-val {
+  color: var(--ink-faint);
+}
+
+/* ------------------------------------------------------------------- foot */
+.foot {
+  padding-top: 8px;
+  text-align: center;
+}
+
+.barcode {
+  width: 72%;
+  height: 36px;
+  margin: 4px auto 12px;
+  opacity: 0.85;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0 2px,
+    transparent 2px 4px,
+    var(--ink) 4px 6px,
+    transparent 6px 9px,
+    var(--ink) 9px 11px,
+    transparent 11px 12px,
+    var(--ink) 12px 15px,
+    transparent 15px 18px
+  );
+}
+
+.foot-note {
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+}
+
+.foot-line {
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.heart {
+  color: var(--stamp);
+}
+
+.foot-small {
+  margin-top: 4px;
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+/* -------------------------------------------------------------- skip link */
+.skip {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  z-index: 10;
+  padding: 10px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+}
+
+
