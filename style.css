@@ -893,3 +893,36 @@ html.has-cursor * {
     color: #000;
   }
 }
+/* ------------------------------------------------------------ a11y focus */
+[hidden] {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--stamp);
+  outline-offset: 2px;
+}
+
+.proj-sum:focus-visible {
+  outline-offset: -2px;
+}
+
+.mail {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+}
+
+a,
+button,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* the skip link is only a control while focused */
+.skip:focus,
+.skip:focus-visible {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+}
