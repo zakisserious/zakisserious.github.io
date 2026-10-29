@@ -4,601 +4,326 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="theme-color" content="#f4f1e6" />
   <title>Zakaria Omar - Full-Stack Developer</title>
-  <meta name="description" content="Portfolio of Zakaria Omar - Full-Stack Developer, AI Enthusiast, and Blockchain Builder." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
-
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="animations.css" />
-  <link rel="stylesheet" href="responsive.css" />
+  <meta name="description"
+    content="Portfolio of Zakaria Omar - Full-Stack Developer, AI Enthusiast, and Blockchain Builder." />
+  <link rel="stylesheet" href="style.css?v=1" />
 </head>
 
-<body class="loading">
-  <!-- Retro Overlays -->
-  <div class="scanlines" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="crt-glow" aria-hidden="true"></div>
-  <div class="terminal-output" id="terminal-output" aria-hidden="true">
-    <div class="terminal-chrome">
-      <div class="terminal-dots">
-        <span class="dot dot-close"></span>
-        <span class="dot dot-minimize"></span>
-        <span class="dot dot-maximize"></span>
-      </div>
-      <span class="terminal-title">zakaria - terminal</span>
-    </div>
-    <div class="terminal-body" id="terminal-body"></div>
+<body>
+  <div class="desk" aria-hidden="true">
+    <div class="desk-scan" aria-hidden="true"></div>
   </div>
 
-  <!-- Loading Screen -->
-  <div class="loader" id="loader" aria-hidden="true">
-  <pre class="loader-ascii" id="loader-ascii" aria-hidden="true">
-┌───────────────────────────────────────┐
-│ ███████╗ █████╗ ██╗  ██╗              │
-│ ╚══███╔╝██╔══██╗██║ ██╔╝              │
-│   ███╔╝ ███████║█████╔╝               │
-│  ███╔╝  ██╔══██║██╔═██╗               │
-│ ███████╗██║  ██║██║  ██╗              │
-│ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝              │
-│       ◆ PORTFOLIO SYSTEM v2.0.26 ◆    │
-└───────────────────────────────────────┘
-</pre>
-    <div class="loader-terminal" id="loader-terminal">
-      <div class="loader-line" id="loader-line-1">
-        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">sudo init portfolio --theme=retro</span>
-      </div>
-      <div class="loader-line" id="loader-line-2">
-        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">loading modules...</span>
-      </div>
-      <div class="loader-line" id="loader-line-3">
-        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">compiling animations...</span>
-      </div>
-      <div class="loader-line" id="loader-line-4">
-        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">initializing terminal...</span>
-      </div>
-      <div class="loader-line" id="loader-line-5">
-        <span class="prompt">zakaria@portfolio:~$</span> <span class="cmd">ready_</span><span class="cursor-blink"></span>
-      </div>
-      <div class="loader-progress" id="loader-progress">
-        <div class="loader-progress-bar" id="loader-progress-bar"></div>
-      </div>
-    </div>
-  </div>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Custom Cursor -->
-  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-trail" id="cursor-trail" aria-hidden="true"></div>
-  <div class="cursor-trail-dot cursor-trail-dot-1" id="trail-1" aria-hidden="true"></div>
-  <div class="cursor-trail-dot cursor-trail-dot-2" id="trail-2" aria-hidden="true"></div>
-  <div class="cursor-trail-dot cursor-trail-dot-3" id="trail-3" aria-hidden="true"></div>
-  <div class="cursor-trail-dot cursor-trail-dot-4" id="trail-4" aria-hidden="true"></div>
-  <div class="cursor-trail-dot cursor-trail-dot-5" id="trail-5" aria-hidden="true"></div>
-  <div class="cursor-image" id="cursor-image" aria-hidden="true">
-    <img src="" alt="" id="cursor-img-el" />
-  </div>
+  <main class="receipt" id="main">
+    <!-- ======================== HEAD ======================== -->
+    <header class="head" id="hero">
+      <p class="head-top">
+        <span>ZAKARIA OMAR</span>
+        <span class="head-top-r">PORTFOLIO</span>
+      </p>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">~/zakaria</a>
-      <ul class="nav-links">
-        <li><a href="#about">about</a></li>
-        <li><a href="#toolbox">skills</a></li>
-        <li><a href="#projects">projects</a></li>
-        <li><a href="#contact">contact</a></li>
-        <li><a href="resume.html">resume</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#about" class="mobile-link">~/about</a>
-    <a href="#toolbox" class="mobile-link">~/skills</a>
-    <a href="#projects" class="mobile-link">~/projects</a>
-    <a href="#contact" class="mobile-link">~/contact</a>
-    <a href="resume.html" class="mobile-link">~/resume</a>
-  </div>
-
-  <main>
-    <!-- ======================== HERO ======================== -->
-    <section class="hero" id="hero">
-      <!-- Floating Code Snippets -->
-      <div class="hero-floating-code" aria-hidden="true">const zakaria = new Developer({ stack: 'full' });</div>
-      <div class="hero-floating-code" aria-hidden="true">while(alive) { code(); learn(); build(); }</div>
-      <div class="hero-floating-code" aria-hidden="true">import { skills } from './toolbox';</div>
-      <div class="hero-floating-code" aria-hidden="true">// TODO: change the world</div>
-      <div class="hero-floating-code" aria-hidden="true">npm run deploy --production</div>
-
-      <!-- Binary Floats -->
-      <div class="binary-float" aria-hidden="true" data-speed="0.3">01101001 10110100 11010011</div>
-      <div class="binary-float" aria-hidden="true" data-speed="0.5">0xDEADBEEF 0xCAFEBABE</div>
-      <div class="binary-float" aria-hidden="true" data-speed="0.2">SELECT * FROM skills WHERE level='elite'</div>
-      <div class="binary-float" aria-hidden="true" data-speed="0.4">git commit -m "initializing soul"</div>
-
-      <div class="hero-inner">
-        <div class="hero-photo-wrap">
-          <div class="hero-pulse-ring" aria-hidden="true"></div>
-          <div class="hero-pulse-ring" aria-hidden="true"></div>
-          <div class="hero-pulse-ring" aria-hidden="true"></div>
-          <img src="./assets/profile-pic.png" alt="Zakaria Omar" class="hero-photo" />
-          <div class="hero-photo-glow" aria-hidden="true"></div>
-        </div>
-        <div class="hero-text">
-          <p class="hero-greeting">> Hello, I'm</p>
-          <h2 class="section-heading reveal glitch"><span id="hero-name" class="hero-name hero-name-glitch" data-text="zakaria">zakaria</span></h2>
-          <div class="hero-role">
-            <span class="auto_type"></span>
-          </div>
-          <div class="hero-actions">
-            <a href="resume.html" class="btn btn-primary magnetic">Resume</a>
-            <a href="#contact" class="btn btn-outline magnetic">Contact Me</a>
-          </div>
+      <div class="head-id">
+        <img class="stamp" src="./assets/profile-pic.png" alt="Zakaria Omar" width="400" height="400" />
+        <div class="head-id-text">
+          <p class="kicker">Hello, I'm</p>
+          <h1 class="head-name">zakaria</h1>
         </div>
       </div>
-    </section>
 
-    <!-- Divider -->
-    <div class="section-divider" aria-hidden="true">
-      <div class="section-divider-line"></div>
-      <span class="section-divider-text">sys.nav</span>
-      <div class="section-divider-line"></div>
-    </div>
+      <p class="head-role">Full-Stack Developer. AI Enthusiast. Blockchain Builder. Problem Solver.</p>
+      <p class="head-meta">Kuala Lumpur, Malaysia &middot; EST. 2026</p>
+
+      <div class="head-actions">
+        <a class="btn" href="resume.html">Resume</a>
+        <a class="btn btn--solid" href="#contact">Contact Me</a>
+      </div>
+    </header>
+
+    <hr class="rule rule--double" />
 
     <!-- ======================== ABOUT ======================== -->
-    <section class="section" id="about">
-      <div class="section-scan-line" aria-hidden="true"></div>
-      <div class="section-flash" aria-hidden="true"></div>
-      <div class="binary-float" aria-hidden="true" data-speed="0.25">0xFF 0xAA 0xBB 0xCC</div>
-      <div class="binary-float" aria-hidden="true" data-speed="0.35">mkdir -p ~/achievements && cd ~/goals</div>
-      <h2 class="section-heading reveal glitch">About Me</h2>
-      <div class="about-grid">
-        <div class="about-photo-wrap reveal">
-          <div class="about-photo-scan" aria-hidden="true"></div>
-          <img src="./assets/about-pic.jpg" alt="Zakaria Omar" class="about-photo" />
-        </div>
-        <div class="about-content">
-          <div class="about-text">
-            <p class="reveal">
-              I'm a <strong>Full-Stack Developer</strong> who enjoys building things that work efficiently, from interactive web apps to AI-powered platforms. My experience spans React.js, Node.js, Python, and AWS, with hands-on work in SaaS, blockchain, and AI/ML projects.
-            </p>
-            <p class="reveal">
-              I love solving problems, optimizing systems, and turning ideas into real, functional products. My recent work includes developing a blockchain-based certificate verification system and cloud applications focused on scalability and performance. I've also <strong>mentored 200+ students</strong> in programming fundamentals.
-            </p>
-          </div>
-          <div class="about-stats">
-            <div class="stat reveal">
-              <span class="stat-number" data-target="3">0</span>
-              <span class="stat-label">Years Experience</span>
-            </div>
-            <div class="stat reveal">
-              <span class="stat-number" data-target="2">0</span>
-              <span class="stat-label">Degrees</span>
-            </div>
-            <div class="stat reveal">
-              <span class="stat-number" data-target="5">0</span>
-              <span class="stat-label">Projects Shipped</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <section class="block" id="about" aria-labelledby="about-title">
+      <h2 class="block-title" id="about-title"><span class="block-num">01</span> About Me</h2>
+
+      <figure class="portrait">
+        <img src="./assets/about-pic.jpg" alt="Zakaria Omar" width="595" height="751" />
+      </figure>
+
+      <p class="block-text">
+        I'm a <strong>Full-Stack Developer</strong> who enjoys building things that work efficiently, from
+        interactive web apps to AI-powered platforms. My experience spans React.js, Node.js, Python, and AWS, with
+        hands-on work in SaaS, blockchain, and AI/ML projects.
+      </p>
+      <p class="block-text">
+        I love solving problems, optimizing systems, and turning ideas into real, functional products. My recent work
+        includes developing a blockchain-based certificate verification system and cloud applications focused on
+        scalability and performance. I've also <strong>mentored 200+ students</strong> in programming fundamentals.
+      </p>
+
+      <ul class="ledger">
+        <li>
+          <span class="ledger-label">Years Experience</span>
+          <span class="ledger-dots" aria-hidden="true"></span>
+          <span class="ledger-value">3</span>
+        </li>
+        <li>
+          <span class="ledger-label">Degrees</span>
+          <span class="ledger-dots" aria-hidden="true"></span>
+          <span class="ledger-value">2</span>
+        </li>
+        <li>
+          <span class="ledger-label">Projects Shipped</span>
+          <span class="ledger-dots" aria-hidden="true"></span>
+          <span class="ledger-value">5</span>
+        </li>
+      </ul>
     </section>
 
-    <!-- Divider -->
-    <div class="section-divider" aria-hidden="true">
-      <div class="section-divider-line"></div>
-      <span class="section-divider-text">load modules</span>
-      <div class="section-divider-line"></div>
-    </div>
+    <hr class="rule" />
 
     <!-- ======================== TOOLBOX ======================== -->
-    <section class="section" id="toolbox">
-      <div class="section-scan-line" aria-hidden="true"></div>
-      <div class="section-flash" aria-hidden="true"></div>
-      <div class="binary-float" aria-hidden="true" data-speed="0.3">pip install --upgrade skills brain</div>
-      <div class="binary-float" aria-hidden="true" data-speed="0.4">cargo build --release --target=legend</div>
-      <h2 class="section-heading reveal glitch">Toolbox</h2>
-      <div class="toolbox-grid">
-        <div class="toolbox-row reveal">
-          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
-          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
-          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
-          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
-          <div class="toolbox-header">
-            <div class="toolbox-icon"></div>
-            <span class="toolbox-label">Languages</span>
-          </div>
-          <div class="toolbox-tags">
-            <span class="toolbox-tag"><i class="devicon-javascript-plain"></i> JavaScript</span>
-            <span class="toolbox-tag"><i class="devicon-typescript-plain"></i> TypeScript</span>
-            <span class="toolbox-tag"><i class="devicon-python-plain"></i> Python</span>
-            <span class="toolbox-tag"><i class="devicon-java-plain"></i> Java</span>
-            <span class="toolbox-tag"><i class="devicon-cplusplus-plain"></i> C++</span>
-            <span class="toolbox-tag"><i class="devicon-csharp-plain"></i> C#</span>
-            <span class="toolbox-tag"><i class="devicon-solidity-plain"></i> Solidity</span>
-            <span class="toolbox-tag"><i class="devicon-rust-plain"></i> Rust</span>
-            <span class="toolbox-tag">SQL</span>
-          </div>
-        </div>
-        <div class="toolbox-row reveal">
-          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
-          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
-          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
-          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
-          <div class="toolbox-header">
-            <div class="toolbox-icon"></div>
-            <span class="toolbox-label">Frontend</span>
-          </div>
-          <div class="toolbox-tags">
-            <span class="toolbox-tag"><i class="devicon-react-original"></i> React.js</span>
-            <span class="toolbox-tag"><i class="devicon-html5-plain"></i> HTML5</span>
-            <span class="toolbox-tag"><i class="devicon-css3-plain"></i> CSS3</span>
-            <span class="toolbox-tag"><i class="devicon-bootstrap-plain"></i> Bootstrap</span>
-            <span class="toolbox-tag"><i class="devicon-tailwindcss-plain"></i> Tailwind CSS</span>
-            <span class="toolbox-tag"><i class="devicon-razor-plain"></i> Razor Pages</span>
-          </div>
-        </div>
-        <div class="toolbox-row reveal">
-          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
-          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
-          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
-          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
-          <div class="toolbox-header">
-            <div class="toolbox-icon"></div>
-            <span class="toolbox-label">Backend & Database</span>
-          </div>
-          <div class="toolbox-tags">
-            <span class="toolbox-tag"><i class="devicon-nodejs-plain"></i> Node.js</span>
-            <span class="toolbox-tag"><i class="devicon-flask-original"></i> Flask</span>
-            <span class="toolbox-tag"><i class="devicon-express-original"></i> Express</span>
-            <span class="toolbox-tag"><i class="devicon-mongodb-plain"></i> MongoDB</span>
-            <span class="toolbox-tag"><i class="devicon-postgresql-plain"></i> PostgreSQL</span>
-            <span class="toolbox-tag"><i class="devicon-mysql-plain"></i> MySQL</span>
-            <span class="toolbox-tag"><i class="devicon-sqlite-plain"></i> SQLite</span>
-            <span class="toolbox-tag"><i class="devicon-firebase-plain"></i> Firebase</span>
-          </div>
-        </div>
-        <div class="toolbox-row reveal">
-          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
-          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
-          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
-          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
-          <div class="toolbox-header">
-            <div class="toolbox-icon"></div>
-            <span class="toolbox-label">AI & Machine Learning</span>
-          </div>
-          <div class="toolbox-tags">
-            <span class="toolbox-tag"><i class="devicon-tensorflow-original"></i> TensorFlow</span>
-            <span class="toolbox-tag"><i class="devicon-opencv-plain"></i> OpenCV</span>
-            <span class="toolbox-tag"><i class="devicon-python-plain"></i> Pandas</span>
-            <span class="toolbox-tag"><i class="devicon-python-plain"></i> NumPy</span>
-            <span class="toolbox-tag">Computer Vision</span>
-            <span class="toolbox-tag">LLMs</span>
-            <span class="toolbox-tag">Prompt Engineering</span>
-          </div>
-        </div>
-        <div class="toolbox-row reveal">
-          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
-          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
-          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
-          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
-          <div class="toolbox-header">
-            <div class="toolbox-icon"></div>
-            <span class="toolbox-label">Blockchain & Web3</span>
-          </div>
-          <div class="toolbox-tags">
-            <span class="toolbox-tag"><i class="devicon-solidity-plain"></i> Solidity</span>
-            <span class="toolbox-tag"><i class="devicon-hardhat-plain"></i> Hardhat</span>
-            <span class="toolbox-tag"><i class="devicon-ethereum-plain"></i> Web3.js</span>
-            <span class="toolbox-tag">Truffle</span>
-            <span class="toolbox-tag">Smart Contracts</span>
-            <span class="toolbox-tag">GoQuorum</span>
-          </div>
-        </div>
-        <div class="toolbox-row reveal">
-          <span class="toolbox-corner-tl" aria-hidden="true">┌</span>
-          <span class="toolbox-corner-tr" aria-hidden="true">┐</span>
-          <span class="toolbox-corner-bl" aria-hidden="true">└</span>
-          <span class="toolbox-corner-br" aria-hidden="true">┘</span>
-          <div class="toolbox-header">
-            <div class="toolbox-icon"></div>
-            <span class="toolbox-label">DevOps & Tools</span>
-          </div>
-          <div class="toolbox-tags">
-            <span class="toolbox-tag"><i class="devicon-git-plain"></i> Git</span>
-            <span class="toolbox-tag"><i class="devicon-github-original"></i> GitHub</span>
-            <span class="toolbox-tag"><i class="devicon-amazonwebservices-plain-wordmark"></i> AWS</span>
-            <span class="toolbox-tag"><i class="devicon-docker-plain"></i> Docker</span>
-            <span class="toolbox-tag"><i class="devicon-linux-plain"></i> Linux</span>
-            <span class="toolbox-tag">REST APIs</span>
-            <span class="toolbox-tag"><i class="devicon-figma-plain"></i> Figma</span>
-          </div>
-        </div>
+    <section class="block" id="toolbox" aria-labelledby="toolbox-title">
+      <h2 class="block-title" id="toolbox-title"><span class="block-num">02</span> Toolbox</h2>
+      <p class="block-note">load modules</p>
+
+      <div class="group">
+        <h3 class="group-title">Languages</h3>
+        <p class="tags">
+          <span>JavaScript</span><span>TypeScript</span><span>Python</span><span>Java</span><span>C++</span><span>C#</span><span>Solidity</span><span>Rust</span><span>SQL</span>
+        </p>
+      </div>
+
+      <div class="group">
+        <h3 class="group-title">Frontend</h3>
+        <p class="tags">
+          <span>React.js</span><span>HTML5</span><span>CSS3</span><span>Bootstrap</span><span>Tailwind CSS</span><span>Razor Pages</span>
+        </p>
+      </div>
+
+      <div class="group">
+        <h3 class="group-title">Backend &amp; Database</h3>
+        <p class="tags">
+          <span>Node.js</span><span>Flask</span><span>Express</span><span>MongoDB</span><span>PostgreSQL</span><span>MySQL</span><span>SQLite</span><span>Firebase</span>
+        </p>
+      </div>
+
+      <div class="group">
+        <h3 class="group-title">AI &amp; Machine Learning</h3>
+        <p class="tags">
+          <span>TensorFlow</span><span>OpenCV</span><span>Pandas</span><span>NumPy</span><span>Computer Vision</span><span>LLMs</span><span>Prompt Engineering</span>
+        </p>
+      </div>
+
+      <div class="group">
+        <h3 class="group-title">Blockchain &amp; Web3</h3>
+        <p class="tags">
+          <span>Solidity</span><span>Hardhat</span><span>Web3.js</span><span>Truffle</span><span>Smart Contracts</span><span>GoQuorum</span>
+        </p>
+      </div>
+
+      <div class="group">
+        <h3 class="group-title">DevOps &amp; Tools</h3>
+        <p class="tags">
+          <span>Git</span><span>GitHub</span><span>AWS</span><span>Docker</span><span>Linux</span><span>REST APIs</span><span>Figma</span>
+        </p>
       </div>
     </section>
 
-    <!-- Divider -->
-    <div class="section-divider" aria-hidden="true">
-      <div class="section-divider-line"></div>
-      <span class="section-divider-text">deploy</span>
-      <div class="section-divider-line"></div>
-    </div>
+    <hr class="rule" />
 
     <!-- ======================== PROJECTS ======================== -->
-    <section class="section" id="projects">
-      <p class="section-label">// featured_work</p>
-      <h2 class="section-heading reveal glitch">Projects</h2>
+    <section class="block" id="projects" aria-labelledby="projects-title">
+      <h2 class="block-title" id="projects-title"><span class="block-num">03</span> Projects</h2>
+      <p class="block-note">// featured_work</p>
 
-      <div class="projects-wrapper" id="projects-wrapper">
-        <div class="projects-track" id="projects-track">
-
-        <div class="project-slide" data-cursor="expand" data-image="./assets/project4.png">
-          <div class="project-card-chrome">
-            <div class="terminal-dots">
-              <span class="dot dot-close"></span>
-              <span class="dot dot-minimize"></span>
-              <span class="dot dot-maximize"></span>
-            </div>
-            <span class="terminal-title">codebase-qa</span>
-            <span class="project-image-badge">AI</span>
-          </div>
-          <div class="project-image">
-            <img src="./assets/project4.png" alt="CodeBase QA" loading="lazy" />
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">CodeBase QA</h3>
-            <p class="project-desc">Self-hosted RAG for codebases. Ask questions about any GitHub/local repo in plain English and get answers with clickable file:line citations. AST-aware splitting, agentic deep analysis, D3 dependency graphs. Runs fully local on Ollama.</p>
-            <div class="project-tech">
-              <span>Python</span>
-              <span>FastAPI</span>
-              <span>LangChain</span>
-              <span>ChromaDB</span>
-              <span>Ollama</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/zakisserious/codebase-qa" target="_blank" rel="noopener" class="btn btn-sm btn-primary magnetic">$ cat source</a>
-            </div>
-          </div>
-          <div class="card-scan-line" aria-hidden="true"></div>
+      <details class="proj" open>
+        <summary class="proj-sum">
+          <span class="proj-num">01</span>
+          <h3 class="proj-name">CodeBase QA</h3>
+          <span class="proj-slug">codebase-qa</span>
+          <span class="proj-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="proj-body">
+          <figure class="shot">
+            <img src="./assets/project4.png" alt="CodeBase QA" width="1734" height="963" loading="lazy" />
+          </figure>
+          <p class="proj-desc">Self-hosted RAG for codebases. Ask questions about any GitHub/local repo in plain
+            English and get answers with clickable file:line citations. AST-aware splitting, agentic deep analysis, D3
+            dependency graphs. Runs fully local on Ollama.</p>
+          <p class="proj-tech"><span>Python</span><span>FastAPI</span><span>LangChain</span><span>ChromaDB</span><span>Ollama</span></p>
+          <p class="proj-links">
+            <a href="https://github.com/zakisserious/codebase-qa" target="_blank" rel="noopener"
+              aria-label="CodeBase QA source on GitHub">$ cat source</a>
+          </p>
         </div>
+      </details>
 
-        <div class="project-slide" data-cursor="expand" data-image="./assets/project5.png">
-          <div class="project-card-chrome">
-            <div class="terminal-dots">
-              <span class="dot dot-close"></span>
-              <span class="dot dot-minimize"></span>
-              <span class="dot dot-maximize"></span>
-            </div>
-            <span class="terminal-title">zava</span>
-            <span class="project-image-badge">RUST</span>
-          </div>
-          <div class="project-image">
-            <img src="./assets/project5.png" alt="Zava Audio Visualizer" loading="lazy" />
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">Zava</h3>
-            <p class="project-desc">Console-based audio visualizer written in pure Rust. A CAVA remake with SIMD FFT DSP, waveform & spectrum modes, and 16 live-toggle visual upgrades. Zero-config, PipeWire/PulseAudio capture.</p>
-            <div class="project-tech">
-              <span>Rust</span>
-              <span>SIMD FFT</span>
-              <span>PipeWire</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/zakisserious/zava" target="_blank" rel="noopener" class="btn btn-sm btn-primary magnetic">$ cat source</a>
-            </div>
-          </div>
-          <div class="card-scan-line" aria-hidden="true"></div>
+      <details class="proj">
+        <summary class="proj-sum">
+          <span class="proj-num">02</span>
+          <h3 class="proj-name">Zava</h3>
+          <span class="proj-slug">zava</span>
+          <span class="proj-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="proj-body">
+          <figure class="shot">
+            <img src="./assets/project5.png" alt="Zava Audio Visualizer" width="1280" height="720" loading="lazy" />
+          </figure>
+          <p class="proj-desc">Console-based audio visualizer written in pure Rust. A CAVA remake with SIMD FFT DSP,
+            waveform &amp; spectrum modes, and 16 live-toggle visual upgrades. Zero-config, PipeWire/PulseAudio capture.
+          </p>
+          <p class="proj-tech"><span>Rust</span><span>SIMD FFT</span><span>PipeWire</span></p>
+          <p class="proj-links">
+            <a href="https://github.com/zakisserious/zava" target="_blank" rel="noopener"
+              aria-label="Zava source on GitHub">$ cat source</a>
+          </p>
         </div>
+      </details>
 
-        <div class="project-slide" data-cursor="expand" data-image="./assets/project2.png">
-          <div class="project-card-chrome">
-            <div class="terminal-dots">
-              <span class="dot dot-close"></span>
-              <span class="dot dot-minimize"></span>
-              <span class="dot dot-maximize"></span>
-            </div>
-            <span class="terminal-title">artists-evolution</span>
-            <span class="project-image-badge">LIVE</span>
-          </div>
-          <div class="project-image">
-            <img src="./assets/project2.png" alt="Artists Evolution Analyzer" loading="lazy" />
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">Artists Evolution Analyzer</h3>
-            <p class="project-desc">Discover an artist's breakout era, trace their popularity over time, and explore their discography timeline through interactive data visualization.</p>
-            <div class="project-tech">
-              <span>React</span>
-            </div>
-            <div class="project-links">
-              <a href="https://artists-evolution-data.vercel.app/" target="_blank" rel="noopener" class="btn btn-sm btn-primary magnetic">$ open live_demo</a>
-              <a href="https://github.com/zakisserious/Artists-Evolution-Data" target="_blank" rel="noopener" class="btn btn-sm btn-outline magnetic">$ cat source</a>
-            </div>
-          </div>
-          <div class="card-scan-line" aria-hidden="true"></div>
+      <details class="proj">
+        <summary class="proj-sum">
+          <span class="proj-num">03</span>
+          <h3 class="proj-name">Artists Evolution Analyzer</h3>
+          <span class="proj-slug">artists-evolution</span>
+          <span class="proj-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="proj-body">
+          <figure class="shot">
+            <img src="./assets/project2.png" alt="Artists Evolution Analyzer" width="836" height="449" loading="lazy" />
+          </figure>
+          <p class="proj-desc">Discover an artist's breakout era, trace their popularity over time, and explore their
+            discography timeline through interactive data visualization.</p>
+          <p class="proj-tech"><span>React</span></p>
+          <p class="proj-links">
+            <a href="https://artists-evolution-data.vercel.app/" target="_blank" rel="noopener"
+              aria-label="Artists Evolution Analyzer live demo">$ open live_demo</a>
+            <a href="https://github.com/zakisserious/Artists-Evolution-Data" target="_blank" rel="noopener"
+              aria-label="Artists Evolution Analyzer source on GitHub">$ cat source</a>
+          </p>
         </div>
+      </details>
 
-        <div class="project-slide" data-cursor="expand" data-image="./assets/project1.png">
-          <div class="project-card-chrome">
-            <div class="terminal-dots">
-              <span class="dot dot-close"></span>
-              <span class="dot dot-minimize"></span>
-              <span class="dot dot-maximize"></span>
-            </div>
-            <span class="terminal-title">pathfinder</span>
-            <span class="project-image-badge">LIVE</span>
-          </div>
-          <div class="project-image">
-            <img src="./assets/project1.png" alt="Pathfinder Algorithm Visualizer" loading="lazy" />
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">Pathfinder</h3>
-            <p class="project-desc">Interactive pathfinding algorithm visualizer with 9 algorithms (A*, Dijkstra, BFS, DFS), compare mode, cost visualization, and maze generation.</p>
-            <div class="project-tech">
-              <span>React</span>
-              <span>Vite</span>
-              <span>Tailwind CSS</span>
-            </div>
-            <div class="project-links">
-              <a href="https://pathfinding-ecru.vercel.app/" target="_blank" rel="noopener" class="btn btn-sm btn-primary magnetic">$ open live_demo</a>
-              <a href="https://github.com/zakisserious/pathfinder" target="_blank" rel="noopener" class="btn btn-sm btn-outline magnetic">$ cat source</a>
-            </div>
-          </div>
-          <div class="card-scan-line" aria-hidden="true"></div>
+      <details class="proj">
+        <summary class="proj-sum">
+          <span class="proj-num">04</span>
+          <h3 class="proj-name">Pathfinder</h3>
+          <span class="proj-slug">pathfinder</span>
+          <span class="proj-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="proj-body">
+          <figure class="shot">
+            <img src="./assets/project1.png" alt="Pathfinder Algorithm Visualizer" width="1362" height="870"
+              loading="lazy" />
+          </figure>
+          <p class="proj-desc">Interactive pathfinding algorithm visualizer with 9 algorithms (A*, Dijkstra, BFS, DFS),
+            compare mode, cost visualization, and maze generation.</p>
+          <p class="proj-tech"><span>React</span><span>Vite</span><span>Tailwind CSS</span></p>
+          <p class="proj-links">
+            <a href="https://pathfinding-ecru.vercel.app/" target="_blank" rel="noopener"
+              aria-label="Pathfinder live demo">$ open live_demo</a>
+            <a href="https://github.com/zakisserious/pathfinder" target="_blank" rel="noopener"
+              aria-label="Pathfinder source on GitHub">$ cat source</a>
+          </p>
         </div>
+      </details>
 
-        <div class="project-slide" data-cursor="expand" data-image="./assets/project3.png">
-          <div class="project-card-chrome">
-            <div class="terminal-dots">
-              <span class="dot dot-close"></span>
-              <span class="dot dot-minimize"></span>
-              <span class="dot dot-maximize"></span>
-            </div>
-            <span class="terminal-title">blockchain-cert</span>
-          </div>
-          <div class="project-image">
-            <img src="./assets/project3.png" alt="Blockchain Certificate Verification" loading="lazy" />
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">Blockchain Certificate Verification</h3>
-            <p class="project-desc">Academic certificate verification system using GoQuorum blockchain with Solidity smart contracts, AI/ML document classification, and anomaly detection.</p>
-            <div class="project-tech">
-              <span>React</span>
-              <span>Node.js</span>
-              <span>Python</span>
-              <span>Solidity</span>
-              <span>Hardhat</span>
-              <span>MongoDB</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/zakisserious/fyp" target="_blank" rel="noopener" class="btn btn-sm btn-outline magnetic">$ cat source</a>
-            </div>
-          </div>
-          <div class="card-scan-line" aria-hidden="true"></div>
+      <details class="proj">
+        <summary class="proj-sum">
+          <span class="proj-num">05</span>
+          <h3 class="proj-name">Blockchain Certificate Verification</h3>
+          <span class="proj-slug">blockchain-cert</span>
+          <span class="proj-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="proj-body">
+          <figure class="shot">
+            <img src="./assets/project3.png" alt="Blockchain Certificate Verification" width="1146" height="706"
+              loading="lazy" />
+          </figure>
+          <p class="proj-desc">Academic certificate verification system using GoQuorum blockchain with Solidity smart
+            contracts, AI/ML document classification, and anomaly detection.</p>
+          <p class="proj-tech">
+            <span>React</span><span>Node.js</span><span>Python</span><span>Solidity</span><span>Hardhat</span><span>MongoDB</span>
+          </p>
+          <p class="proj-links">
+            <a href="https://github.com/zakisserious/fyp" target="_blank" rel="noopener"
+              aria-label="Blockchain Certificate Verification source on GitHub">$ cat source</a>
+          </p>
         </div>
+      </details>
 
-        <div class="project-text-card" data-cursor="expand">
-          <div class="project-card-chrome">
-            <div class="terminal-dots">
-              <span class="dot dot-close"></span>
-              <span class="dot dot-minimize"></span>
-              <span class="dot dot-maximize"></span>
-            </div>
-            <span class="terminal-title">diabetes-mgmt</span>
-          </div>
-          <span class="project-number">04</span>
-          <div class="project-info">
-            <h3 class="project-title">Cloud Diabetes Management System</h3>
-            <p class="project-desc">Cloud-based application for tracking and managing diabetes data with serverless architecture, secure data handling, and efficient backend logic for patient record management.</p>
-            <div class="project-tech">
-              <span>C#</span>
-              <span>Razor Pages</span>
-              <span>AWS Elastic Beanstalk</span>
-              <span>AWS Lambda</span>
-            </div>
-          </div>
-          <div class="card-scan-line" aria-hidden="true"></div>
+      <details class="proj">
+        <summary class="proj-sum">
+          <span class="proj-num">06</span>
+          <h3 class="proj-name">Cloud Diabetes Management System</h3>
+          <span class="proj-slug">diabetes-mgmt</span>
+          <span class="proj-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="proj-body">
+          <p class="proj-desc">Cloud-based application for tracking and managing diabetes data with serverless
+            architecture, secure data handling, and efficient backend logic for patient record management.</p>
+          <p class="proj-tech"><span>C#</span><span>Razor Pages</span><span>AWS Elastic Beanstalk</span><span>AWS Lambda</span></p>
         </div>
+      </details>
 
-        <div class="project-text-card" data-cursor="expand">
-          <div class="project-card-chrome">
-            <div class="terminal-dots">
-              <span class="dot dot-close"></span>
-              <span class="dot dot-minimize"></span>
-              <span class="dot dot-maximize"></span>
-            </div>
-            <span class="terminal-title">face-hand-detect</span>
-          </div>
-          <span class="project-number">05</span>
-          <div class="project-info">
-            <h3 class="project-title">Face & Hand Detection System</h3>
-            <p class="project-desc">Real-time ML-based face and hand detection system for authentication, gesture control, and human-computer interaction using deep learning.</p>
-            <div class="project-tech">
-              <span>Python</span>
-              <span>TensorFlow</span>
-              <span>OpenCV</span>
-            </div>
-          </div>
-          <div class="card-scan-line" aria-hidden="true"></div>
+      <details class="proj">
+        <summary class="proj-sum">
+          <span class="proj-num">07</span>
+          <h3 class="proj-name">Face &amp; Hand Detection System</h3>
+          <span class="proj-slug">face-hand-detect</span>
+          <span class="proj-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="proj-body">
+          <p class="proj-desc">Real-time ML-based face and hand detection system for authentication, gesture control,
+            and human-computer interaction using deep learning.</p>
+          <p class="proj-tech"><span>Python</span><span>TensorFlow</span><span>OpenCV</span></p>
         </div>
-
-      </div>
+      </details>
     </section>
 
-    <!-- Divider -->
-    <div class="section-divider" aria-hidden="true">
-      <div class="section-divider-line"></div>
-      <span class="section-divider-text">establish connection</span>
-      <div class="section-divider-line"></div>
-    </div>
+    <hr class="rule" />
 
     <!-- ======================== CONTACT ======================== -->
-    <section class="section contact-section" id="contact">
-      <div class="section-scan-line" aria-hidden="true"></div>
-      <div class="section-flash" aria-hidden="true"></div>
-      <p class="section-label">// get_in_touch</p>
-      <h2 class="contact-heading reveal glitch">Let's work<br>together.</h2>
-      <p class="contact-subtext reveal">
-        > I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+    <section class="block contact" id="contact" aria-labelledby="contact-title">
+      <h2 class="contact-title" id="contact-title">Let's work<br />together.</h2>
+      <p class="block-note">// get_in_touch</p>
+      <p class="block-text">
+        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
       </p>
-      <a href="mailto:zakaria.m.omar@gmail.com" class="contact-email reveal magnetic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
-        zakaria.m.omar@gmail.com
-      </a>
-      <div class="contact-social">
-        <a href="https://www.linkedin.com/in/zakaria-omar-21b0b729b/" target="_blank" rel="noopener" aria-label="LinkedIn" class="magnetic">
-          <svg viewBox="0 0 24 24" fill="#0a66c2" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452z"/></svg>
-        </a>
-        <a href="https://github.com/zakisserious" target="_blank" rel="noopener" aria-label="GitHub" class="magnetic">
-          <svg viewBox="0 0 24 24" fill="#f0f6fc" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        </a>
-      </div>
+
+      <a class="mail" href="mailto:zakaria.m.omar@gmail.com">zakaria.m.omar@gmail.com</a>
+
+      <ul class="social">
+        <li>
+          <a href="https://www.linkedin.com/in/zakaria-omar-21b0b729b/" target="_blank" rel="noopener">
+            <span class="social-key">linkedin</span>
+            <span class="social-val">/ zakaria-omar</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/zakisserious" target="_blank" rel="noopener">
+            <span class="social-key">github</span>
+            <span class="social-val">/ zakisserious</span>
+          </a>
+        </li>
+      </ul>
     </section>
+
+    <hr class="rule rule--double" />
+
+    <!-- ======================== FOOT ======================== -->
+    <footer class="foot">
+      <div class="barcode" aria-hidden="true"></div>
+      <p class="foot-note">THANK YOU FOR VISITING</p>
+      <p class="foot-line">Built with <span class="heart">&#9829;</span> by Zakaria Omar &copy; 2026</p>
+      <p class="foot-small">v2.0.26 &middot; rendered on thermal paper</p>
+    </footer>
   </main>
 
-  <!-- System Status Bar -->
-  <div class="status-bar" aria-hidden="true">
-    <div class="status-bar-left">
-      <div class="status-item">
-        <span class="status-dot"></span>
-        <span>SYSTEM: ONLINE</span>
-      </div>
-      <div class="status-item">
-        <span class="status-dot amber"></span>
-        <span>LOAD: 42%</span>
-      </div>
-    </div>
-    <div class="status-bar-right">
-      <div class="status-item">
-        <span id="uptime">UPTIME: 00:00:00</span>
-      </div>
-      <div class="status-item">
-        <span>v2.0.26</span>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <p>Built with <span class="green">&#9829;</span> by Zakaria Omar &copy; 2026</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
-  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=1" defer></script>
 </body>
 
 </html>
