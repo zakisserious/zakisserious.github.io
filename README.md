@@ -3,8 +3,8 @@
 One long riso-printed sheet. Static HTML, CSS and a small amount of vanilla
 JavaScript. No build step, no package manager, no dependencies, no web fonts.
 
-Built for phones first: the sheet is the viewport minus 8px on mobile and stays
-a single 470px column on wider screens rather than growing a desktop layout.
+Phones get one column: the sheet is the viewport minus 8px. From 900px the sheet
+opens into a two-column spread with a sticky masthead rail.
 
 ## Files
 
@@ -20,8 +20,10 @@ a single 470px column on wider screens rather than growing a desktop layout.
 
 - **Content is the product.** Copy, stats, skills, projects, links and resume
   data live in the HTML. Decorative chrome is the only thing that may go.
-- **Single column at every width.** The paper is `max-width: 470px` on desktop
-  and the viewport minus 8px on phones. Nothing is ever laid out in columns.
+- **One column on phones, two on desktop.** Below 900px the sheet is the
+  viewport minus 8px, single column. From 900px it opens into a 1160px spread:
+  a sticky rail with the masthead and portrait, the document beside it, and the
+  contact band across both.
 - **Three inks plus one pop.** Vermilion, cobalt and ink on cream paper; the
   acid lime is a background only, never text. Body copy stays ink on paper.
 - **Works with JavaScript off.** Projects are native `<details>`, every link is

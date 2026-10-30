@@ -297,7 +297,7 @@ strong {
 /* --------------------------------------------------------------- photos */
 .portrait {
   width: auto;
-  margin: 0 calc(var(--pad) * -1) 20px;
+  margin: 22px calc(var(--pad) * -1) 20px;
 }
 
 .portrait-frame,
@@ -1102,6 +1102,179 @@ summary {
   text-decoration: none;
 }
 
+/* --------------------------------------------------------------- desktop */
+/* The sheet opens into an editorial spread: a sticky masthead rail on the
+   left, the document on the right, the lime contact band across the bottom.
+   Phones keep the single column above this breakpoint. */
+@media (min-width: 900px) {
+  .receipt {
+    --pad: clamp(40px, 5vw, 64px);
+    width: min(100% - 64px, 1160px);
+    margin: 40px auto 90px;
+    padding: 48px var(--pad) 56px;
+    display: grid;
+    grid-template-columns: clamp(280px, 30%, 360px) minmax(0, 1fr);
+    column-gap: clamp(40px, 5vw, 72px);
+    align-items: start;
+  }
+
+  /* the item fills the whole rail so the inner block can stick and then be
+     pushed off by the contact band — sticky on the grid item itself is not
+     clamped to its grid area in every engine. */
+  .head {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-self: stretch;
+  }
+
+  .head-inner {
+    position: sticky;
+    top: 40px;
+  }
+
+  .head-name {
+    font-size: clamp(3.2rem, 5.6vw, 4.6rem);
+  }
+
+  .resume .head-name--sm {
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
+  }
+
+  #about {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  #toolbox {
+    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    column-gap: 36px;
+    align-content: start;
+  }
+
+  #toolbox .sec {
+    grid-column: 1 / -1;
+  }
+
+  #projects {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: 56px;
+  }
+
+  .contact {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    margin-top: 64px;
+  }
+
+  .foot {
+    grid-column: 1 / -1;
+    grid-row: 5;
+  }
+
+  .sec-num {
+    font-size: clamp(44px, 5vw, 60px);
+  }
+
+  .resume .sec-num {
+    font-size: clamp(34px, 4vw, 44px);
+  }
+
+  .block-text,
+  .proj-desc {
+    max-width: 60ch;
+  }
+
+  /* split the band: statement left, the actual contact right */
+  .contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(40px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .contact .sec {
+    grid-column: 1 / -1;
+  }
+
+  .contact-title {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 0;
+    font-size: clamp(2.6rem, 3.8vw, 3.4rem);
+  }
+
+  .contact .block-text {
+    grid-column: 1;
+    grid-row: 3;
+    max-width: 40ch;
+    margin: 16px 0 0;
+  }
+
+  .mail {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+    margin: 0 0 12px;
+    font-size: clamp(15px, 1.5vw, 20px);
+  }
+
+  .contact .social {
+    grid-column: 2;
+    grid-row: 3;
+    max-width: none;
+    margin-top: 18px;
+  }
+
+  /* the portrait sits in the rail: show the photo upright */
+  .portrait {
+    margin: 24px 0 0;
+  }
+
+  .portrait img {
+    aspect-ratio: 4 / 5;
+    object-position: 50% 18%;
+  }
+
+  .portrait .shot-cap {
+    padding: 8px 0 0;
+  }
+
+  /* no bleed into the rail; images sit in the column */
+  .shot {
+    margin: 0 0 20px;
+  }
+
+  .shot .shot-cap {
+    left: 12px;
+    bottom: 12px;
+  }
+
+  .proj-sum {
+    min-height: 78px;
+    padding: 16px 0;
+  }
+
+  .proj-name {
+    font-size: 22px;
+  }
+
+  .proj-body {
+    padding-bottom: 28px;
+  }
+
+  .total,
+  .foot {
+    max-width: none;
+  }
+}
+
 /* ----------------------------------------------------------------- print */
 @media print {
   @page {
@@ -1121,12 +1294,44 @@ summary {
   }
 
   .receipt {
+    display: block;
     width: auto;
     max-width: none;
     margin: 0;
     padding: 0;
     background: #fff;
     box-shadow: none;
+  }
+
+  /* the desktop spread collapses back to one document on paper */
+  .head,
+  .head-inner {
+    position: static;
+  }
+
+  #about,
+  #toolbox,
+  #projects,
+  .contact,
+  .foot {
+    grid-column: auto;
+    grid-row: auto;
+    margin-top: 0;
+    max-width: none;
+  }
+
+  #toolbox,
+  .contact {
+    display: block;
+  }
+
+  .contact {
+    margin: 0;
+    padding: 0;
+  }
+
+  .portrait {
+    margin: 0 0 8pt;
   }
 
   .head-name {
