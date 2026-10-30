@@ -77,9 +77,12 @@
      so nothing is ever out of register while you are reading. */
   function initRegister() {
     var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Repainting large display type every scroll frame is far too expensive on
+    // a phone, so the misregistration is a pointer-and-keyboard flourish only.
+    var rich = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)').matches;
     var root = document.documentElement;
     var fx = window.__fx || (window.__fx = { reg: 0 });
-    if (calm) return;
+    if (calm || !rich) return;
 
     var reg = 0;
     var lastY = window.scrollY;

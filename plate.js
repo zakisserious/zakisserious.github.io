@@ -201,6 +201,8 @@
 
     var loaded = false;
     var visible = true;
+    var scrolling = false;
+    var scrollTimer = 0;
     var raf = 0;
     var last = 0;
     var printed = 0;
@@ -270,7 +272,7 @@
 
     function loop(now) {
       raf = 0;
-      if (!visible || document.hidden || !loaded) return;
+      if (!visible || document.hidden || !loaded || scrolling) return;
 
       // idle: the float is slow, so 12fps is plenty and the phone stays cold
       var fx = window.__fx || { reg: 0 };
@@ -360,6 +362,15 @@
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) stop(); else play();
     });
+
+    window.addEventListener('scroll', function () {
+      scrolling = true;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function () {
+        scrolling = false;
+        play();
+      }, 160);
+    }, { passive: true });
 
     if (window.ResizeObserver) {
       new ResizeObserver(function () {

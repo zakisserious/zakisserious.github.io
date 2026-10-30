@@ -1,9 +1,10 @@
 /*
  * props.js — real 3D assets, drawn as riso spot illustrations.
  *
- * One fixed canvas, one WebGL context, one viewport per [data-prop] slot.
- * Each slot loads a low-poly glTF model (Poly Pizza, CC BY 3.0) once and
- * clones it; drag any of them to spin it.
+ * One small canvas per slot, positioned inside the slot. Because the canvas
+ * scrolls with the page there is nothing to redraw while scrolling: the
+ * compositor just moves a layer. Each slot only renders while it is on
+ * screen, and only ~30fps.
  *
  * Optional: if WebGL or a model fails, the slot stays hidden and the
  * document is exactly as it was.
@@ -19,15 +20,19 @@
     holo: { url: './assets/models/holo.glb', size: 2.8, tilt: 0.06, turn: 0.16 },
     server: { url: './assets/models/server.glb', size: 2.6, tilt: 0.05, turn: -0.45 },
     laptop: { url: './assets/models/laptop.glb', size: 2.8, tilt: 0.2, turn: -0.5 },
-    drone: { url: './assets/models/drone.glb', size: 2.6, tilt: 0.16, turn: -0.3 }
+    drone: { url: './assets/models/drone.glb', size: 2.6, tilt: 0.16, turn: -0.3 },
+    brain: { url: './assets/models/brain.glb', size: 2.6, tilt: 0.1, turn: -0.35 },
+    computer: { url: './assets/models/computer.glb', size: 2.9, tilt: 0.14, turn: -0.52 },
+    robot: { url: './assets/models/robot.glb', size: 2.6, tilt: 0.04, turn: -0.32 }
   };
 
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var booted = false;
-  var renderer = null;
-  var props = [];
+  var items = [];
   var raf = 0;
   var last = 0;
+  var scrolling = false;
+  var scrollTimer = 0;
 
   if (window.requestIdleCallback) {
     window.requestIdleCallback(boot, { timeout: 1200 });
@@ -54,33 +59,9 @@
   }
 
   function start(THREE, GLTFLoader) {
-    var canvas = document.createElement('canvas');
-    canvas.className = 'props-canvas';
-    canvas.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(canvas);
-
-    try {
-      renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        antialias: true,
-        alpha: true,
-        powerPreference: 'low-power'
-      });
-    } catch (err) {
-      canvas.remove();
-      return;
-    }
-    if (!renderer.getContext()) {
-      canvas.remove();
-      return;
-    }
-
-    renderer.setClearColor(0x000000, 0);
-    renderer.autoClear = false;
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-
     var loader = new GLTFLoader();
     var cache = {};
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
     function loadModel(url) {
       if (!cache[url]) {
@@ -100,13 +81,36 @@
       var el = slots[i];
       var cfg = MODELS[el.getAttribute('data-prop')] || MODELS.laptop;
 
+      var canvas = document.createElement('canvas');
+      canvas.className = 'prop-canvas';
+      canvas.setAttribute('aria-hidden', 'true');
+      el.appendChild(canvas);
+
+      var renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({
+          canvas: canvas,
+          antialias: dpr < 1.5,
+          alpha: true,
+          powerPreference: 'low-power'
+        });
+      } catch (err) {
+        canvas.remove();
+        continue;
+      }
+      if (!renderer.getContext()) {
+        canvas.remove();
+        continue;
+      }
+
+      renderer.setClearColor(0x000000, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+
       var scene = new THREE.Scene();
       scene.add(new THREE.AmbientLight(0xfff6e6, 2.1));
-
       var key = new THREE.DirectionalLight(0xfff3d8, 2.6);
       key.position.set(3, 4, 5);
       scene.add(key);
-
       var rim = new THREE.DirectionalLight(0x1b3fd8, 1.2);
       rim.position.set(-4, -2, -3);
       scene.add(rim);
@@ -117,7 +121,6 @@
       var pivot = new THREE.Group();
       scene.add(pivot);
 
-      // a soft stain under the object so it sits on the paper, not in the air
       var shadow = new THREE.Mesh(
         new THREE.PlaneGeometry(1, 1),
         new THREE.ShaderMaterial({
@@ -141,8 +144,10 @@
       shadow.rotation.x = -Math.PI / 2;
       scene.add(shadow);
 
-      props.push({
+      var item = {
         el: el,
+        canvas: canvas,
+        renderer: renderer,
         scene: scene,
         camera: camera,
         pivot: pivot,
@@ -151,24 +156,66 @@
         size: cfg.size,
         tilt: cfg.tilt || 0,
         turn: cfg.turn || 0,
+        ready: false,
+        visible: false,
         appear: 0,
         born: 0,
         spin: 0,
         drag: 0,
-        ready: false
-      });
+        w: 0,
+        h: 0
+      };
+      items.push(item);
     }
 
-    // load every distinct model once
-    var urls = {};
-    for (var u = 0; u < props.length; u++) urls[props[u].url] = true;
+    if (!items.length) return;
 
-    var jobs = [];
+    document.documentElement.classList.add('has-props');
+
+    /* --------------------------------------------------------- sizing */
+    function measure(item) {
+      var w = item.el.clientWidth;
+      var h = item.el.clientHeight;
+      if (!w || !h || (w === item.w && h === item.h)) return;
+
+      item.w = w;
+      item.h = h;
+      item.camera.aspect = w / h;
+      item.camera.updateProjectionMatrix();
+      item.renderer.setPixelRatio(dpr);
+      item.renderer.setSize(w, h, false);
+
+      // frame the model against the slot: fill the short axis, 10% margin
+      var fov = (34 * Math.PI) / 180;
+      var radius = item.size * 0.56;
+      var dist = radius / Math.tan(fov / 2);
+      if (item.camera.aspect < 1) dist /= item.camera.aspect;
+      item.camera.position.set(0, dist * 0.12, dist * 1.02);
+      item.camera.lookAt(0, 0, 0);
+      item.camera.updateProjectionMatrix();
+    }
+
+    for (var m = 0; m < items.length; m++) measure(items[m]);
+
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(function () {
+        for (var k = 0; k < items.length; k++) {
+          measure(items[k]);
+          if (items[k].visible) play();
+        }
+      });
+      for (var r = 0; r < items.length; r++) ro.observe(items[r].el);
+    }
+
+    /* ---------------------------------------------------------- models */
+    var urls = {};
+    for (var u = 0; u < items.length; u++) urls[items[u].url] = true;
+
     Object.keys(urls).forEach(function (url) {
-      jobs.push(loadModel(url).then(function (scene) {
+      loadModel(url).then(function (scene) {
         if (!scene) return;
-        for (var k = 0; k < props.length; k++) {
-          var p = props[k];
+        for (var k = 0; k < items.length; k++) {
+          var p = items[k];
           if (p.url !== url || p.ready) continue;
 
           var model = scene.clone(true);
@@ -180,49 +227,35 @@
 
           model.scale.setScalar(s);
           model.position.set(-center.x * s, -center.y * s, -center.z * s);
-          // spin a holder around the centred model, not the model's own origin
-          var holder = new THREE.Group();
-          holder.rotation.set(p.tilt, p.turn, 0);
-          holder.add(model);
 
-          // keep the model's own materials; only tame the specular so it
-          // reads as printed stock rather than glossy plastic
           model.traverse(function (o) {
             if (!o.isMesh || !o.material) return;
             var mats = Array.isArray(o.material) ? o.material : [o.material];
             for (var mi = 0; mi < mats.length; mi++) {
-              var m = mats[mi];
-              if ('roughness' in m) m.roughness = 0.95;
-              if ('metalness' in m) m.metalness = 0.05;
+              if ('roughness' in mats[mi]) mats[mi].roughness = 0.95;
+              if ('metalness' in mats[mi]) mats[mi].metalness = 0.05;
             }
           });
+
+          var holder = new THREE.Group();
+          holder.rotation.set(p.tilt, p.turn, 0);
+          holder.add(model);
 
           p.pivot.add(holder);
           p.shadow.scale.set(p.size * 1.15, p.size * 0.42, 1);
           p.shadow.position.y = -p.size * 0.5;
           p.ready = true;
         }
-      }));
+        play();
+      });
     });
-
-    document.documentElement.classList.add('has-props');
-
-    function resize() {
-      var w = window.innerWidth;
-      var h = window.innerHeight;
-      var dpr = Math.min(window.devicePixelRatio || 1, 1.75, 1800 / Math.max(w, h));
-      renderer.setPixelRatio(dpr);
-      renderer.setSize(w, h, false);
-    }
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
 
     /* ------------------------------------------------------------ drag */
     var active = null;
     var startX = 0;
     var startY = 0;
 
-    for (var d = 0; d < props.length; d++) {
+    for (var d = 0; d < items.length; d++) {
       (function (p) {
         p.el.addEventListener('pointerdown', function (e) {
           if (e.pointerType === 'mouse' && e.button !== 0) return;
@@ -236,12 +269,10 @@
 
         p.el.addEventListener('pointermove', function (e) {
           if (active !== p) return;
-          var dx = e.clientX - startX;
-          var dy = e.clientY - startY;
+          p.spin += (e.clientX - startX) * 0.012;
+          p.drag = Math.max(-0.5, Math.min(0.5, p.drag + (e.clientY - startY) * 0.006));
           startX = e.clientX;
           startY = e.clientY;
-          p.spin += dx * 0.012;
-          p.drag = Math.max(-0.5, Math.min(0.5, p.drag + dy * 0.006));
           play();
         });
 
@@ -253,69 +284,47 @@
         p.el.addEventListener('pointerup', release);
         p.el.addEventListener('pointercancel', release);
         p.el.addEventListener('lostpointercapture', release);
-      })(props[d]);
+      })(items[d]);
     }
 
-    var seen = new IntersectionObserver(function (entries) {
+    /* --------------------------------------------------------- visibility */
+    var io = new IntersectionObserver(function (entries) {
       for (var k = 0; k < entries.length; k++) {
-        if (!entries[k].isIntersecting) continue;
-        var p = entries[k].target.__prop;
-        if (p && !p.born) p.born = performance.now();
-        seen.unobserve(entries[k].target);
+        var el = entries[k].target;
+        for (var n = 0; n < items.length; n++) {
+          if (items[n].el !== el) continue;
+          items[n].visible = entries[k].isIntersecting;
+          if (entries[k].isIntersecting) {
+            if (!items[n].born) items[n].born = performance.now();
+            play();
+          }
+        }
       }
-    }, { rootMargin: '0px 0px -10% 0px' });
+    }, { rootMargin: '120px' });
 
-    for (var j = 0; j < props.length; j++) {
-      props[j].el.__prop = props[j];
-      seen.observe(props[j].el);
-    }
+    for (var v = 0; v < items.length; v++) io.observe(items[v].el);
 
+    /* ------------------------------------------------------------- draw */
     function draw(now) {
-      var vh = window.innerHeight;
+      var t = now / 1000;
       var any = false;
 
-      renderer.setScissorTest(false);
-      renderer.clear();
-      renderer.setScissorTest(true);
-
-      for (var n = 0; n < props.length; n++) {
-        var p = props[n];
-        var r = p.el.getBoundingClientRect();
-        if (r.bottom < -40 || r.top > vh + 40 || r.width < 8) continue;
-        if (!p.ready) continue;
+      for (var n = 0; n < items.length; n++) {
+        var p = items[n];
+        if (!p.visible || !p.ready) continue;
 
         if (p.born && p.appear < 1) {
           p.appear = Math.min(1, (now - p.born) / 620);
           var e2 = 1 - Math.pow(1 - p.appear, 3);
           p.pivot.scale.setScalar(e2 + Math.sin(p.appear * Math.PI) * 0.07);
         }
-        if (!p.born) p.appear = 0;
 
-        var t = now / 1000;
-        // a slow sway, not a full spin: the object keeps showing its front
-        p.pivot.rotation.y = p.spin + (calm ? 0.2 : Math.sin(t * 0.34 + n) * 0.42);
+        var sway = calm ? 0.2 : Math.sin(t * 0.34 + n) * 0.42;
+        p.pivot.rotation.y = p.spin + sway;
         p.pivot.rotation.x = p.drag + Math.sin(t * 0.5 + n) * 0.05;
         p.pivot.position.y = Math.sin(t * 0.8 + n * 1.7) * 0.05;
 
-        var x = Math.round(r.left);
-        var y = Math.round(vh - r.bottom);
-        var w = Math.round(r.width);
-        var h = Math.round(r.height);
-
-        p.camera.aspect = w / h;
-
-        // frame the model against the slot: fill the short axis, 15% margin
-        var fov = (34 * Math.PI) / 180;
-        var radius = p.size * 0.56;
-        var dist = radius / Math.tan(fov / 2);
-        if (p.camera.aspect < 1) dist /= p.camera.aspect;
-        p.camera.position.set(0, dist * 0.12, dist * 1.02);
-        p.camera.lookAt(0, 0, 0);
-        p.camera.updateProjectionMatrix();
-
-        renderer.setViewport(x, y, w, h);
-        renderer.setScissor(x, y, w, h);
-        renderer.render(p.scene, p.camera);
+        p.renderer.render(p.scene, p.camera);
         any = true;
       }
 
@@ -324,14 +333,13 @@
 
     function loop(now) {
       raf = 0;
-      if (document.hidden) return;
-      if (now - last < 32) {
+      if (document.hidden || scrolling) return;
+      if (now - last < 40) {
         raf = requestAnimationFrame(loop);
         return;
       }
       last = now;
-      var any = draw(now);
-      if (any && !calm) raf = requestAnimationFrame(loop);
+      if (draw(now)) raf = requestAnimationFrame(loop);
     }
 
     function play() {
@@ -339,24 +347,28 @@
       raf = requestAnimationFrame(loop);
     }
 
-    setTimeout(function () { canvas.classList.add('is-ready'); }, 80);
-
-    if (calm) {
-      draw(performance.now());
-      return;
-    }
-
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) play();
     });
-    window.addEventListener('scroll', play, { passive: true });
 
-    // redraw as each model lands
-    Promise.all(jobs).then(function () {
-      if (!calm) play();
-      else draw(performance.now());
-    });
+    // The canvases sit in the flow, so they move with the page. There is
+    // nothing to redraw until the scroll settles.
+    window.addEventListener('scroll', function () {
+      scrolling = true;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function () {
+        scrolling = false;
+        play();
+      }, 160);
+    }, { passive: true });
 
-    raf = requestAnimationFrame(loop);
+    if (calm) {
+      for (var c = 0; c < items.length; c++) items[c].visible = true;
+      draw(performance.now());
+      for (var c2 = 0; c2 < items.length; c2++) items[c2].visible = false;
+      return;
+    }
+
+    play();
   }
 })();
