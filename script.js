@@ -72,6 +72,71 @@
     });
   }
 
+  /* Scrolling slips the press: --reg is the misregistration offset shared by
+     the display type and the WebGL plate. It decays back to register at rest,
+     so nothing is ever out of register while you are reading. */
+  function initRegister() {
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var root = document.documentElement;
+    var fx = window.__fx || (window.__fx = { reg: 0 });
+    if (calm) return;
+
+    var reg = 0;
+    var lastY = window.scrollY;
+    var queued = false;
+
+    function frame() {
+      queued = false;
+      var y = window.scrollY;
+      var v = Math.abs(y - lastY);
+      lastY = y;
+
+      var target = Math.min(v * 0.09, 2.2);
+      reg += (target - reg) * 0.28;
+      if (Math.abs(reg) < 0.02) reg = 0;
+
+      root.style.setProperty('--reg', reg.toFixed(2) + 'px');
+      fx.reg = reg;
+
+      if (reg) {
+        queued = true;
+        requestAnimationFrame(frame);
+      }
+    }
+
+    function queue() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(frame);
+    }
+
+    window.addEventListener('scroll', queue, { passive: true });
+  }
+
+  /* Sections and project rows rise once as they enter. The hidden state only
+     exists after this runs, so with JS off nothing is ever invisible. */
+  function initReveal() {
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (calm || !window.IntersectionObserver) return;
+
+    var els = document.querySelectorAll('.block, .proj');
+    if (!els.length) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (!entries[i].isIntersecting) continue;
+        entries[i].target.classList.add('is-in');
+        io.unobserve(entries[i].target);
+      }
+    }, { rootMargin: '0px 0px -8% 0px' });
+
+    for (var i = 0; i < els.length; i++) {
+      els[i].setAttribute('data-reveal', '');
+      io.observe(els[i]);
+    }
+    document.documentElement.classList.add('has-motion');
+  }
+
   function initPrint() {
     var btn = document.querySelector('[data-print]');
     if (!btn) return;
@@ -84,6 +149,8 @@
 
   function init() {
     run('cursor', initCursor);
+    run('reveal', initReveal);
+    run('register', initRegister);
     run('print', initPrint);
   }
 

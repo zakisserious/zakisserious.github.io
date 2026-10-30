@@ -10,7 +10,16 @@
     content="Portfolio of Zakaria Omar - Full-Stack Developer, AI Enthusiast, and Blockchain Builder." />
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4efe1'/%3E%3Cpath d='M9 4h14v24l-3.5-2.5L16 28l-3.5-2.5L9 28z' fill='%23171310'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="style.css?v=24" />
+  <link rel="stylesheet" href="style.css?v=29" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./assets/vendor/three.module.min.js",
+        "three/addons/": "./assets/vendor/addons/"
+      }
+    }
+  </script>
+
 </head>
 
 <body>
@@ -38,6 +47,7 @@
       <figure class="portrait">
         <div class="portrait-frame duo duo--red">
           <img src="./assets/about-pic.jpg" alt="Zakaria Omar" width="595" height="751" decoding="async" />
+          <canvas class="plate-canvas" aria-hidden="true"></canvas>
         </div>
         <figcaption class="shot-cap"><span>Fig. 00</span>
           <span>Portrait</span></figcaption>
@@ -74,6 +84,7 @@
           <span class="stat-label">Projects Shipped</span>
         </li>
       </ul>
+          <div class="prop" data-prop="holo" data-label="Fig. 01 &#8212; Synthetic" aria-hidden="true"></div>
     </section>
 
     <!-- ======================== TOOLBOX ======================== -->
@@ -158,6 +169,7 @@
           <span>Figma</span>
         </p>
       </div>
+          <div class="prop" data-prop="server" data-label="Fig. 02 &#8212; Infrastructure" aria-hidden="true"></div>
     </section>
 
     <!-- ======================== PROJECTS ======================== -->
@@ -341,6 +353,7 @@
         </div>
       </details>
 
+          <div class="prop" data-prop="laptop" data-label="Fig. 03 &#8212; Toolchain" aria-hidden="true"></div>
     </section>
 
     <!-- ======================== CONTACT ======================== -->
@@ -369,6 +382,7 @@
           </a>
         </li>
       </ul>
+          <div class="prop" data-prop="drone" data-label="Fig. 04 &#8212; Autonomous" aria-hidden="true"></div>
     </section>
 
     <!-- ======================== FOOT ======================== -->
@@ -378,7 +392,9 @@
     </footer>
   </main>
 
-  <script src="script.js?v=4" defer></script>
+  <script src="script.js?v=5" defer></script>
+  <script type="module" src="plate.js?v=19"></script>
+  <script type="module" src="props.js?v=13"></script>
 </body>
 
 </html>

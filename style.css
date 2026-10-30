@@ -17,6 +17,7 @@
   --red-ink: #a8240c; /* small text on paper */
   --blue: #1b3fd8;
   --pop: #d7f24a; /* background only */
+  --reg: 0px;     /* print registration drift, set by script.js */
   --rule: #b3aa93;
 
   --desk: #0c0b09;
@@ -1157,7 +1158,9 @@ summary {
     align-content: start;
   }
 
-  #toolbox .sec {
+  #toolbox .sec,
+  #toolbox .prop,
+  .contact .prop {
     grid-column: 1 / -1;
   }
 
@@ -1275,6 +1278,134 @@ summary {
   }
 }
 
+/* ------------------------------------------------------------- 3d props */
+/* Spot illustrations: riso-printed objects rendered against the paper. The
+   slots only exist once WebGL has taken over, so nothing shifts without JS. */
+.props-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.props-canvas.is-ready {
+  opacity: 1;
+}
+
+.prop {
+  display: none;
+}
+
+.has-props .prop {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: clamp(210px, 34vw, 300px);
+  margin: 34px 0 44px;
+  cursor: grab;
+  touch-action: pan-y;
+  border-radius: 4px;
+}
+
+.has-props .prop:active,
+.prop.is-dragging {
+  cursor: grabbing;
+}
+
+.has-props .prop::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+
+
+
+/* ----------------------------------------------------------------- plate */
+/* The portrait is a riso plate rendered in WebGL. The <img> underneath is the
+   finished state; the canvas only fades over it once a frame has drawn. */
+.plate-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  touch-action: pan-y;
+}
+
+.portrait-frame.is-live .plate-canvas {
+  opacity: 1;
+}
+
+/* the shader prints its own dots and grain; keep the CSS overlays off */
+.portrait-frame.is-live::before,
+.portrait-frame.is-live::after {
+  opacity: 0;
+}
+
+/* ---------------------------------------------------------- registration */
+/* Scrolling slips the press: the two ink plates drift apart for a moment and
+   settle back. Display type only — body copy is never touched, so contrast
+   and readability are exactly as measured. */
+.head-name,
+.sec-num,
+.contact-title {
+  text-shadow:
+    calc(var(--reg) * -1) calc(var(--reg) * 0.35) 0 var(--blue),
+    var(--reg) calc(var(--reg) * -0.35) 0 var(--red);
+}
+
+/* --------------------------------------------------------------- reveals */
+html.has-motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+html.has-motion [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------- page transitions */
+/* Native cross-document view transitions: the next sheet wipes down over the
+   last. Browsers without support just navigate. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation: sheet-wipe 0.36s cubic-bezier(0.22, 0.9, 0.24, 1) both;
+}
+
+@keyframes sheet-wipe {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 /* ----------------------------------------------------------------- print */
 @media print {
   @page {
@@ -1332,6 +1463,27 @@ summary {
 
   .portrait {
     margin: 0 0 8pt;
+  }
+
+  .head-name,
+  .sec-num,
+  .contact-title {
+    text-shadow: none;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .plate-canvas,
+  .props-canvas,
+  .prop {
+    display: none;
+  }
+
+  .portrait-frame {
+    background: none;
   }
 
   .head-name {

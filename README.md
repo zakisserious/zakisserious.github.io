@@ -47,3 +47,14 @@ python3 -m http.server 8123
 ```
 
 Then open <http://localhost:8123>.
+
+## 3D props
+
+Spot illustrations are low-poly glTF models, rendered on one shared WebGL
+canvas and drawn into a slot per section (`[data-prop]`). Drag any of them to
+spin it; they sway slowly on their own and settle under reduced motion.
+
+- Models: Poly by Google, via [Poly Pizza](https://poly.pizza) - CC BY 3.0.
+- Renderer: three.js r160, vendored in `assets/vendor/` and loaded through an
+  import map, so there is no CDN and no build step.
+- Without WebGL, or if a model fails, the slots stay hidden.
