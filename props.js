@@ -61,7 +61,7 @@
     // small canvases, so full rate is cheap; only trim resolution on phones
     // that report little memory or few cores
     var lowEnd = (navigator.deviceMemory || 8) <= 4 || (navigator.hardwareConcurrency || 8) <= 4;
-    var dpr = Math.min(window.devicePixelRatio || 1, lowEnd ? 1.5 : 2);
+    var dpr = Math.min(window.devicePixelRatio || 1, lowEnd ? 2 : 3);
 
     function loadModel(url) {
       if (!cache[url]) {
@@ -90,7 +90,7 @@
       try {
         renderer = new THREE.WebGLRenderer({
           canvas: canvas,
-          antialias: dpr < 1.5,
+          antialias: true,
           alpha: true,
           powerPreference: 'low-power'
         });
