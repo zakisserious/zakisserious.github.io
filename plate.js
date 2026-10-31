@@ -212,7 +212,7 @@
       var ch = frame.clientHeight;
       if (!cw || !ch) return;
 
-      var dpr = Math.min(window.devicePixelRatio || 1, 2, 900 / Math.max(cw, ch));
+      var dpr = Math.min(window.devicePixelRatio || 1, 3, 1200 / Math.max(cw, ch));
       renderer.setPixelRatio(dpr);
       renderer.setSize(cw, ch, false);
 
