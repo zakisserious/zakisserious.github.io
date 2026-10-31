@@ -30,9 +30,6 @@
   var booted = false;
   var items = [];
   var raf = 0;
-  var last = 0;
-  var scrolling = false;
-  var scrollTimer = 0;
 
   if (window.requestIdleCallback) {
     window.requestIdleCallback(boot, { timeout: 1200 });
@@ -61,7 +58,10 @@
   function start(THREE, GLTFLoader) {
     var loader = new GLTFLoader();
     var cache = {};
-    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    // small canvases, so full rate is cheap; only trim resolution on phones
+    // that report little memory or few cores
+    var lowEnd = (navigator.deviceMemory || 8) <= 4 || (navigator.hardwareConcurrency || 8) <= 4;
+    var dpr = Math.min(window.devicePixelRatio || 1, lowEnd ? 1.5 : 2);
 
     function loadModel(url) {
       if (!cache[url]) {
@@ -333,12 +333,7 @@
 
     function loop(now) {
       raf = 0;
-      if (document.hidden || scrolling) return;
-      if (now - last < 40) {
-        raf = requestAnimationFrame(loop);
-        return;
-      }
-      last = now;
+      if (document.hidden) return;
       if (draw(now)) raf = requestAnimationFrame(loop);
     }
 
@@ -350,17 +345,6 @@
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) play();
     });
-
-    // The canvases sit in the flow, so they move with the page. There is
-    // nothing to redraw until the scroll settles.
-    window.addEventListener('scroll', function () {
-      scrolling = true;
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(function () {
-        scrolling = false;
-        play();
-      }, 160);
-    }, { passive: true });
 
     if (calm) {
       for (var c = 0; c < items.length; c++) items[c].visible = true;

@@ -201,8 +201,6 @@
 
     var loaded = false;
     var visible = true;
-    var scrolling = false;
-    var scrollTimer = 0;
     var raf = 0;
     var last = 0;
     var printed = 0;
@@ -272,14 +270,14 @@
 
     function loop(now) {
       raf = 0;
-      if (!visible || document.hidden || !loaded || scrolling) return;
+      if (!visible || document.hidden || !loaded) return;
 
       // idle: the float is slow, so 12fps is plenty and the phone stays cold
       var fx = window.__fx || { reg: 0 };
       var idle = printed >= 1 &&
         Math.abs(tx - rx) < 0.001 && Math.abs(ty - ry) < 0.001 &&
         Math.abs(fx.reg) < 0.05;
-      if (idle && now - lastDraw < 80) {
+      if (idle && now - lastDraw < 40) {
         raf = requestAnimationFrame(loop);
         return;
       }
@@ -362,15 +360,6 @@
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) stop(); else play();
     });
-
-    window.addEventListener('scroll', function () {
-      scrolling = true;
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(function () {
-        scrolling = false;
-        play();
-      }, 160);
-    }, { passive: true });
 
     if (window.ResizeObserver) {
       new ResizeObserver(function () {
